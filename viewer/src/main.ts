@@ -14,6 +14,12 @@ import { createHouse } from "./model";
 import "./style.css";
 import { createDepthRenderer } from "./depth";
 
+const squareFeet = (squareMeters: number) =>
+  (squareMeters / 0.3048 ** 2).toLocaleString("en-US", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+
 const icon = {
   orbit:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-30 12 12)"/><ellipse cx="12" cy="12" rx="4" ry="10" transform="rotate(-30 12 12)"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>',
@@ -60,7 +66,7 @@ app.innerHTML = `
       <div id="error" role="alert" hidden></div>
     </section>
   </main>
-  <footer class="facts"><div><strong>03</strong><span>Bedrooms</span></div><div><strong>02</strong><span>Full bathrooms</span></div><div><strong>${areas.combined_floor.toFixed(1)}<small> m²</small></strong><span>Combined floor area</span></div><div><strong>18<small> m²</small></strong><span>Covered terrace</span></div><p>Room to gather.<br><em>Space to slow down.</em></p></footer>`;
+  <footer class="facts"><div><strong>03</strong><span>Bedrooms</span></div><div><strong>02</strong><span>Full bathrooms</span></div><div><strong>${areas.combined_floor.toFixed(1)}<small> m²</small></strong><span class="area-imperial">${squareFeet(areas.combined_floor)} ft²</span><span>Combined floor area</span></div><div><strong>${areas.covered_terrace}<small> m²</small></strong><span class="area-imperial">${squareFeet(areas.covered_terrace)} ft²</span><span>Covered terrace</span></div><p>Room to gather.<br><em>Space to slow down.</em></p></footer>`;
 
 const $ = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
@@ -281,7 +287,7 @@ function enterRoom(id: string) {
   yaw = position[2];
   pitch = ["G2", "U2", "G3", "G8"].includes(id) ? -0.38 : -0.16;
   $("scene-heading").textContent = room.name;
-  $("view-label").textContent = `${room.id} / ${room.area.toFixed(1)} m²`;
+  $("view-label").textContent = `${room.id} / ${room.area.toFixed(1)} m² · ${squareFeet(room.area)} ft²`;
   $<HTMLSelectElement>("room").value = id;
 }
 

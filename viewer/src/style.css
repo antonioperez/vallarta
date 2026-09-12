@@ -487,6 +487,10 @@ h1 {
   font-size: 9px;
   color: var(--muted);
 }
+.facts div > .area-imperial {
+  font-size: 12px;
+  color: inherit;
+}
 .facts > p {
   font-family: "Libre Caslon Display", Georgia, serif;
   line-height: 1.3;
