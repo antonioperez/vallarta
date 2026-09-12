@@ -1,0 +1,202 @@
+{
+  "units": "meters; areas in square meters",
+  "areas": {
+    "lot": 200,
+    "ground": 94.5,
+    "upper_envelope": 85.5,
+    "upper_stair_void": 7.4025,
+    "upper_floor": 78.0975,
+    "combined_floor": 172.5975,
+    "covered_terrace": 18,
+    "front_zone": 55,
+    "side_passage": 10.5,
+    "rear_zone": 40
+  },
+  "rooms": [
+    {
+      "id": "G1",
+      "name": "Queen guest bedroom",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        0.2,
+        3.6,
+        4.1
+      ],
+      "area": 14.76
+    },
+    {
+      "id": "G2",
+      "name": "Shared full bathroom",
+      "floor": "Ground",
+      "rect": [
+        1.95,
+        4.45,
+        1.85,
+        2.3
+      ],
+      "area": 4.255
+    },
+    {
+      "id": "G3",
+      "name": "Laundry / utility",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        4.45,
+        1.6,
+        2.3
+      ],
+      "area": 3.6799999999999997
+    },
+    {
+      "id": "G4",
+      "name": "Kitchen / transition zone",
+      "floor": "Ground",
+      "rect": [
+        3.95,
+        4.65,
+        4.85,
+        2.1
+      ],
+      "area": 10.185
+    },
+    {
+      "id": "G5",
+      "name": "Living / dining zone",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        6.9,
+        8.6,
+        3.4
+      ],
+      "area": 29.24
+    },
+    {
+      "id": "G6",
+      "name": "Entrance circulation",
+      "floor": "Ground",
+      "rect": [
+        3.95,
+        0.2,
+        2.2,
+        4.3
+      ],
+      "area": 9.46
+    },
+    {
+      "id": "G7",
+      "name": "Stair zone, including landings",
+      "floor": "Ground",
+      "rect": [
+        6.3,
+        0.2,
+        2.5,
+        4.3
+      ],
+      "area": 10.75
+    },
+    {
+      "id": "U1",
+      "name": "Two-double guest bedroom",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        0.2,
+        4.6,
+        4.6
+      ],
+      "area": 21.159999999999997
+    },
+    {
+      "id": "U2",
+      "name": "Guest private bathroom",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        4.95,
+        2,
+        2.3
+      ],
+      "area": 4.6
+    },
+    {
+      "id": "U3",
+      "name": "Primary private bathroom",
+      "floor": "Upper",
+      "rect": [
+        2.35,
+        4.95,
+        2,
+        2.3
+      ],
+      "area": 4.6
+    },
+    {
+      "id": "U4",
+      "name": "Primary dressing / storage",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        7.4,
+        4.15,
+        1.9
+      ],
+      "area": 7.885000000000001
+    },
+    {
+      "id": "U5",
+      "name": "Primary bedroom, main rectangle",
+      "floor": "Upper",
+      "rect": [
+        4.5,
+        4.95,
+        4.3,
+        4.35
+      ],
+      "area": 18.705
+    },
+    {
+      "id": "U6",
+      "name": "Hall",
+      "floor": "Upper",
+      "rect": [
+        4.95,
+        0.2,
+        1.2,
+        4.3
+      ],
+      "area": 5.159999999999999
+    },
+    {
+      "id": "U7",
+      "name": "Upper arrival landing",
+      "floor": "Upper",
+      "rect": [
+        6.3,
+        0.2,
+        2.5,
+        1
+      ],
+      "area": 2.5
+    }
+  ],
+  "checks": [
+    "lot allocation reconciles",
+    "room rectangles inside floor envelopes",
+    "room rectangles do not overlap",
+    "stair rise/run arithmetic",
+    "budget allocation reconciles"
+  ],
+  "not_verified": [
+    "parcel buildability",
+    "structural adequacy",
+    "code compliance",
+    "stair headroom",
+    "actual local construction cost",
+    "finished floor level",
+    "flood exposure",
+    "utility capacity"
+  ]
+}

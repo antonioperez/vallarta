@@ -1,0 +1,376 @@
+{
+  "units": "meters; areas in square meters",
+  "areas": {
+    "lot": 200,
+    "ground": 94.5,
+    "upper_envelope": 85.5,
+    "upper_stair_void": 7.4025,
+    "upper_floor": 78.0975,
+    "combined_floor": 172.5975,
+    "covered_terrace": 18,
+    "front_zone": 55,
+    "side_passage": 10.5,
+    "rear_zone": 40
+  },
+  "reference_conversion": {
+    "meters_per_foot": 0.3048,
+    "feet_format": "decimal",
+    "rounding": "display only; metric dimensions govern"
+  },
+  "areas_square_feet_reference": {
+    "lot": 2152.782083341944,
+    "ground": 1017.1895343790687,
+    "upper_envelope": 920.3143406286812,
+    "upper_stair_void": 79.67984685969371,
+    "upper_floor": 840.6344937689875,
+    "combined_floor": 1857.8240281480562,
+    "covered_terrace": 193.750387500775,
+    "front_zone": 592.0150729190347,
+    "side_passage": 113.02105937545208,
+    "rear_zone": 430.55641666838886
+  },
+  "rooms": [
+    {
+      "id": "G1",
+      "name": "Queen guest bedroom",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        2.65,
+        3.6,
+        4.1
+      ],
+      "area": 14.76,
+      "dimensions_feet_reference": [
+        11.811023622047244,
+        13.451443569553804
+      ],
+      "area_square_feet_reference": 158.87531775063547
+    },
+    {
+      "id": "G2",
+      "name": "Front shared full bathroom",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        0.2,
+        2,
+        2.3
+      ],
+      "area": 4.6,
+      "dimensions_feet_reference": [
+        6.561679790026246,
+        7.545931758530183
+      ],
+      "area_square_feet_reference": 49.513987916864714
+    },
+    {
+      "id": "G3",
+      "name": "Recessed stacked laundry bay",
+      "floor": "Ground",
+      "rect": [
+        2.35,
+        0.2,
+        1.45,
+        1.3
+      ],
+      "area": 1.885,
+      "dimensions_feet_reference": [
+        4.757217847769028,
+        4.2650918635170605
+      ],
+      "area_square_feet_reference": 20.289971135497826
+    },
+    {
+      "id": "G4",
+      "name": "Kitchen / transition zone",
+      "floor": "Ground",
+      "rect": [
+        3.95,
+        4.65,
+        4.85,
+        2.1
+      ],
+      "area": 10.185,
+      "dimensions_feet_reference": [
+        15.912073490813647,
+        6.889763779527559
+      ],
+      "area_square_feet_reference": 109.63042759418852
+    },
+    {
+      "id": "G5",
+      "name": "Living / dining zone",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        6.9,
+        8.6,
+        3.4
+      ],
+      "area": 29.24,
+      "dimensions_feet_reference": [
+        28.215223097112858,
+        11.154855643044618
+      ],
+      "area_square_feet_reference": 314.73674058459227
+    },
+    {
+      "id": "G6",
+      "name": "Entrance circulation",
+      "floor": "Ground",
+      "rect": [
+        3.95,
+        0.2,
+        2.2,
+        4.3
+      ],
+      "area": 9.46,
+      "dimensions_feet_reference": [
+        7.217847769028872,
+        14.107611548556429
+      ],
+      "area_square_feet_reference": 101.82659254207398
+    },
+    {
+      "id": "G7",
+      "name": "Stair zone, including landings",
+      "floor": "Ground",
+      "rect": [
+        6.3,
+        0.2,
+        2.5,
+        4.3
+      ],
+      "area": 10.75,
+      "dimensions_feet_reference": [
+        8.202099737532809,
+        14.107611548556429
+      ],
+      "area_square_feet_reference": 115.7120369796295
+    },
+    {
+      "id": "G8",
+      "name": "Indoor service passage",
+      "floor": "Ground",
+      "rect": [
+        2.35,
+        1.5,
+        1.45,
+        1
+      ],
+      "area": 1.45,
+      "dimensions_feet_reference": [
+        4.757217847769028,
+        3.280839895013123
+      ],
+      "area_square_feet_reference": 15.607670104229095
+    },
+    {
+      "id": "U1",
+      "name": "Two-double guest bedroom",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        2.65,
+        4.6,
+        4.1
+      ],
+      "area": 18.859999999999996,
+      "dimensions_feet_reference": [
+        15.091863517060366,
+        13.451443569553804
+      ],
+      "area_square_feet_reference": 203.0073504591453
+    },
+    {
+      "id": "U2",
+      "name": "Open shared bathroom with far-end shower",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        0.2,
+        3.6,
+        2.3
+      ],
+      "area": 8.28,
+      "dimensions_feet_reference": [
+        11.811023622047244,
+        7.545931758530183
+      ],
+      "area_square_feet_reference": 89.12517825035648
+    },
+    {
+      "id": "U3",
+      "name": "Hall linen cupboard",
+      "floor": "Upper",
+      "rect": [
+        3.95,
+        1.95,
+        0.6,
+        0.55
+      ],
+      "area": 0.33,
+      "dimensions_feet_reference": [
+        1.9685039370078738,
+        1.804461942257218
+      ],
+      "area_square_feet_reference": 3.552090437514208
+    },
+    {
+      "id": "U4",
+      "name": "Primary dressing / storage",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        6.9,
+        4.6,
+        2.4
+      ],
+      "area": 11.04,
+      "dimensions_feet_reference": [
+        15.091863517060366,
+        7.874015748031495
+      ],
+      "area_square_feet_reference": 118.83357100047532
+    },
+    {
+      "id": "U5",
+      "name": "Primary bedroom",
+      "floor": "Upper",
+      "rect": [
+        4.95,
+        4.65,
+        3.85,
+        4.65
+      ],
+      "area": 17.902500000000003,
+      "dimensions_feet_reference": [
+        12.631233595800525,
+        15.255905511811024
+      ],
+      "area_square_feet_reference": 192.70090623514582
+    },
+    {
+      "id": "U6",
+      "name": "Hall",
+      "floor": "Upper",
+      "rect": [
+        4.95,
+        0.2,
+        1.2,
+        4.3
+      ],
+      "area": 5.159999999999999,
+      "dimensions_feet_reference": [
+        3.9370078740157477,
+        14.107611548556429
+      ],
+      "area_square_feet_reference": 55.54177775022215
+    },
+    {
+      "id": "U7",
+      "name": "Upper arrival landing",
+      "floor": "Upper",
+      "rect": [
+        6.3,
+        0.2,
+        2.5,
+        1
+      ],
+      "area": 2.5,
+      "dimensions_feet_reference": [
+        8.202099737532809,
+        3.280839895013123
+      ],
+      "area_square_feet_reference": 26.909776041774304
+    }
+  ],
+  "bathroom_count": 2,
+  "bedroom_count": 3,
+  "downstairs_bath_wall_to_kitchen_zone_gap_m": 2.0000000000000004,
+  "service_access": {
+    "route": [
+      "G6 entry hall",
+      "G8 indoor passage",
+      "G2 bathroom"
+    ],
+    "laundry_access": "G3 opens directly to G8",
+    "passage_width_m": 1,
+    "passage_width_ft": 3.280839895013123,
+    "bathroom_door_opening_m": 0.85,
+    "laundry_type": "stacked washer/dryer in an open recessed bay",
+    "exterior_laundry_door": false
+  },
+  "upper_bathroom": {
+    "private_toilet_compartment": false,
+    "toilet_count": 1,
+    "bathing_fixture": "walk-in shower",
+    "shower_position": "far end opposite the hall door; left in plan",
+    "fixtures_m": {
+      "shower": [
+        0.2,
+        0.2,
+        1.1,
+        2.3
+      ],
+      "double_vanity": [
+        1.65,
+        0.2,
+        1.9,
+        0.55
+      ],
+      "toilet": [
+        2.0,
+        1.72,
+        0.6,
+        0.75
+      ]
+    },
+    "fixture_dimensions_ft": {
+      "shower": [
+        3.608923884514436,
+        7.545931758530183
+      ],
+      "double_vanity": [
+        6.233595800524934,
+        1.804461942257218
+      ],
+      "toilet": [
+        1.9685039370078738,
+        2.4606299212598426
+      ]
+    },
+    "door": {
+      "x": 3.875,
+      "y": 0.85,
+      "width": 0.9
+    },
+    "shower_entry_m": 0.9,
+    "nominal_toilet_front_to_vanity_gap_m": 0.97
+  },
+  "checks": [
+    "three bedrooms and two full bathrooms, one bathroom per floor",
+    "downstairs bathroom has no shared kitchen wall; 2.0 m plan-depth separation",
+    "lot allocation reconciles",
+    "room rectangles inside floor envelopes",
+    "room rectangles do not overlap",
+    "service-area rectangles and partition reconcile",
+    "passage connects hall, bath opening and laundry bay",
+    "stacked appliance footprint stays outside passage",
+    "upper bathroom fixture rectangles fit and do not overlap",
+    "upper bathroom door swing is clear of fixture rectangles",
+    "stair rise/run arithmetic",
+    "budget allocation reconciles"
+  ],
+  "not_verified": [
+    "parcel buildability",
+    "structural adequacy",
+    "code compliance",
+    "stair headroom",
+    "actual local construction cost",
+    "finished floor level",
+    "flood exposure",
+    "utility capacity"
+  ]
+}

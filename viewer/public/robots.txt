@@ -1,0 +1,4 @@
+# Crawling must remain allowed for the HTML noindex directive to be read.
+# On a GitHub project site, only the host-root /robots.txt is authoritative.
+User-agent: *
+Allow: /
