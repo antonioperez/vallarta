@@ -13,7 +13,7 @@ Publish only the built viewer. Add static noindex,nofollow meta tags to all HTML
 - [x] Build data and geometry, including genuine openings and the upper stair void.
 - [x] Build the responsive viewer, room map and navigation.
 - [x] Verify room bounds, opening access, stair elevations, browser controls and production assets.
-- [ ] Create the public antonioperez/Mehhhico repository, publish through Pages Actions, and verify the live HTML and assets.
+- [x] Create the public repository, publish through Pages Actions, and verify the live HTML and assets. GitHub now names the repository antonioperez/vallarta; the live site is https://antonioperez.github.io/vallarta/.
 
 ## Files
 viewer/src/house.ts: dimensions, wall segments and walk surface logic.
@@ -22,3 +22,7 @@ viewer/src/main.ts and style.css: viewer controls, camera and accessible UI.
 viewer/tests/: geometry and browser verification.
 .github/workflows/pages.yml: test/build/deploy only viewer/dist.
 README.md: commands, source provenance, limitations and indexing behavior.
+
+## Verification result
+
+Seven geometry tests and three browser tests passed locally. The GitHub build and deploy completed successfully; all three browser tests also passed against the live site. Production JavaScript and CSS return HTTP 200, and both index and custom 404 HTML contain noindex. The separately created design/concept-06 directory was left untouched and uncommitted.

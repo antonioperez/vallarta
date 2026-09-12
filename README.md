@@ -1,5 +1,7 @@
 # Las Juntas house study
 
+[Open the live walkthrough](https://antonioperez.github.io/vallarta/) · [Source repository](https://github.com/antonioperez/vallarta)
+
 An interactive, browser-based walkthrough of Concept 05: a two-story, three-bedroom house on a 10 × 20 m lot. Built with TypeScript, Vite and Three.js. No viewer installation, account, paid modeling software or backend is needed.
 
 ## Run locally
@@ -44,12 +46,12 @@ Geometry tests check source heights, openings, service access, room viewpoints, 
 
 ## GitHub Pages
 
-The `Publish house walkthrough` workflow tests and builds the app on pushes to `main`, then publishes only `viewer/dist` with GitHub Actions. The relative Vite asset base supports the `/Mehhhico/` project path. Choose GitHub Actions as the Pages build source.
+The `Publish house walkthrough` workflow tests and builds the app on pushes to `main`, then publishes only `viewer/dist` with GitHub Actions. The relative Vite asset base supports the `/vallarta/` project path. Choose GitHub Actions as the Pages build source.
 
 ## Search indexing
 
 All published HTML entry points include `noindex, nofollow, noimageindex` before JavaScript runs. The production build fails if the index directive is missing; the generated 404 page also has it. No sitemap, search registration or analytics is configured. Fonts are self-hosted.
 
-Crawling is deliberately allowed so compliant search engines can read `noindex`. Do not add `Disallow: /`: it can prevent crawlers from seeing the page's indexing directive. A robots.txt at `/Mehhhico/robots.txt` is not authoritative for the host; crawler rules are read from the domain-root `/robots.txt`. HTML meta tags are the operative mechanism here.
+Crawling is deliberately allowed so compliant search engines can read `noindex`. Do not add `Disallow: /`: it can prevent crawlers from seeing the page's indexing directive. A robots.txt at `/vallarta/robots.txt` is not authoritative for the host; crawler rules are read from the domain-root `/robots.txt`. HTML meta tags are the operative mechanism here.
 
 The site is public. These directives ask compliant engines not to index the HTML; they are not access control, do not control noncompliant bots, and do not prevent GitHub's public source repository from appearing in searches. See Google's [noindex documentation](https://developers.google.com/search/docs/crawling-indexing/block-indexing).
