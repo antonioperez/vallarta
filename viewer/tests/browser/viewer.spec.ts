@@ -1,59 +1,92 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('renders the model and excludes the static document from indexing', async ({ page, request }) => {
+test("renders the model and excludes the static document from indexing", async ({
+  page,
+  request,
+}) => {
   const errors: string[] = [];
-  page.on('pageerror', e => errors.push(e.message));
-  await page.goto('./');
-  await expect(page.locator('#scene')).toHaveAttribute('data-ready', 'true');
-  expect(Number(await page.locator('#scene').getAttribute('data-draw-calls'))).toBeGreaterThan(100);
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-  const html = await (await request.get('./')).text();
-  expect(html).toContain('name="robots" content="noindex, nofollow, noimageindex"');
-  await page.screenshot({ path: 'test-results/exterior.png' });
-  await page.getByRole('button', { name: '02 Ground floor' }).click();
-  await expect(page.locator('#view-status')).toHaveText('Ground floor · orbit view');
-  await page.screenshot({ path: 'test-results/ground.png' });
-  await page.getByRole('button', { name: '03 Upper floor' }).click();
-  await expect(page.locator('#view-status')).toHaveText('Upper floor · orbit view');
-  await page.screenshot({ path: 'test-results/upper.png' });
-  await page.locator('#room').selectOption('U5');
-  await expect(page.locator('#scene')).toHaveAttribute('data-mode', 'walk');
-  await expect(page.locator('#scene-heading')).toHaveText('Primary bedroom');
-  await page.screenshot({ path: 'test-results/walk.png' });
-  await page.keyboard.press('Escape');
-  await expect(page.locator('#scene')).toHaveAttribute('data-mode', 'orbit');
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("./");
+  await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
+  expect(
+    Number(await page.locator("#scene").getAttribute("data-draw-calls")),
+  ).toBeGreaterThan(100);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+    "content",
+    /noindex/,
+  );
+  const html = await (await request.get("./")).text();
+  expect(html).toContain(
+    'name="robots" content="noindex, nofollow, noimageindex"',
+  );
+  await page.screenshot({ path: "test-results/exterior.png" });
+  await page.getByRole("button", { name: "02 Ground floor" }).click();
+  await expect(page.locator("#view-status")).toHaveText(
+    "Ground floor · orbit view",
+  );
+  await page.screenshot({ path: "test-results/ground.png" });
+  await page.getByRole("button", { name: "03 Upper floor" }).click();
+  await expect(page.locator("#view-status")).toHaveText(
+    "Upper floor · orbit view",
+  );
+  await page.screenshot({ path: "test-results/upper.png" });
+  await page.locator("#room").selectOption("U5");
+  await expect(page.locator("#scene")).toHaveAttribute("data-mode", "walk");
+  await expect(page.locator("#scene-heading")).toHaveText("Primary bedroom");
+  await page.screenshot({ path: "test-results/walk.png" });
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#scene")).toHaveAttribute("data-mode", "orbit");
   expect(errors).toEqual([]);
 });
 
-test('keyboard movement stops at the rear wall and room shortcuts work', async ({ page }) => {
-  await page.goto('./');
-  await expect(page.locator('#scene')).toHaveAttribute('data-ready', 'true');
-  await page.locator('#room').selectOption('G1');
-  const before = await page.locator('#scene').getAttribute('data-position');
-  await page.keyboard.down('w');
+test("keyboard movement stops at the rear wall and room shortcuts work", async ({
+  page,
+}) => {
+  await page.goto("./");
+  await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
+  await page.locator("#room").selectOption("G1");
+  const before = await page.locator("#scene").getAttribute("data-position");
+  await page.keyboard.down("w");
   await page.waitForTimeout(2500);
-  await page.keyboard.up('w');
-  const after = (await page.locator('#scene').getAttribute('data-position'))!.split(',').map(Number);
-  expect(after[2]).toBeGreaterThan(Number(before!.split(',')[2]));
+  await page.keyboard.up("w");
+  const after = (await page.locator("#scene").getAttribute("data-position"))!
+    .split(",")
+    .map(Number);
+  expect(after[2]).toBeGreaterThan(Number(before!.split(",")[2]));
   expect(after[2]).toBeLessThanOrEqual(6.59);
-  await page.locator('#room').selectOption('G2');
-  await expect(page.locator('#scene-heading')).toHaveText('Front shared full bathroom');
-  await page.locator('#orbit').click();
-  await page.getByRole('button', { name: 'Enter Living / dining zone', exact: true }).click();
-  await expect(page.locator('#scene-heading')).toHaveText('Living / dining zone');
+  await page.locator("#room").selectOption("G2");
+  await expect(page.locator("#scene-heading")).toHaveText(
+    "Front shared full bathroom",
+  );
+  await page.locator("#orbit").click();
+  await page
+    .getByRole("button", { name: "Enter Living / dining zone", exact: true })
+    .click();
+  await expect(page.locator("#scene-heading")).toHaveText(
+    "Living / dining zone",
+  );
 });
 
-test('mobile layout fits and touch navigation moves', async ({ page }) => {
+test("mobile layout fits and touch navigation moves", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('./');
-  await expect(page.locator('#scene')).toHaveAttribute('data-ready', 'true');
-  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
-  await page.screenshot({ path: 'test-results/mobile.png', fullPage: true });
-  await page.locator('#walk').click();
-  const before = await page.locator('#scene').getAttribute('data-position');
-  const forward = page.getByRole('button', { name: 'Move forward', exact: true });
+  await page.goto("./");
+  await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
+  expect(
+    await page.evaluate(() => document.documentElement.scrollWidth),
+  ).toBeLessThanOrEqual(390);
+  await page.screenshot({ path: "test-results/mobile.png", fullPage: true });
+  await page.locator("#walk").click();
+  const before = await page.locator("#scene").getAttribute("data-position");
+  const forward = page.getByRole("button", {
+    name: "Move forward",
+    exact: true,
+  });
   const box = await forward.boundingBox();
   await page.mouse.move(box!.x + box!.width / 2, box!.y + box!.height / 2);
-  await page.mouse.down(); await page.waitForTimeout(400); await page.mouse.up();
-  expect(await page.locator('#scene').getAttribute('data-position')).not.toBe(before);
+  await page.mouse.down();
+  await page.waitForTimeout(400);
+  await page.mouse.up();
+  expect(await page.locator("#scene").getAttribute("data-position")).not.toBe(
+    before,
+  );
 });
