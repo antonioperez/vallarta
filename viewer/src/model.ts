@@ -86,17 +86,6 @@ function cylinder(
   mesh.receiveShadow = true;
   parent.add(mesh);
 }
-function tree(parent: THREE.Group, x: number, d: number, size = 1) {
-  cylinder(parent, x, d, 0, 0.12 * size, 1.6 * size, palette.wood);
-  const crown = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(0.8 * size, 2),
-    material("#78815a"),
-  );
-  crown.position.set(x, 2 * size, -d);
-  crown.scale.y = 1.2;
-  crown.castShadow = true;
-  parent.add(crown);
-}
 function bed(
   group: THREE.Group,
   x: number,
@@ -259,11 +248,6 @@ export function createHouse(scene: THREE.Scene) {
   box(site, -1, 14.4, 10, 0.1, 0, 1.2, palette.stone);
   for (let n = 0; n < 5; n++)
     box(site, 4.32, -5.05 + n * 0.95, 1.08, 0.65, 0.01, 0.055, "#e9e4d8");
-  tree(site, 0.25, 13.1, 1.1);
-  tree(site, 0.9, 14, 0.8);
-  tree(site, 8.4, 13.8, 0.8);
-  tree(site, 5.8, -3, 0.7);
-  tree(site, 4.1, -4.1, 0.65);
   for (const x of [2.1, 7.8])
     box(site, x, 13.3, 0.14, 0.14, 0.08, 2.65, palette.wood);
   for (let n = 0; n < 13; n++)
