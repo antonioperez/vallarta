@@ -90,3 +90,31 @@ test("mobile layout fits and touch navigation moves", async ({ page }) => {
     before,
   );
 });
+
+test("interior depth cues toggle and the latest spaces render", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("./");
+  await expect(page.locator(".edition")).toContainText("CONCEPT 06");
+  for (const room of ["G5", "G2", "G6", "U5"]) {
+    await page.locator("#room").selectOption(room);
+    await expect(page.locator("#scene")).toHaveAttribute("data-depth", "true");
+    await page.screenshot({ path: `test-results/interior-${room}.png` });
+  }
+  await page.locator("#depth").uncheck();
+  await expect(page.locator("#scene")).toHaveAttribute("data-depth", "false");
+  await page.screenshot({ path: "test-results/depth-off.png" });
+  await page.locator("#depth").check();
+  await expect(page.locator("#scene")).toHaveAttribute("data-depth", "true");
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({
+    path: "test-results/mobile-interior.png",
+    fullPage: true,
+  });
+  await page.locator("#furniture").uncheck();
+  await page.locator("#room").selectOption("G6");
+  await page.screenshot({ path: "test-results/doors-without-furniture.png" });
+  expect(errors).toEqual([]);
+});

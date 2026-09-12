@@ -1,4 +1,4 @@
-import schedule from "../../design/concept-05/area-schedule.json";
+import schedule from "../../design/concept-06/area-schedule.json";
 
 export type Floor = "ground" | "upper";
 export type View = "exterior" | Floor;
@@ -11,6 +11,7 @@ export interface Solid {
   bottom: number;
   top: number;
   floor: Floor;
+  lining?: boolean;
 }
 export interface Opening {
   start: number;
@@ -21,6 +22,7 @@ export interface Opening {
 }
 export interface Wall {
   rect: Rect;
+  lining?: boolean;
   openings?: Opening[];
 }
 export const heights = schedule.heights_m;
@@ -31,6 +33,24 @@ export const rooms = schedule.rooms.map((room) => ({
 }));
 export const levels = { ground: 0, upper: heights.floor_to_floor };
 export const areas = schedule.areas;
+export const acoustic = schedule.acoustic_design;
+export const livingFurniture = acoustic.living_furniture_m;
+const doors = acoustic.doors;
+export const openDoorLeaves: Rect[] = [
+  [doors.D0_front.x, doors.D0_front.y, 0.045, doors.D0_front.width],
+  [
+    doors.D1_stair.x - doors.D1_stair.width,
+    doors.D1_stair.y,
+    doors.D1_stair.width,
+    0.045,
+  ],
+  [
+    doors.D2_service.x,
+    doors.D2_service.y + doors.D2_service.width - 0.045,
+    doors.D2_service.width,
+    0.045,
+  ],
+];
 const door = (start: number, width: number): Opening => ({
   start,
   width,
@@ -57,7 +77,7 @@ export const walls: Record<Floor, Wall[]> = {
       openings: [
         windowAt(0.4, 0.85, 1.5),
         windowAt(3.25, 0.45),
-        door(4.3, 1),
+        door(doors.D0_front.x, doors.D0_front.width),
         windowAt(6.8, 1.65),
       ],
     },
@@ -67,7 +87,13 @@ export const walls: Record<Floor, Wall[]> = {
     },
     { rect: [6.15, 0.2, 0.15, 4.6], openings: [door(0.25, 0.9)] },
     { rect: [6.3, 4.8, 2.5, 0.15] },
-    { rect: [3.8, 0.2, 0.15, 6.55], openings: [door(1.5, 1), door(3, 0.9)] },
+    {
+      rect: [3.8, 0.2, 0.15, 6.55],
+      openings: [
+        door(doors.D2_service.y, doors.D2_service.width),
+        door(3, 0.9),
+      ],
+    },
     { rect: [0.2, 2.5, 3.6, 0.15] },
     { rect: [0.2, 6.75, 3.6, 0.15] },
     { rect: [2.2, 0.2, 0.15, 2.3], openings: [door(1.6, 0.85)] },
@@ -100,38 +126,65 @@ export const walls: Record<Floor, Wall[]> = {
   ],
 };
 
+// Acoustic lining reservations physically reduce the bedroom envelopes.
+for (const floor of ["ground", "upper"] as const) {
+  const linings = acoustic.linings_m[floor === "ground" ? "Ground" : "Upper"];
+  for (const [x, z, w, d] of linings) {
+    let openings: Opening[] = [];
+    if (floor === "ground" && x === 3.7) openings = [door(3, 0.9)];
+    if (floor === "upper" && x === 4.7) openings = [door(3.4, 0.9)];
+    if (floor === "upper" && z === 4.95) openings = [door(5.05, 0.9)];
+    walls[floor].push({ rect: [x, z, w, d], openings, lining: true });
+  }
+}
+
 export function wallSolids(floor: Floor): Solid[] {
   const base = levels[floor],
     height = floor === "ground" ? heights.ground_clear : heights.upper_clear;
-  return walls[floor].flatMap(({ rect: [x, z, w, d], openings = [] }) => {
-    const horizontal = w > d;
-    const start = horizontal ? x : z,
-      end = start + (horizontal ? w : d);
-    const result: Solid[] = [];
-    const add = (a: number, b: number, bottom: number, top: number) => {
-      if (b - a < 0.0001 || top - bottom < 0.0001) return;
-      result.push({
-        x: horizontal ? a : x,
-        z: horizontal ? z : a,
-        w: horizontal ? b - a : w,
-        d: horizontal ? d : b - a,
-        bottom: base + bottom,
-        top: base + top,
-        floor,
-      });
-    };
-    let cursor = start;
-    for (const o of [...openings].sort((a, b) => a.start - b.start)) {
-      add(cursor, o.start, 0, height);
-      add(o.start, o.start + o.width, 0, o.sill);
-      add(o.start, o.start + o.width, o.sill + o.height, height);
-      cursor = o.start + o.width;
-    }
-    add(cursor, end, 0, height);
-    return result;
-  });
+  return walls[floor].flatMap(
+    ({ rect: [x, z, w, d], openings = [], lining }) => {
+      const horizontal = w > d;
+      const start = horizontal ? x : z,
+        end = start + (horizontal ? w : d);
+      const result: Solid[] = [];
+      const add = (a: number, b: number, bottom: number, top: number) => {
+        if (b - a < 0.0001 || top - bottom < 0.0001) return;
+        result.push({
+          x: horizontal ? a : x,
+          z: horizontal ? z : a,
+          w: horizontal ? b - a : w,
+          d: horizontal ? d : b - a,
+          bottom: base + bottom,
+          top: base + top,
+          floor,
+          lining,
+        });
+      };
+      let cursor = start;
+      for (const o of [...openings].sort((a, b) => a.start - b.start)) {
+        add(cursor, o.start, 0, height);
+        add(o.start, o.start + o.width, 0, o.sill);
+        add(o.start, o.start + o.width, o.sill + o.height, height);
+        cursor = o.start + o.width;
+      }
+      add(cursor, end, 0, height);
+      return result;
+    },
+  );
 }
-export const solids = [...wallSolids("ground"), ...wallSolids("upper")];
+export const solids: Solid[] = [
+  ...wallSolids("ground"),
+  ...wallSolids("upper"),
+  ...openDoorLeaves.map(([x, z, w, d]) => ({
+    x,
+    z,
+    w,
+    d,
+    bottom: 0,
+    top: 2.2,
+    floor: "ground" as const,
+  })),
+];
 export function inside(x: number, depth: number, rect: Rect, inset = 0) {
   return (
     x >= rect[0] + inset &&
@@ -201,18 +254,18 @@ export function tryMove(x: number, depth: number, feet: number) {
 // Safe viewpoints avoid the schematic furniture and are inside their source rooms.
 export const roomViewpoints: Record<string, [number, number, number]> = {
   G1: [2, 3.5, 0],
-  G2: [1.65, 1.2, 0],
-  G3: [3.35, 1.3, 0],
-  G4: [7.3, 6.2, 0],
-  G5: [4.4, 8.6, 0],
+  G2: [1.65, 1.2, 2.6],
+  G3: [3.35, 1.3, Math.PI],
+  G4: [7.3, 6.2, 2.8],
+  G5: [4.4, 9.7, 2.0],
   G6: [5.1, 2, 0],
   G7: [6.9, 0.7, 0],
-  G8: [3.1, 2, 0],
+  G8: [3.1, 2, Math.PI],
   U1: [2.5, 3.6, 0],
-  U2: [2.8, 1.25, 0],
+  U2: [2.8, 1.25, 1.5],
   U3: [4.4, 1.45, 0],
   U4: [2.5, 7.7, 0],
-  U5: [5.8, 6.2, 0],
+  U5: [5.65, 5.7, -0.8],
   U6: [5.5, 2.8, 0],
   U7: [8, 0.7, 0],
 };

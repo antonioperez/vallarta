@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import {
   heights,
+  livingFurniture,
+  openDoorLeaves,
   levels,
   rooms,
   stair,
@@ -9,17 +11,22 @@ import {
   type Floor,
   type View,
 } from "./house";
+import { addFloorFinish, addEdges } from "./surfaces";
 
 const palette = {
-  plaster: "#e6ddcb",
-  stone: "#c3b39b",
-  tile: "#d1b99b",
+  plaster: "#e5dfd2",
+  stone: "#a9a596",
+  tile: "#bca487",
   wood: "#9a6545",
   cream: "#f7f0e4",
   sage: "#819080",
   rust: "#a4573e",
   metal: "#394c45",
-  glass: "#9fbfc0",
+  glass: "#b5cfda",
+  ceiling: "#f4f3ed",
+  sideWall: "#ccd4cd",
+  lining: "#bacbc1",
+  trim: "#797b6c",
 };
 const cube = new THREE.BoxGeometry(1, 1, 1);
 const materials = new Map<string, THREE.MeshStandardMaterial>();
@@ -32,6 +39,8 @@ function material(color: string, glass = false) {
         color,
         roughness: glass ? 0.15 : 0.86,
         metalness: 0,
+        emissive: color === palette.ceiling ? palette.ceiling : "#000000",
+        emissiveIntensity: color === palette.ceiling ? 0.18 : 0,
         transparent: glass,
         opacity: glass ? 0.27 : 1,
         depthWrite: !glass,
@@ -50,7 +59,7 @@ function box(
   height: number,
   color = palette.plaster,
   glass = false,
-) {
+): THREE.Mesh {
   const mesh = new THREE.Mesh(cube, material(color, glass));
   mesh.position.set(x + w / 2, bottom + height / 2, -d - depth / 2);
   mesh.scale.set(w, height, depth);
@@ -224,6 +233,7 @@ function toilet(
 }
 
 export function createHouse(scene: THREE.Scene) {
+  const depthEdges: THREE.LineSegments[] = [];
   const site = new THREE.Group(),
     ground = new THREE.Group(),
     upper = new THREE.Group(),
@@ -276,20 +286,106 @@ export function createHouse(scene: THREE.Scene) {
     [6.4, 0, 2.25, 1.2],
     [6.4, 4.79, 2.25, 4.71],
   ]) {
-    box(upper, r[0], r[1], r[2], r[3], slabBottom, slabHeight, palette.tile);
+    const slab = box(
+      upper,
+      r[0],
+      r[1],
+      r[2],
+      r[3],
+      slabBottom,
+      slabHeight,
+      palette.tile,
+    );
+    slab.material = [
+      material(palette.stone),
+      material(palette.stone),
+      material(palette.tile),
+      material(palette.ceiling),
+      material(palette.stone),
+      material(palette.stone),
+    ];
   }
-  box(roof, 0, 0, 9, 9.5, heights.upper_ceiling_level, 0.18, palette.plaster);
-  box(roof, 0, 9.5, 9, 1, 3, 0.18, palette.plaster);
+  box(roof, 0, 0, 9, 9.5, heights.upper_ceiling_level, 0.18, palette.ceiling);
+  box(roof, 0, 9.5, 9, 1, 3, 0.18, palette.ceiling);
   for (const floor of ["ground", "upper"] as const) {
     const group = floor === "ground" ? ground : upper,
       base = levels[floor];
-    for (const s of wallSolids(floor))
-      box(group, s.x, s.z, s.w, s.d, s.bottom, s.top - s.bottom);
+    for (const s of wallSolids(floor)) {
+      const color = s.lining
+        ? palette.lining
+        : s.w > s.d
+          ? palette.plaster
+          : palette.sideWall;
+      const wall = box(
+        group,
+        s.x,
+        s.z,
+        s.w,
+        s.d,
+        s.bottom,
+        s.top - s.bottom,
+        color,
+      );
+      depthEdges.push(addEdges(wall));
+      if (s.bottom === base) {
+        // Skirting stops at each actual door opening and outlines the floor junction.
+        box(
+          group,
+          s.x - 0.012,
+          s.z - 0.012,
+          s.w + 0.024,
+          s.d + 0.024,
+          base,
+          0.095,
+          palette.trim,
+        );
+      }
+    }
     for (const wall of walls[floor]) {
       const [x, d, w, depth] = wall.rect,
         horizontal = w > depth;
       for (const o of wall.openings ?? []) {
-        if (o.kind !== "window") continue;
+        if (o.kind === "door") {
+          // Jambs sit outside the nominal opening. Linings share the same reveal.
+          const frame = palette.wood;
+          if (horizontal) {
+            for (const edge of [o.start - 0.045, o.start + o.width])
+              box(
+                group,
+                edge,
+                d - 0.018,
+                0.045,
+                depth + 0.036,
+                base,
+                2.2,
+                frame,
+              );
+            box(
+              group,
+              o.start - 0.045,
+              d - 0.018,
+              o.width + 0.09,
+              depth + 0.036,
+              base + 2.2,
+              0.055,
+              frame,
+            );
+          } else {
+            for (const edge of [o.start - 0.045, o.start + o.width])
+              box(group, x - 0.018, edge, w + 0.036, 0.045, base, 2.2, frame);
+            box(
+              group,
+              x - 0.018,
+              o.start - 0.045,
+              w + 0.036,
+              o.width + 0.09,
+              base + 2.2,
+              0.055,
+              frame,
+            );
+          }
+          continue;
+        }
         const wx = horizontal ? o.start : x + w / 2 - 0.015;
         const wz = horizontal ? d + depth / 2 - 0.015 : o.start;
         box(
@@ -344,18 +440,17 @@ export function createHouse(scene: THREE.Scene) {
     for (const room of rooms.filter((r) => r.floor === floor)) {
       const [x, d, w, depth] = room.rect;
       if (room.id === "G7" || room.id === "U7") continue;
-      box(
+      addFloorFinish(
         group,
         x,
         d,
         w,
         depth,
-        base + 0.002,
-        0.007,
+        base + 0.012,
         /bathroom/.test(room.name)
-          ? "#c9d1c8"
+          ? "#8daaa7"
           : /bedroom/.test(room.name)
-            ? "#d6c0a1"
+            ? "#c2a483"
             : palette.tile,
       );
     }
@@ -421,7 +516,7 @@ export function createHouse(scene: THREE.Scene) {
     u = furniture.upper,
     b = levels.upper;
   bed(g, 1.4, 4.42, 1.52, 2.03, 0);
-  box(g, 0.2, 2.85, 0.6, 1.25, 0, 2.25, palette.wood);
+  box(g, 0.2, 2.95, 0.6, 1.25, 0, 2.25, palette.wood);
   box(g, 5.7, 2.6, 0.45, 1.2, 0, 0.85, palette.wood);
   box(g, 5.2, 4.95, 0.8, 0.72, 0, 1.9, "#afbab4");
   box(g, 6, 4.95, 2.8, 0.65, 0, 0.9, palette.wood);
@@ -434,14 +529,49 @@ export function createHouse(scene: THREE.Scene) {
       cylinder(g, x, d, 0.96, 0.07, 0.006, "#8b9390");
   box(g, 8.25, 5.9, 0.43, 0.65, 0.95, 0.015, palette.glass);
   table(g, 5.5, 7.55, 0);
-  box(g, 0.35, 9.25, 3.3, 0.85, 0.1, 0.4, palette.cream);
-  box(g, 0.35, 9.94, 3.3, 0.16, 0.5, 0.38, palette.cream);
-  box(g, 0.35, 8.05, 0.85, 1.2, 0.1, 0.4, palette.cream);
-  box(g, 0.35, 8.05, 0.16, 1.2, 0.5, 0.38, palette.cream);
-  box(g, 0.95, 7.9, 2.7, 2.2, 0.012, 0.015, "#b9b39e");
-  box(g, 1.6, 8.15, 1.25, 0.55, 0.15, 0.22, palette.wood);
-  for (const x of [2, 3]) box(g, x, 7.1, 0.75, 0.75, 0.12, 0.4, palette.sage);
-  box(g, 1.95, 6.9, 1.25, 0.12, 0.8, 0.7, palette.metal);
+  // Concept 06: TV on the exterior wall; the three-seat sofa faces it.
+  const lf = livingFurniture;
+  const place = (r: number[], bottom: number, height: number, color: string) =>
+    box(g, r[0], r[1], r[2], r[3], bottom, height, color);
+  place(lf.media_console, 0.06, 0.52, palette.wood);
+  const tv = place(lf.tv, 0.9, 0.76, palette.metal);
+  depthEdges.push(addEdges(tv));
+  place(lf.sofa, 0.12, 0.34, palette.sage);
+  const [sx, sz, sw, sd] = lf.sofa;
+  box(g, sx + sw - 0.15, sz, 0.15, sd, 0.46, 0.45, palette.sage);
+  for (let n = 0; n < 3; n++)
+    box(
+      g,
+      sx + 0.04,
+      sz + 0.1 + n * 0.8,
+      sw - 0.22,
+      0.76,
+      0.46,
+      0.1,
+      palette.cream,
+    );
+  for (const z of [sz, sz + sd - 0.1])
+    box(g, sx, z, sw, 0.1, 0.46, 0.24, palette.sage);
+  place(lf.coffee_table, 0.18, 0.22, palette.wood);
+  for (const r of [lf.chair, lf.rear_chair]) {
+    place(r, 0.12, 0.35, palette.rust);
+    box(g, r[0], r[1], 0.13, r[3], 0.47, 0.37, palette.rust);
+  }
+  // Solid-core doors are held open at the approved swings for the walkthrough.
+  for (const r of openDoorLeaves) {
+    const leaf = box(ground, r[0], r[1], r[2], r[3], 0.02, 2.15, palette.wood);
+    depthEdges.push(addEdges(leaf));
+    box(
+      ground,
+      r[0] + r[2] * 0.8,
+      r[1] + r[3] * 0.8,
+      0.06,
+      0.06,
+      0.98,
+      0.035,
+      palette.metal,
+    );
+  }
   vanity(g, 1.3, 0.2, 0.9, 0);
   toilet(g, 0.35, 0.23, 0);
   box(g, 0.2, 1.6, 1, 0.9, 0.01, 0.03, palette.glass);
@@ -460,7 +590,7 @@ export function createHouse(scene: THREE.Scene) {
   bed(u, 0.8, 4.55, 1.35, 1.9, b);
   bed(u, 2.85, 4.55, 1.35, 1.9, b);
   bed(u, 6.65, 6.15, 2, 2, b, true);
-  box(u, 0.35, 2.65, 3.05, 0.6, b, 2.25, palette.wood);
+  box(u, 0.35, 2.75, 3.05, 0.6, b, 2.25, palette.wood);
   box(u, 3.95, 1.95, 0.6, 0.55, b, 2.25, palette.wood);
   box(u, 0.35, 8.7, 4.3, 0.6, b, 2.25, palette.wood);
   box(u, 0.35, 7.15, 0.6, 1.2, b, 0.8, palette.wood);
@@ -476,6 +606,9 @@ export function createHouse(scene: THREE.Scene) {
     box(u, 1.3, d, 0.02, depth, b, 2.1, palette.glass, true);
 
   return {
+    setDepthCues(enabled: boolean) {
+      depthEdges.forEach((edge) => (edge.visible = enabled));
+    },
     setView(
       view: View,
       walking: boolean,

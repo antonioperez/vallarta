@@ -12,6 +12,7 @@ import {
 } from "./house";
 import { createHouse } from "./model";
 import "./style.css";
+import { createDepthRenderer } from "./depth";
 
 const icon = {
   orbit:
@@ -24,7 +25,7 @@ const icon = {
 };
 const app = document.querySelector<HTMLDivElement>("#app")!;
 app.innerHTML = `
-  <header class="masthead"><a class="brand" href="./" aria-label="Las Juntas home"><span class="brand-symbol">lj<span>·</span></span><span>LAS JUNTAS<small>A house in the making</small></span></a><div class="edition"><span class="status-dot"></span> CONCEPT 05 <span class="edition-date">/ SEPTEMBER 2026</span></div></header>
+  <header class="masthead"><a class="brand" href="./" aria-label="Las Juntas home"><span class="brand-symbol">lj<span>·</span></span><span>LAS JUNTAS<small>A house in the making</small></span></a><div class="edition"><span class="status-dot"></span> CONCEPT 06 <span class="edition-date">/ SEPTEMBER 2026</span></div></header>
   <main>
     <aside class="sidebar" aria-label="House controls">
       <div class="intro"><p class="eyebrow">THE HOUSE STUDY</p><h1>A little closer<br>to being here.</h1><p class="intro-copy">Step inside the plan. Explore the spaces, the proportions, and how it all connects.</p></div>
@@ -44,8 +45,8 @@ app.innerHTML = `
               .join("")}</optgroup>`,
         )
         .join("")}</select></div>
-      <div class="options"><label><input type="checkbox" id="furniture" checked><span>Furniture</span></label><label><input type="checkbox" id="roof" checked><span>Exterior roof</span></label></div>
-      <details class="notes"><summary>About this model <span>+</span></summary><p>Based on Concept 05. Ground ceiling 3.00 m; upper ceiling 2.80 m; floor-to-floor 3.40 m. Window and door heights, roof thickness, materials and landscape details are illustrative. Furniture is simplified; movement collides with walls, not furniture.</p><p>Schematic study. Stair headroom, structure and construction details remain unverified.</p></details>
+      <div class="options"><label><input type="checkbox" id="furniture" checked><span>Furniture</span></label><label><input type="checkbox" id="roof" checked><span>Exterior roof</span></label><label><input type="checkbox" id="depth" checked><span>Depth cues</span></label></div>
+      <details class="notes"><summary>About this model <span>+</span></summary><p>Based on Concept 06. Ground ceiling 3.00 m; upper ceiling 2.80 m; floor-to-floor 3.40 m. Window and door heights, roof thickness, materials and landscape details are illustrative. Acoustic lining reservations and open stair/service doors follow Concept 06. Furniture is simplified; movement collides with walls and door leaves, not furniture. Tile joints and accent colors are illustrative depth cues.</p><p>Schematic study. Stair headroom, structure and construction details remain unverified.</p></details>
       <div class="sidebar-footer">10 × 20 m lot <span>·</span> Las Juntas, México</div>
     </aside>
     <section class="viewport" aria-label="Interactive 3D house">
@@ -84,11 +85,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.25;
+renderer.toneMappingExposure = 1.05;
+renderer.info.autoReset = false;
 sceneElement.appendChild(renderer.domElement);
-const ambient = new THREE.HemisphereLight("#fff8e9", "#a3a68b", 2.7);
+const ambient = new THREE.HemisphereLight("#f5f5ff", "#b4c0c9", 1.75);
 scene.add(ambient);
-const sun = new THREE.DirectionalLight("#fff4da", 3.4);
+const sun = new THREE.DirectionalLight("#fff2df", 2.6);
 sun.position.set(-12, 22, 10);
 sun.castShadow = true;
 sun.shadow.mapSize.set(2048, 2048);
@@ -109,6 +111,7 @@ groundPlane.position.y = -0.27;
 groundPlane.receiveShadow = true;
 scene.add(groundPlane);
 const model = createHouse(scene);
+const depthRenderer = createDepthRenderer(renderer, scene, camera);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
@@ -128,6 +131,7 @@ const activeFloor = (): Floor =>
   walking ? floorOfCamera() : view === "upper" ? "upper" : "ground";
 
 function updateModel() {
+  model.setDepthCues($<HTMLInputElement>("depth").checked);
   model.setView(
     view,
     walking,
@@ -274,6 +278,8 @@ function enterRoom(id: string) {
       el.setAttribute("aria-pressed", String(el.dataset.view === room.floor)),
     );
   startWalk(position[0], position[1], room.floor);
+  yaw = position[2];
+  pitch = ["G2", "U2", "G3", "G8"].includes(id) ? -0.38 : -0.16;
   $("scene-heading").textContent = room.name;
   $("view-label").textContent = `${room.id} / ${room.area.toFixed(1)} m²`;
   $<HTMLSelectElement>("room").value = id;
@@ -299,7 +305,7 @@ $("fullscreen").addEventListener("click", async () => {
     $("view-status").textContent = "Fullscreen is unavailable in this browser.";
   }
 });
-for (const id of ["roof", "furniture"])
+for (const id of ["roof", "furniture", "depth"])
   $(id).addEventListener("change", updateModel);
 $("room").addEventListener("change", (e) =>
   enterRoom((e.target as HTMLSelectElement).value),
@@ -388,6 +394,7 @@ const observer = new ResizeObserver(() => {
         )
         .add(controls.target);
     renderer.setSize(width, height);
+    depthRenderer.resize(width, height);
     camera.aspect = aspect;
     camera.updateProjectionMatrix();
   }
@@ -441,7 +448,10 @@ function frame(now: number) {
     }
   } else controls.update();
   updateMapCamera();
-  renderer.render(scene, camera);
+  renderer.info.reset();
+  const depthEnabled = walking && $<HTMLInputElement>("depth").checked;
+  depthRenderer.render(depthEnabled);
+  sceneElement.dataset.depth = String(depthEnabled);
   // Read-only diagnostics for browser verification and support.
   sceneElement.dataset.ready = "true";
   sceneElement.dataset.mode = walking ? "walk" : "orbit";
@@ -457,5 +467,6 @@ if (import.meta.hot)
     renderer.setAnimationLoop(null);
     observer.disconnect();
     controls.dispose();
+    depthRenderer.dispose();
     renderer.dispose();
   });

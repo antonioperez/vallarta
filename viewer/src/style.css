@@ -234,6 +234,7 @@ h1 {
   color: #35483e;
 }
 .options {
+  flex-wrap: wrap;
   display: flex;
   gap: 20px;
   padding: 17px 0;
@@ -551,6 +552,7 @@ h1 {
     padding-top: 22px;
   }
   .options {
+    flex-wrap: wrap;
     padding: 12px 0;
   }
   .sidebar-footer {
@@ -676,6 +678,7 @@ h1 {
     padding: 11px;
   }
   .options {
+    flex-wrap: wrap;
     order: 3;
     margin: 0 20px;
     padding: 16px 0;
@@ -748,5 +751,20 @@ h1 {
   .scene-title h2 {
     font-size: 22px;
     line-height: 1.05;
+  }
+}
+
+.walking .scene-title {
+  background: #f7f5efeb;
+  padding: 10px 14px;
+  border-radius: 4px;
+  max-width: calc(100% - 95px);
+}
+.walking .mode-switch {
+  top: 126px;
+}
+@media (max-width: 800px) {
+  .walking .mode-switch {
+    top: 112px;
   }
 }
