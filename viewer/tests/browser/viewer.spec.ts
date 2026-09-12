@@ -94,6 +94,8 @@ test("mobile layout fits and touch navigation moves", async ({ page }) => {
 test("interior depth cues toggle and the latest spaces render", async ({
   page,
 }) => {
+  // Allow software WebGL time for the multi-room screenshot tour on CI.
+  test.setTimeout(process.env.CI ? 120_000 : 30_000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("./");
