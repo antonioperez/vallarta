@@ -181,6 +181,16 @@ test("realistic finishes load locally and switch back to simple materials", asyn
   await expect(
     page.getByLabel("Realistic materials", { exact: true }),
   ).toBeChecked();
+  if (
+    (await page.locator("#scene").getAttribute("data-render-tier")) ===
+    "software"
+  ) {
+    const pixels = await page.locator("#scene canvas").evaluate((canvas) => {
+      const c = canvas as HTMLCanvasElement;
+      return c.width * c.height;
+    });
+    expect(pixels).toBeLessThanOrEqual(240_000);
+  }
   await page.locator("#room").selectOption("G5");
   await page.screenshot({ path: "test-results/materials-realistic.png" });
   await page.getByLabel("Realistic materials", { exact: true }).uncheck();

@@ -94,7 +94,17 @@ try {
     "This browser could not start 3D graphics. Enable hardware acceleration or try a WebGL-capable browser.";
   throw new Error("WebGL unavailable");
 }
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+const gl = renderer.getContext();
+const rendererInfo = gl.getExtension("WEBGL_debug_renderer_info");
+const softwareRenderer = rendererInfo
+  ? /swiftshader|llvmpipe|softpipe|software/i.test(
+      String(gl.getParameter(rendererInfo.UNMASKED_RENDERER_WEBGL)),
+    )
+  : false;
+sceneElement.dataset.renderTier = softwareRenderer ? "software" : "hardware";
+renderer.setPixelRatio(
+  softwareRenderer ? 1 : Math.min(window.devicePixelRatio, 2),
+);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -106,7 +116,7 @@ scene.add(ambient);
 const sun = new THREE.DirectionalLight("#fff2df", 2.6);
 sun.position.set(-12, 22, 10);
 sun.castShadow = true;
-sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.mapSize.setScalar(softwareRenderer ? 512 : 2048);
 sun.shadow.camera.left = -24;
 sun.shadow.camera.right = 24;
 sun.shadow.camera.top = 24;
@@ -132,16 +142,16 @@ pmrem.dispose();
 scene.environment = environment.texture;
 sceneElement.dataset.textures = "loading";
 let active = true;
-void loadMaterialTextures(renderer.capabilities.getMaxAnisotropy()).then(
-  (complete) => {
-    if (!active) return;
-    sceneElement.dataset.textures = complete ? "ready" : "partial";
-    $("material-status").hidden = complete;
-    if (!complete)
-      $("material-status").textContent =
-        "Some finishes could not load; simple surfaces are shown.";
-  },
-);
+void loadMaterialTextures(
+  softwareRenderer ? 1 : renderer.capabilities.getMaxAnisotropy(),
+).then((complete) => {
+  if (!active) return;
+  sceneElement.dataset.textures = complete ? "ready" : "partial";
+  $("material-status").hidden = complete;
+  if (!complete)
+    $("material-status").textContent =
+      "Some finishes could not load; simple surfaces are shown.";
+});
 const depthRenderer = createDepthRenderer(renderer, scene, camera);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -458,8 +468,15 @@ const observer = new ResizeObserver(() => {
           Math.max(1, 0.95 / aspect) / Math.max(1, 0.95 / camera.aspect),
         )
         .add(controls.target);
+    // Keep controls at full CSS resolution while software GPUs draw fewer pixels.
+    const scale = softwareRenderer
+      ? Math.min(1, Math.sqrt(240_000 / (width * height)))
+      : 1;
+    renderer.setPixelRatio(
+      softwareRenderer ? scale : Math.min(window.devicePixelRatio, 2),
+    );
     renderer.setSize(width, height);
-    depthRenderer.resize(width, height);
+    depthRenderer.resize(Math.round(width * scale), Math.round(height * scale));
     camera.aspect = aspect;
     camera.updateProjectionMatrix();
   }
