@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "pdf": "las-juntas-style-study-01.pdf",
+  "page_count": 5,
+  "final_image_count": 6,
+  "baseline": "All Concept 10 file hashes unchanged",
+  "automated_checks": [
+    "Room-aligned front opening extents",
+    "Opening heads below retained ceilings",
+    "Two separate stair openings at floor levels 3.40 m apart",
+    "Roof and canopy footprints within lot",
+    "Entry details outside car footprint",
+    "Gate leaf and reserved sliding space retained",
+    "Exact metric-to-foot conversion before display rounding",
+    "Five A3 landscape pages with correct numbering",
+    "Text within page bounds",
+    "Three live source links",
+    "No excluded attribution terms in PDF text or metadata",
+    "Six full-resolution images in archive"
+  ],
+  "visual_review": {
+    "pdf_pages_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "page_layout": "No clipped text or overlapping tables seen",
+    "A": "Bathroom ribbon, separate framed stair windows, flat entry canopy; coordinated flat rear canopy",
+    "B": "Separate privacy windows, narrow stair openings, hipped clay roof and matching terrace shed roof; side roof edges revised",
+    "C": "Tall separate stair windows, curved entrance, raised front stair parapet; flat rear silhouette matches its recessed roof location",
+    "all_fronts": "Left car exit remains open, with full sliding leaf retracted behind fixed center fence and separate pedestrian gate",
+    "all_rears": "Upper primary window at viewer-left, upper dressing wall solid; slider at left with fridge visible at left side wall; existing terrace arrangement"
+  },
+  "limits": [
+    "Perspective images are illustrative and contain approximate proportions; measured elevations and schedules govern exact dimensions",
+    "Sash operation, guards, cleaning reach and finished member sections require detailed coordination",
+    "Roof support, tile slope compatibility, drainage, glazing performance and construction costs are unverified"
+  ],
+  "sha256": {
+    "las-juntas-style-study-01.pdf": "09d9253953fc6321a0ef1cbfc6c74821804c97b19c3b1039e2e719d477ba95d5",
+    "a-front.png": "ecc7739f76cf5de44f1b92012a52eb91d5b18f99c42bec02edc1e8da50302baf",
+    "a-rear.png": "b0ce54a053b8886013d9009f34bfe7d7adf089abeaaf3fa70cbb57807bb5dc88",
+    "b-front.png": "6bc73ea1461774ffff763be73b43f9befda12e247a1b6ccddec1fc4429d1dfa0",
+    "b-rear.png": "d841cea34acf9d9743c0be5ad60f3d97b561cc93b774bcb9c297e2cadd57fba7",
+    "c-front.png": "213088df2b9817510b9cdce38980260aa6a5b760450596be00c638fba34dc729",
+    "c-rear.png": "6b1af2e84d6bbdc2124851d4651c9c119946364f63a7b041f5906ccb69fb950b"
+  }
+}

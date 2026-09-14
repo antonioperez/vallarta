@@ -1,0 +1,15 @@
+{
+  "mode": "built-in image generation",
+  "file": "front-updated.png",
+  "stages": [
+    {
+      "prompt": "Edit the provided front architectural rendering of this compact two-story house in Las Juntas, Puerto Vallarta. Make ONE localized architectural change: completely REMOVE the tall orange terracotta perforated flower-pattern celosia screen on the RIGHT of the facade, including its outer rectangular recess, and replace that zone with the SAME continuous warm cream stucco wall finish as the rest of the house, containing TWO SEPARATE bronze-framed stair windows vertically aligned, one per floor. The removed screen must leave no patterned tiles, decorative grid, louvers, or tall screen frame anywhere on the facade.\n\nPrecise opening geometry: house facade is 9.00 m wide, about 6.70 m from ground floor datum to roof cap. Each new stair window is 1.65 m wide x 1.50 m high, roughly 1.10:1 width:height, not tall narrow slits. Right edge of BOTH new windows is 0.55 m left of right building edge. Ground stair window sill is 1.10 m above ground finished floor and head is 2.60 m. Upper stair window sill is 4.50 m and head is 6.00 m. Thus there is a substantial 1.90 m tall SOLID STUCCO BAND between the two window openings, with no continuous glazing connecting stories. Keep glazing CLOSED, neutral lightly reflective clear glass, two simple glazed casement panels per opening, slim dark bronze perimeter and one central vertical meeting stile. Subtle interior darkness/reflection, no implausible staircase floating against glass. They are ordinary independent landing windows; not full-height glass walls, doors, balconies or an orange tower.\n\nEverything else must remain as in input: camera framing and square crop, exact house silhouette, roof cap, scale, ALL existing bathroom and laundry windows and their current locations and sizes, central timber entry door, cream plaster, light/shadows, planting, street/curb and especially the complete FRONT GATE arrangement. Keep the car exactly as shown in its tight court, parked nose toward the house, rear facing the street. The wide LEFT car opening is fully OPEN and has NO gate panel, wall or obstruction in front of the car. The single complete sliding gate leaf remains fully retracted RIGHT behind the fixed long center fence, and the separate narrow pedestrian gate remains at FAR RIGHT. Do not shift the car, widen the court, shrink the car, add planting/steps in the driveway or alter any gate panel. Retain the warm late-afternoon architectural character, photorealistic materials, and original perspective. Output one edited image, no labels or annotations.",
+      "references": [
+        "../concept-09/front-updated.png"
+      ],
+      "output": "front-updated.png"
+    }
+  ],
+  "rear": "rear-updated.png retained unchanged from Concept 09",
+  "scope": "Remove the exterior terracotta stair screen and expose two independent stair window groups. Retain gate, court, kitchen, plan dimensions and floor heights."
+}

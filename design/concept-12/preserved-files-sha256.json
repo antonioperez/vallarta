@@ -1,0 +1,49 @@
+{
+  "concept-10": {
+    "las-juntas-concept-10.pdf": "45f230e622047a609b2ba3b72235d7007f3831feb8b0367bd95c3178a3a782d5",
+    "rendering-geometry.json": "f8bffdcc2b3dd2e2bbad0b2abb9976ff98211e7ca3f17c26c239a18c43e2faa5",
+    "area-schedule.json": "c00c101d4430f9a29587297f03fb99fa8be93fc84ed93f40ce8fbc3a4800c8cd",
+    "rear-updated.png": "ebdc391842d68a0b091de9bd129fbb691efc3cb4710d9870bff8f1d453a615a8",
+    "brief.md": "e95e25437ff03441eb9e74fe4023333aec9a5f705fdde2108577b85c5914f02e",
+    "draw_house.py": "9f6105df9bef3eaf7411aa6cb9952033e1813351735e63e836f4b3df045c7bc0",
+    "final-image-prompts.json": "0a89e494bfdd07842a39c22e77cf87164c9e98aa1e5636992b249d2f0fc475d5",
+    "front-updated.png": "48ea645588b12d2ffcf0f67a4fecaabb34b08ca29620e927230224c9d07acd16"
+  },
+  "concept-11": {
+    "las-juntas-concept-11.pdf": "9396d198311f6d47bed25e95224bac74d3cad6b4f2675af1508fdf0274a504ce",
+    "rendering-geometry.json": "cb7c95f754f31006c66c3bdae8c98b8d0f7b48433ba7afcfa4976a952b7bfb3e",
+    "area-schedule.json": "3ede1f541e5b88c84d7b972701cc688096676554c457f99b4c2b2739570e1bef",
+    "rear-updated.png": "b73bd6737a11cc8c8782ceb81a5b7e0a947feffff8ffc3176a0da2bd0adf86af",
+    "verification.json": "a84e66c8f32e31348418122cb265502b0af4300ff1c1f9cf51cbe789eb74afda",
+    "brief.md": "9672d96c89ae86876bcf9119a6e8e9ca08dd907e0e5715f67bab06ad38da67dc",
+    "draw_house.py": "4096c4b21fc06722d26a9dc1d0c3eaf752df40e2755e6430843c6ea011fd4cdb",
+    "final-image-prompts.json": "30058bfbfd66a08238da4cb71ae9d3662991f0daf35c8acf2db3f17b7ade2242",
+    "front-updated.png": "52b74404a3ea40130331fa983b46386f25db3d3a180b8704ff5948afc39b9527"
+  },
+  "style-study-01": {
+    "b-front-initial.png": "ced1f8f5dcd4fbd3f325a8a586ff825b0848bbf24210571c1f34e7d846ec6ff9",
+    "b-front.png": "6bc73ea1461774ffff763be73b43f9befda12e247a1b6ccddec1fc4429d1dfa0",
+    "b-rear-initial.png": "79a2588c411f8ff803b9e092f87a0a62c5295940f009ef1359e96e955bf12f7a",
+    "b-rear-elevation.png": "8138f5d4c5b7647886109250685c5a7b4c549602ae02fa2e1ed17542bb87e60a",
+    "b-rear.png": "d841cea34acf9d9743c0be5ad60f3d97b561cc93b774bcb9c297e2cadd57fba7",
+    "c-rear.png": "6b1af2e84d6bbdc2124851d4651c9c119946364f63a7b041f5906ccb69fb950b",
+    "c-front.png": "213088df2b9817510b9cdce38980260aa6a5b760450596be00c638fba34dc729",
+    "build_comparison.py": "41162ce3372a4a426b9bae8496b79dfe09bdaf470c85438e6549796af03fa389",
+    "b-front-roof-edge-draft.png": "564bfe3f383b9053fb215185d46b7fb01b51746b7fb8b48799bde0ba2301c129",
+    "las-juntas-style-study-01.pdf": "09d9253953fc6321a0ef1cbfc6c74821804c97b19c3b1039e2e719d477ba95d5",
+    "a-rear-elevation.png": "fd3df09f1379ff8cd9b87c382d23b8cfbf5633b37baceeb88fe9fe1bf8fa46da",
+    "a-front-elevation.png": "af40a3112006e4f0db334140fa5be11702451ceded3f9e4156a08e3cace7f894",
+    "c-front-elevation.png": "af25e309e6033be54dcdbb1d8af36e80cba9cb530de3d703d2f0d04ab378edf6",
+    "b-front-elevation.png": "41cba20a5afcb64462fedd15b12a25f914a6f2f7e6200fa9254bd4563e627844",
+    "c-rear-elevation.png": "cd0751c56cc87bf075e9723f8f2819e4e2cef020d339416373d9b780ab1108be",
+    "prepare_study.py": "592396a4361e76381f035340e3feed51cd6da4312f22a643b9855674a448fcc5",
+    "b-front-width-draft.png": "2395b95df14bf006c0d409dc2a0fb27b3f63a4d0a0b769b1fb2fbb9f0559e96d",
+    "six-style-views.zip": "7f2b00bf85d93256720f32d867c693bfe55fc0566fdcd7a21555edf0dfde07df",
+    "verification.json": "a2f050d6720caccb7c09c5fc5c3cfb3e0ee4669c74c8ff1d2b06b7d2dc49117f",
+    "brief.md": "b9b770b6972d2595360d6bd209fa4005756f56655c38f3b6c9ed2cee5411ed91",
+    "a-front.png": "ecc7739f76cf5de44f1b92012a52eb91d5b18f99c42bec02edc1e8da50302baf",
+    "a-rear.png": "b0ce54a053b8886013d9009f34bfe7d7adf089abeaaf3fa70cbb57807bb5dc88",
+    "final-image-prompts.json": "82e4c2e3d1e4653895450489e2d051eddb4a248dbe6f33c7708592c49b1936fe",
+    "study-geometry.json": "3b8695e9f09e178eda713622c4439747cda4349adb788896775b98bb741ea11e"
+  }
+}

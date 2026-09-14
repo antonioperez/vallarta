@@ -1,4 +1,4 @@
-import schedule from "../../design/concept-06/area-schedule.json";
+import { schedule, style, site, kitchen, rearSliderPanelRect } from "./design";
 
 export type Floor = "ground" | "upper";
 export type View = "exterior" | Floor;
@@ -12,6 +12,7 @@ export interface Solid {
   top: number;
   floor: Floor;
   lining?: boolean;
+  name?: string;
 }
 export interface Opening {
   start: number;
@@ -19,10 +20,14 @@ export interface Opening {
   sill: number;
   height: number;
   kind: "door" | "window";
+  privacy?: boolean;
+  modules?: number;
+  reveal?: number;
 }
 export interface Wall {
   rect: Rect;
   lining?: boolean;
+  name?: string;
   openings?: Opening[];
 }
 export const heights = schedule.heights_m;
@@ -66,6 +71,37 @@ const windowAt = (start: number, width: number, sill = 1): Opening => ({
   kind: "window",
 });
 
+const frontOpening = (
+  name: keyof typeof style.front_openings,
+  floor: Floor,
+): Opening => {
+  const [x, z, width, height] = style.front_openings[name];
+  return {
+    start: x - site.building_x,
+    width,
+    sill: z - levels[floor],
+    height,
+    kind: name === "entry" ? "door" : "window",
+    privacy: name.includes("bath"),
+    modules:
+      name === "upper_bath_ribbon" ? 3 : name === "ground_laundry" ? 1 : 2,
+    reveal: name.includes("stair") ? style.stair_reveal_projection : 0,
+  };
+};
+const rearOpening = (
+  name: keyof typeof style.rear_openings,
+  floor: Floor,
+): Opening => {
+  const [x, z, width, height] = style.rear_openings[name];
+  return {
+    start: 9 - x - width,
+    width,
+    sill: z - levels[floor],
+    height,
+    kind: name === "ground_sliding_door" ? "door" : "window",
+  };
+};
+
 // Rectangles use the original building-local plan coordinates. Doors and windows
 // use absolute distance along a wall, not offsets from its start.
 export const walls: Record<Floor, Wall[]> = {
@@ -75,18 +111,30 @@ export const walls: Record<Floor, Wall[]> = {
     {
       rect: [0.2, 0, 8.6, 0.2],
       openings: [
-        windowAt(0.4, 0.85, 1.5),
-        windowAt(3.25, 0.45),
-        door(doors.D0_front.x, doors.D0_front.width),
-        windowAt(6.8, 1.65),
+        frontOpening("ground_bath", "ground"),
+        frontOpening("ground_laundry", "ground"),
+        frontOpening("entry", "ground"),
+        frontOpening("ground_stair", "ground"),
       ],
     },
     {
       rect: [0.2, 10.3, 8.6, 0.2],
-      openings: [windowAt(0.65, 2.9), door(4.9, 3.2)],
+      openings: [
+        rearOpening("ground_living_window", "ground"),
+        rearOpening("ground_sliding_door", "ground"),
+      ],
     },
     { rect: [6.15, 0.2, 0.15, 4.6], openings: [door(0.25, 0.9)] },
     { rect: [6.3, 4.8, 2.5, 0.15] },
+    {
+      rect: kitchen.backing_wall_extension_m as [
+        number,
+        number,
+        number,
+        number,
+      ],
+      name: "Kitchen backing wall extension",
+    },
     {
       rect: [3.8, 0.2, 0.15, 6.55],
       openings: [
@@ -107,12 +155,14 @@ export const walls: Record<Floor, Wall[]> = {
     {
       rect: [0.2, 0, 8.6, 0.2],
       openings: [
-        windowAt(0.4, 0.7, 1.4),
-        windowAt(2.6, 0.9, 1.4),
-        windowAt(6.8, 1.65),
+        frontOpening("upper_bath_ribbon", "upper"),
+        frontOpening("upper_stair", "upper"),
       ],
     },
-    { rect: [0.2, 9.3, 8.6, 0.2], openings: [windowAt(5.2, 3.05)] },
+    {
+      rect: [0.2, 9.3, 8.6, 0.2],
+      openings: [rearOpening("upper_primary_window", "upper")],
+    },
     { rect: [6.15, 0.2, 0.15, 4.6], openings: [door(0.25, 0.9)] },
     { rect: [6.3, 4.8, 2.5, 0.15] },
     { rect: [3.8, 0.2, 0.15, 2.3], openings: [door(0.85, 0.9)] },
@@ -142,7 +192,7 @@ export function wallSolids(floor: Floor): Solid[] {
   const base = levels[floor],
     height = floor === "ground" ? heights.ground_clear : heights.upper_clear;
   return walls[floor].flatMap(
-    ({ rect: [x, z, w, d], openings = [], lining }) => {
+    ({ rect: [x, z, w, d], openings = [], lining, name }) => {
       const horizontal = w > d;
       const start = horizontal ? x : z,
         end = start + (horizontal ? w : d);
@@ -158,6 +208,7 @@ export function wallSolids(floor: Floor): Solid[] {
           top: base + top,
           floor,
           lining,
+          name,
         });
       };
       let cursor = start;
@@ -173,15 +224,24 @@ export function wallSolids(floor: Floor): Solid[] {
   );
 }
 export const solids: Solid[] = [
+  {
+    x: rearSliderPanelRect[0],
+    z: rearSliderPanelRect[1],
+    w: rearSliderPanelRect[2],
+    d: rearSliderPanelRect[3],
+    bottom: 0,
+    top: kitchen.rear_slider.height_m,
+    floor: "ground",
+  },
   ...wallSolids("ground"),
   ...wallSolids("upper"),
-  ...openDoorLeaves.map(([x, z, w, d]) => ({
+  ...openDoorLeaves.map(([x, z, w, d], index) => ({
     x,
     z,
     w,
     d,
     bottom: 0,
-    top: 2.2,
+    top: index === 0 ? style.front_openings.entry[3] : 2.2,
     floor: "ground" as const,
   })),
 ];
@@ -224,7 +284,14 @@ export function floorAt(
   if (inside(x, depth, stairVoid)) return null;
   if (currentFeet > 2.5)
     return inside(x, depth, [0.2, 0.2, 8.6, 9.1]) ? levels.upper : null;
-  return inside(x, depth, [-0.8, -5.3, 9.6, 19.6]) ? 0 : null;
+  return inside(x, depth, [
+    -0.8,
+    -site.front_depth + 0.2,
+    9.6,
+    site.lot_depth - 0.4,
+  ])
+    ? 0
+    : null;
 }
 export function canStand(
   x: number,
@@ -256,13 +323,13 @@ export const roomViewpoints: Record<string, [number, number, number]> = {
   G1: [2, 3.5, 0],
   G2: [1.65, 1.2, 2.6],
   G3: [3.35, 1.3, Math.PI],
-  G4: [7.3, 6.2, 2.8],
+  G4: [4.65, 6.65, -1.98],
   G5: [4.4, 9.7, 2.0],
   G6: [5.1, 2, 0],
   G7: [6.9, 0.7, 0],
   G8: [3.1, 2, Math.PI],
   U1: [2.5, 3.6, 0],
-  U2: [2.8, 1.25, 1.5],
+  U2: [3.25, 2.15, 2.3],
   U3: [4.4, 1.45, 0],
   U4: [2.5, 7.7, 0],
   U5: [5.65, 5.7, -0.8],

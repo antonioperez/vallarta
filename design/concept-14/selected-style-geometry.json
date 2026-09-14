@@ -1,0 +1,144 @@
+{
+  "concept": 14,
+  "selection": "A window layout with B main hip roof and clay-tile rear canopy",
+  "basis": "Concept 13 selected exterior, site and roof drainage retained; Concept 14 interior kitchen and dining revision",
+  "coordinate_basis": "Front x uses lot coordinates from street-left; rear x uses distance from building-left as seen from garden. z is relative to ground finished floor.",
+  "front_openings": {
+    "ground_bath": [
+      1.4,
+      1.6,
+      0.85,
+      0.7
+    ],
+    "ground_laundry": [
+      4.25,
+      1.4,
+      0.45,
+      0.9
+    ],
+    "entry": [
+      5.1,
+      0,
+      1.0,
+      2.45
+    ],
+    "ground_stair": [
+      7.8,
+      1.1,
+      1.65,
+      1.5
+    ],
+    "upper_stair": [
+      7.8,
+      4.5,
+      1.65,
+      1.5
+    ],
+    "upper_bath_ribbon": [
+      1.4,
+      5.15,
+      3.1,
+      0.55
+    ]
+  },
+  "rear_openings": {
+    "ground_sliding_door": [
+      0.9,
+      0,
+      3.2,
+      2.5
+    ],
+    "ground_living_window": [
+      5.45,
+      0.6,
+      2.9,
+      1.9
+    ],
+    "upper_primary_window": [
+      0.75,
+      4.25,
+      3.05,
+      1.7
+    ]
+  },
+  "roof": {
+    "type": "hipped clay-tile roof",
+    "main_top": 6.6,
+    "highest_top": 7.95,
+    "slope_rise_per_run": 0.3,
+    "footprint_lot": [
+      1,
+      5.45,
+      9,
+      10.2
+    ],
+    "ridge_lot_xy_start_end": [
+      [
+        5.5,
+        9.95
+      ],
+      [
+        5.5,
+        11.15
+      ]
+    ],
+    "side_eave_projection": 0,
+    "front_rear_eave_projection": 0.35
+  },
+  "rear_canopy": {
+    "type": "clay-tile shed roof descending to garden",
+    "footprint_lot": [
+      3,
+      16.3,
+      6,
+      3
+    ],
+    "soffit": 2.5,
+    "low_top": 2.7,
+    "high_top": 3.6,
+    "slope_rise_per_run": 0.3
+  },
+  "front_canopy": {
+    "footprint_lot": [
+      4.85,
+      5.0,
+      1.8,
+      0.8
+    ],
+    "soffit": 2.65,
+    "top": 2.8
+  },
+  "stair_reveal_projection": 0.2,
+  "palette": {
+    "plaster": "warm ivory",
+    "frames_gate": "dark bronze",
+    "entry_soffit": "timber",
+    "roof": "reddish clay tile",
+    "window_reveals": "ivory plaster"
+  },
+  "sources": [
+    {
+      "title": "Casa Los Mangos / Bernal Architecture Studio / Bucerias",
+      "url": "https://www.brnlarchitecture.com/es/casa-los-mangos-nuevo-vallarta"
+    },
+    {
+      "title": "Puerto Vallarta Tourism Board / Cultural Patrimony of Jalisco",
+      "url": "https://visitpuertovallarta.com/blog/puerto-vallarta-cultural-patrimony-of-jalisco"
+    }
+  ],
+  "status": "Selected concept form and opening schedule; assemblies, structure, drainage, glazing, hardware and costs unverified",
+  "rear_canopy_columns_lot_xywh": [
+    [
+      3.09,
+      19.17,
+      0.12,
+      0.12
+    ],
+    [
+      8.79,
+      19.17,
+      0.12,
+      0.12
+    ]
+  ]
+}

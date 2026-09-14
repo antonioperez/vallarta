@@ -1,0 +1,24 @@
+{
+  "mode": "built-in image generation",
+  "scope": "Concept 12: A openings and facade with B roofs, retaining Concept 11 site and parking",
+  "stages": [
+    {
+      "prompt": "Use case: precise-object-edit. Asset type: Concept 12 architectural front rendering. Image 1 is EDIT TARGET, style study A front. Image 2 is ROOF REFERENCE ONLY, style study B front. Image 3 is CURRENT SITE/CAR REFERENCE ONLY, Concept 11 front. Make the selected hybrid: preserve A's warm ivory plaster, bronze frames, timber door and slim small flat entry canopy; preserve A's exact window arrangement and ivory projecting stair-window surrounds. Replace ONLY the main flat parapet roof with B's modest reddish clay HIP ROOF on all four sides, not a gable. No ochre trim from B. The hip roof eave level is +6.60 m and ridge +7.95 m above ground floor, pitch 30% rise/run; building width 9 m, roof width exactly 9 m with side edges flush with walls, only 0.35 m front/rear eave projection. Keep all roof inside 10 m lot. A's upper left bathroom has ONE high horizontal obscure-glass opening 3.10 m wide x 0.55 m tall, in THREE glazed modules. Do not revert to B's separate small bathroom windows. Two separate stair windows on right, each 1.65 m wide x 1.50 m tall, sills +1.10 and +4.50 m; solid wall/floor band between. Ground bathroom, laundry and door stay as in A. Retain 3.00 m ground clear, 2.80 m upper clear and 3.40 m floor-to-floor. Apply CURRENT site revision: entire house 5.80 m behind boundary, sedan 4.80 m long x 1.85 m body width, parked nose toward house, rear bumper 0.55 m from boundary and nose only 0.45 m from house; larger sedan like image 3. Car must look tightly parked. Keep complete sliding gate fully open: unobstructed left 3.60 m vehicle opening, complete 3.80 m leaf retracted RIGHT behind center fixed fence, separate pedestrian gate far right. No post, gate or planter blocks car exit. Keep square frontal street camera, warm afternoon lighting, modest local house scale, same landscape character and street. Allow enough sky to show entire hip roof. No added rooms, floors, celosia, text, measurements, watermark.",
+      "references": [
+        "../style-study-01/a-front.png",
+        "../style-study-01/b-front.png",
+        "../concept-11/front-updated.png"
+      ],
+      "output": "front-updated.png"
+    },
+    {
+      "prompt": "Use case: precise-object-edit. Asset type: Concept 12 architectural rear rendering. Image 1 is EDIT TARGET, Concept 11 rear with current 0.70 m garden strip and low foreground boundary wall. Image 2 is ROOF REFERENCE ONLY, style study B rear. Image 3 is A MATERIAL/WINDOW REFERENCE. Apply B's modest reddish clay HIP ROOF to the main two-story body and B's clay-tiled sloping SHED ROOF to the 6 m wide x 3 m deep terrace canopy. Retain A's warm ivory plaster and dark bronze window frames, no ochre window trim; timber-toned terrace soffit and supports like B. Main hip roof across 9 m building width, eaves +6.60 m, ridge +7.95 m above ground floor, 30% rise/run, side edges exactly flush with building walls, 0.35 m front/rear eaves only. Terrace roof descends toward garden, top +3.60 m at house junction to +2.70 m outer edge over 3 m depth, outer soffit +2.50 m. Roof remains below upper primary window sill +4.25 m. Preserve all current openings and interior orientation: single wide upper primary window viewer-left, solid upper-right dressing wall, lower-left 3.20 m glazed slider with refrigerator at viewer-left side wall and sink/cooktop on long back counter, lower-right living window. No new upper windows. Retain ground clear 3 m, upper clear 2.8 m, floor-to-floor 3.4 m, upper rear setback 1 m. Rear house wall to fixed rear boundary ONLY 3.70 m, canopy depth 3 m leaving ONLY 0.70 m garden strip. Preserve the shallow foreground and visible low boundary wall at bottom of image 1; do not replace it with the larger lawn from B. Same terrace table and chairs, warm tile floor and plants within narrow side strips. Keep same square rear camera framing, warm afternoon light, and compact lot. Roofs and supports must fit inside lot. No labels, dimensions, text, watermark, clay facade screen, added floors or gable roof.",
+      "references": [
+        "../concept-11/rear-updated.png",
+        "../style-study-01/b-rear.png",
+        "../style-study-01/a-rear.png"
+      ],
+      "output": "rear-updated.png"
+    }
+  ]
+}

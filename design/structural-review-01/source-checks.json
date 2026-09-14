@@ -1,0 +1,34 @@
+{
+  "review_date": "2026-09-13",
+  "scope": "architectural load-path and standards coordination; no structural design or certification",
+  "project_hashes": {
+    "design/concept-14/las-juntas-concept-14.pdf": "ea68a587d91c468cacdf962fc08e4e88d569c69f43ffc494067a6ecb5d02261d",
+    "design/concept-14/area-schedule.json": "656ac7d0b7871123edd8578cd3401b31734de1b90a431f32df1415c7c82ff064",
+    "design/concept-14/selected-style-geometry.json": "decc3044dac19a1a292f8aec2a28eab4e85b477d2e34a4f41fd96277bf30fa5a",
+    "design/concept-14/brief.md": "88423be2ebefca1cfa89f402670137c75eb74cd93a9f04243a2b59fe005eb267",
+    "viewer/src/house.ts": "f86f04225429806f562a1005084940961f824a24a9a309e07a354de75923a7bc",
+    "viewer/src/model.ts": "29cd24e6ae08ece955e0be3ead0ee356e92da6b991391572d80848d1367579a5"
+  },
+  "municipal_register": "https://transparencia.puertovallarta.gob.mx/articulo8.php?pag=art8-secIId",
+  "regulation_url": "https://transparencia.puertovallarta.gob.mx/transparenciaY/normatividad/reglamentos/2023/REGLAMENTO%20DE%20CONSTRUCCI%C3%93N%20PARA%20EL%20MUNICIPIO%20DE%20PUERTO%20VALLARTA%2C%20JALISCO%20Y%20SUS%20NORMAS%20TECNICAS%20COMPLEMENTARIAS..doc",
+  "regulation_sha256": "619230eeb533854d1a1dbc5b6db16dfab5dc27c2fb30b92dce921e6ab3751cb2",
+  "articles_reviewed": [
+    149,
+    151,
+    154,
+    157,
+    159,
+    164,
+    178,
+    195,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208
+  ],
+  "structural_values_selected": false,
+  "main_pdf_and_viewer_geometry_changed": false
+}

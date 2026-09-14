@@ -1,0 +1,466 @@
+{
+  "walls": {
+    "ground": [
+      {
+        "rect": [
+          0,
+          0,
+          0.2,
+          10.5
+        ],
+        "openings": [
+          {
+            "start": 4.25,
+            "width": 1.3,
+            "sill": 1,
+            "height": 1.3,
+            "kind": "window"
+          }
+        ]
+      },
+      {
+        "rect": [
+          8.8,
+          0,
+          0.2,
+          10.5
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          0,
+          8.6,
+          0.2
+        ],
+        "openings": [
+          {
+            "start": 0.3999999999999999,
+            "width": 0.85,
+            "sill": 1.6,
+            "height": 0.7,
+            "kind": "window",
+            "privacy": true,
+            "modules": 2,
+            "reveal": 0
+          },
+          {
+            "start": 3.25,
+            "width": 0.45,
+            "sill": 1.4,
+            "height": 0.9,
+            "kind": "window",
+            "privacy": false,
+            "modules": 1,
+            "reveal": 0
+          },
+          {
+            "start": 4.1,
+            "width": 1,
+            "sill": 0,
+            "height": 2.45,
+            "kind": "door",
+            "privacy": false,
+            "modules": 2,
+            "reveal": 0
+          },
+          {
+            "start": 6.8,
+            "width": 1.65,
+            "sill": 1.1,
+            "height": 1.5,
+            "kind": "window",
+            "privacy": false,
+            "modules": 2,
+            "reveal": 0.2
+          }
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          10.3,
+          8.6,
+          0.2
+        ],
+        "openings": [
+          {
+            "start": 0.6499999999999999,
+            "width": 2.9,
+            "sill": 0.6,
+            "height": 1.9,
+            "kind": "window"
+          },
+          {
+            "start": 4.8999999999999995,
+            "width": 3.2,
+            "sill": 0,
+            "height": 2.5,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          6.15,
+          0.2,
+          0.15,
+          4.6
+        ],
+        "openings": [
+          {
+            "start": 0.25,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          6.3,
+          4.8,
+          2.5,
+          0.15
+        ]
+      },
+      {
+        "rect": [
+          5.2,
+          4.8,
+          1.1,
+          0.15
+        ],
+        "name": "Kitchen backing wall extension"
+      },
+      {
+        "rect": [
+          3.8,
+          0.2,
+          0.15,
+          6.55
+        ],
+        "openings": [
+          {
+            "start": 1.55,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          },
+          {
+            "start": 3,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          2.5,
+          3.6,
+          0.15
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          6.75,
+          3.6,
+          0.15
+        ]
+      },
+      {
+        "rect": [
+          2.2,
+          0.2,
+          0.15,
+          2.3
+        ],
+        "openings": [
+          {
+            "start": 1.6,
+            "width": 0.85,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          2.65,
+          3.6,
+          0.1
+        ],
+        "openings": [],
+        "lining": true
+      },
+      {
+        "rect": [
+          3.7,
+          2.75,
+          0.1,
+          3.9
+        ],
+        "openings": [
+          {
+            "start": 3,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ],
+        "lining": true
+      },
+      {
+        "rect": [
+          0.2,
+          6.65,
+          3.6,
+          0.1
+        ],
+        "openings": [],
+        "lining": true
+      }
+    ],
+    "upper": [
+      {
+        "rect": [
+          0,
+          0,
+          0.2,
+          9.5
+        ],
+        "openings": [
+          {
+            "start": 4.1,
+            "width": 1.5,
+            "sill": 1,
+            "height": 1.3,
+            "kind": "window"
+          },
+          {
+            "start": 7.8,
+            "width": 0.55,
+            "sill": 1,
+            "height": 1.3,
+            "kind": "window"
+          }
+        ]
+      },
+      {
+        "rect": [
+          8.8,
+          0,
+          0.2,
+          9.5
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          0,
+          8.6,
+          0.2
+        ],
+        "openings": [
+          {
+            "start": 0.3999999999999999,
+            "width": 3.1,
+            "sill": 1.7500000000000004,
+            "height": 0.55,
+            "kind": "window",
+            "privacy": true,
+            "modules": 3,
+            "reveal": 0
+          },
+          {
+            "start": 6.8,
+            "width": 1.65,
+            "sill": 1.1,
+            "height": 1.5,
+            "kind": "window",
+            "privacy": false,
+            "modules": 2,
+            "reveal": 0.2
+          }
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          9.3,
+          8.6,
+          0.2
+        ],
+        "openings": [
+          {
+            "start": 5.2,
+            "width": 3.05,
+            "sill": 0.8500000000000001,
+            "height": 1.7,
+            "kind": "window"
+          }
+        ]
+      },
+      {
+        "rect": [
+          6.15,
+          0.2,
+          0.15,
+          4.6
+        ],
+        "openings": [
+          {
+            "start": 0.25,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          6.3,
+          4.8,
+          2.5,
+          0.15
+        ]
+      },
+      {
+        "rect": [
+          3.8,
+          0.2,
+          0.15,
+          2.3
+        ],
+        "openings": [
+          {
+            "start": 0.85,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          2.5,
+          4.6,
+          0.15
+        ]
+      },
+      {
+        "rect": [
+          4.8,
+          2.65,
+          0.15,
+          6.65
+        ],
+        "openings": [
+          {
+            "start": 3.4,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          },
+          {
+            "start": 7.15,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          6.75,
+          4.6,
+          0.15
+        ]
+      },
+      {
+        "rect": [
+          4.95,
+          4.8,
+          3.85,
+          0.15
+        ],
+        "openings": [
+          {
+            "start": 5.05,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ]
+      },
+      {
+        "rect": [
+          0.2,
+          2.65,
+          4.6,
+          0.1
+        ],
+        "openings": [],
+        "lining": true
+      },
+      {
+        "rect": [
+          4.7,
+          2.75,
+          0.1,
+          4
+        ],
+        "openings": [
+          {
+            "start": 3.4,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ],
+        "lining": true
+      },
+      {
+        "rect": [
+          4.95,
+          4.95,
+          3.85,
+          0.1
+        ],
+        "openings": [
+          {
+            "start": 5.05,
+            "width": 0.9,
+            "sill": 0,
+            "height": 2.2,
+            "kind": "door"
+          }
+        ],
+        "lining": true
+      }
+    ]
+  },
+  "stairVoid": [
+    6.4,
+    1.2,
+    2.25,
+    3.59
+  ]
+}

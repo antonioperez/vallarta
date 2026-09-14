@@ -1,0 +1,36 @@
+{
+  "concept": 11,
+  "pdf_pages": 9,
+  "geometry_checks": "passed; draw_house.py verify_geometry",
+  "baseline_concept_10": "all original file hashes unchanged",
+  "interior_drawing_functions": "AST identical to Concept 10",
+  "site_depth_m": [
+    5.8,
+    10.5,
+    3.7
+  ],
+  "lot_area_m2": 200,
+  "front_court_m2": 58,
+  "rear_zone_m2": 37,
+  "covered_terrace_m2": 18,
+  "closed_gate_bumper_gap_m": 0.25,
+  "beyond_canopy_m": 0.7,
+  "pdf_text_checks": "all page headers and numbers; revised dimensions and area totals passed",
+  "visual_review": "all nine pages rendered with Poppler at 1500 px and inspected; page 8 re-rendered after separate-depth label correction; no clipping or overlaps observed",
+  "images": "both revised via built-in image generation and visually inspected; illustrative perspectives, dimensioned plans govern",
+  "limitations": [
+    "selected vehicle, mirrors and trunk/tailgate access not verified",
+    "gate hardware not selected",
+    "schematic only; not construction or permit drawings"
+  ],
+  "files_sha256": {
+    "las-juntas-concept-11.pdf": "9396d198311f6d47bed25e95224bac74d3cad6b4f2675af1508fdf0274a504ce",
+    "rendering-geometry.json": "cb7c95f754f31006c66c3bdae8c98b8d0f7b48433ba7afcfa4976a952b7bfb3e",
+    "area-schedule.json": "3ede1f541e5b88c84d7b972701cc688096676554c457f99b4c2b2739570e1bef",
+    "rear-updated.png": "b73bd6737a11cc8c8782ceb81a5b7e0a947feffff8ffc3176a0da2bd0adf86af",
+    "brief.md": "9672d96c89ae86876bcf9119a6e8e9ca08dd907e0e5715f67bab06ad38da67dc",
+    "draw_house.py": "4096c4b21fc06722d26a9dc1d0c3eaf752df40e2755e6430843c6ea011fd4cdb",
+    "final-image-prompts.json": "30058bfbfd66a08238da4cb71ae9d3662991f0daf35c8acf2db3f17b7ade2242",
+    "front-updated.png": "52b74404a3ea40130331fa983b46386f25db3d3a180b8704ff5948afc39b9527"
+  }
+}

@@ -12,16 +12,32 @@ import {
   type View,
 } from "./house";
 import { addFloorFinish, addEdges } from "./surfaces";
+import {
+  style,
+  geometry,
+  site as siteGeometry,
+  gate,
+  lotRect,
+  lotPoint,
+  kitchen,
+  rearSliderPanelRect,
+  mainRoofFaces,
+  terraceRoofFace,
+  proposedCollectionPaths,
+  proposedFlowArrows,
+  type Point,
+} from "./design";
+import { addClayRoof, worldPoint } from "./roof";
 
 const palette = {
-  plaster: "#e5dfd2",
+  plaster: "#eee5d6",
   stone: "#a9a596",
   tile: "#bca487",
   wood: "#9a6545",
   cream: "#f7f0e4",
   sage: "#819080",
   rust: "#a4573e",
-  metal: "#394c45",
+  metal: "#49413a",
   glass: "#b5cfda",
   ceiling: "#f4f3ed",
   sideWall: "#ccd4cd",
@@ -165,6 +181,7 @@ function vanity(
   w: number,
   base: number,
   double = false,
+  mirrorHeight = 0.8,
 ) {
   box(group, x, d, w, 0.55, base + 0.15, 0.65, palette.wood);
   box(group, x, d, w, 0.55, base + 0.8, 0.06, palette.cream);
@@ -197,7 +214,7 @@ function vanity(
       0.54,
       0.025,
       base + 1.08,
-      0.8,
+      mirrorHeight,
       palette.glass,
     );
   }
@@ -223,6 +240,7 @@ function toilet(
 
 export function createHouse(scene: THREE.Scene) {
   const depthEdges: THREE.LineSegments[] = [];
+  let depthCuesEnabled = true;
   const site = new THREE.Group(),
     ground = new THREE.Group(),
     upper = new THREE.Group(),
@@ -236,29 +254,153 @@ export function createHouse(scene: THREE.Scene) {
   site.name = "Site";
   ground.name = "Ground floor";
   upper.name = "Upper floor";
-  roof.name = "Illustrative roof";
+  roof.name = "Selected clay roofs and canopies";
   scene.add(site, ground, upper, roof);
-  box(site, -1, -5.5, 10, 20, -0.22, 0.2, "#c6beac");
-  box(site, -1, 10.5, 10, 4, -0.02, 0.035, "#a1a785");
+  const front = siteGeometry.front_depth,
+    rear = siteGeometry.lot_depth - front;
+  box(site, -1, -front, 10, 20, -0.22, 0.2, "#c6beac");
+  box(site, -1, 10.5, 10, rear - 10.5, -0.02, 0.035, "#a1a785");
   box(site, 2, 10.5, 6, 3, 0.015, 0.07, palette.tile);
-  box(site, -1, -7.5, 10, 2, -0.25, 0.04, "#a3a39a");
-  box(site, -1, -5.5, 10, 0.35, -0.02, 0.06, palette.stone);
-  // Site enclosure is illustrative; openings preserve vehicle and pedestrian access.
-  for (const x of [-1, 8.9]) box(site, x, -5.5, 0.1, 20, 0, 0.8, palette.stone);
-  box(site, -1, 14.4, 10, 0.1, 0, 1.2, palette.stone);
-  for (let n = 0; n < 5; n++)
-    box(site, 4.32, -5.05 + n * 0.95, 1.08, 0.65, 0.01, 0.055, "#e9e4d8");
-  for (const x of [2.1, 7.8])
-    box(site, x, 13.3, 0.14, 0.14, 0.08, 2.65, palette.wood);
-  for (let n = 0; n < 13; n++)
-    box(site, 2 + n * 0.48, 10.5, 0.1, 3, 2.78, 0.12, palette.wood);
+  box(site, -1, -front - 2, 10, 2, -0.25, 0.04, "#a3a39a");
+  // Flush vehicle crossing; no curb or planting across its exit corridor.
+  for (const x of [-1, 8.9])
+    box(site, x, -front, 0.1, 20, 0, 0.8, palette.stone);
+  box(site, -1, rear - 0.1, 10, 0.1, 0, 1.2, palette.stone);
+  box(site, 7.65, -front + 0.45, 1.0, 4.3, 0.01, 0.025, "#e9e4d8");
+  box(site, 4.3, -1.1, 4.35, 0.9, 0.01, 0.025, "#e9e4d8");
+  for (const r of style.rear_canopy_columns_lot_xywh)
+    box(
+      site,
+      ...lotRect(r),
+      0.08,
+      style.rear_canopy.soffit - 0.08,
+      palette.wood,
+    );
   table(site, 4, 11.5, 0.08);
-  // One schematic car to preserve the parking footprint.
-  box(site, 0.8, -4.95, 1.85, 4.5, 0.25, 0.55, "#7b8c87");
-  box(site, 0.95, -3.9, 1.55, 2.1, 0.8, 0.65, "#a5b9b6");
-  for (const x of [0.73, 2.5])
-    for (const d of [-4.1, -1.2])
-      cylinder(site, x, d, 0.1, 0.28, 0.35, palette.metal);
+
+  const gateLeaf = new THREE.Group();
+  gateLeaf.name = "Complete sliding gate leaf";
+  site.add(gateLeaf);
+  const gateHeight = 1.8; // Appearance only; no gate structure or height selected.
+  const panel = (parent: THREE.Group, r: readonly number[]) => {
+    const [x, d, w, depth] = lotRect(r);
+    box(parent, x, d, w, depth, 0.08, gateHeight - 0.08, palette.metal);
+    for (let y = 0.3; y < gateHeight; y += 0.18)
+      box(
+        parent,
+        x + 0.04,
+        d + depth - 0.008,
+        w - 0.08,
+        0.008,
+        y,
+        0.018,
+        "#706156",
+      );
+  };
+  panel(gateLeaf, gate.closed_leaf);
+  panel(site, gate.fixed_fence);
+  for (const r of gate.posts)
+    box(site, ...lotRect(r), 0, gateHeight + 0.08, palette.plaster);
+  box(site, -1, -front, 0.6, 0.12, 0, gateHeight, palette.plaster);
+  box(site, 8.85, -front, 0.15, 0.12, 0, gateHeight, palette.plaster);
+  // Separate pedestrian leaf held inward, out of the retained sliding reserve.
+  box(site, 8.6, -front + 0.22, 0.045, 1.05, 0, gateHeight, palette.metal);
+  gateLeaf.position.x = gate.travel;
+
+  // Body and wheels fit the 1.85 x 4.80 m planning envelope.
+  const car = new THREE.Group();
+  car.name = "4.80 m planning car";
+  site.add(car);
+  const [cx, cd, cw, cl] = lotRect(geometry.parking_m.car);
+  box(car, cx, cd, cw, cl, 0.28, 0.52, "#7b8c87");
+  box(car, cx + 0.14, cd + 1.0, cw - 0.28, 2.35, 0.8, 0.65, "#a5b9b6");
+  for (const d of [cd + 1.02, cd + 3.26])
+    box(car, cx + 0.19, d, cw - 0.38, 0.055, 0.98, 0.38, palette.glass);
+  for (const x of [cx + 0.09, cx + cw - 0.09])
+    for (const d of [cd + 0.82, cd + cl - 0.85]) {
+      const wheel = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.29, 0.29, 0.18, 20),
+        material("#303635"),
+      );
+      wheel.rotation.z = Math.PI / 2;
+      wheel.position.set(x, 0.3, -d);
+      wheel.castShadow = true;
+      car.add(wheel);
+    }
+
+  const drainage = new THREE.Group();
+  drainage.name = "Proposed drainage diagram";
+  roof.add(drainage);
+  drainage.visible = false;
+  const flowMaterial = new THREE.LineBasicMaterial({
+    color: "#168eaf",
+    depthTest: false,
+  });
+  const dashedMaterial = new THREE.LineDashedMaterial({
+    color: "#168eaf",
+    dashSize: 0.16,
+    gapSize: 0.1,
+    depthTest: false,
+  });
+  const diagramLine = (points: Point[], dashed = false, color?: string) => {
+    const m = color
+      ? new THREE.LineBasicMaterial({ color, depthTest: false })
+      : dashed
+        ? dashedMaterial
+        : flowMaterial;
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(points.map(worldPoint)),
+      m,
+    );
+    line.computeLineDistances();
+    line.renderOrder = 10;
+    drainage.add(line);
+  };
+  for (const path of proposedCollectionPaths) diagramLine(path);
+  diagramLine(
+    [lotPoint([9.85, 5.55], 6.67), lotPoint([9.85, 15.55], 6.67)],
+    false,
+    "#db792e",
+  );
+  for (const points of proposedFlowArrows) {
+    const start = worldPoint(points[0]),
+      end = worldPoint(points[1]),
+      delta = end.clone().sub(start);
+    const arrow = new THREE.ArrowHelper(
+      delta.clone().normalize(),
+      start,
+      delta.length(),
+      "#168eaf",
+      0.3,
+      0.17,
+    );
+    arrow.traverse((o) => {
+      if (o instanceof THREE.Line || o instanceof THREE.Mesh) {
+        (o.material as THREE.Material).depthTest = false;
+        o.renderOrder = 10;
+      }
+    });
+    drainage.add(arrow);
+  }
+  // Rear transfer shown as a relationship only; no constructed pipe diameter.
+  for (const x of [1.1, 9.85])
+    diagramLine(
+      [
+        lotPoint([x, 15.55], 6.67),
+        lotPoint([x, 15.55], 3.6),
+        lotPoint([x, 16.3], 3.6),
+        lotPoint([x, 16.3], 0.3),
+      ],
+      true,
+    );
+  for (const y of [5.45, 15.65]) {
+    const endY = y < 10 ? 4.8 : 16.15;
+    diagramLine(
+      [lotPoint([9.5, y], 6.72), lotPoint([9.5, endY], 6.72)],
+      false,
+      "#db792e",
+    );
+  }
 
   box(ground, 0, 0, 9, 10.5, -0.1, 0.1, palette.tile);
   // The upper slab is split around the measured stair opening.
@@ -289,8 +431,48 @@ export function createHouse(scene: THREE.Scene) {
       material(palette.stone),
     ];
   }
-  box(roof, 0, 0, 9, 9.5, heights.upper_ceiling_level, 0.18, palette.ceiling);
-  box(roof, 0, 9.5, 9, 1, 3, 0.18, palette.ceiling);
+  box(roof, 0, 0, 9, 9.5, heights.upper_ceiling_level, 0.12, palette.ceiling);
+  // Fill the selected eave band above the clear upper ceiling; roof build-up is schematic.
+  for (const [x, d, w, depth] of [
+    [0, 0, 9, 0.2],
+    [0, 9.3, 9, 0.2],
+    [0, 0.2, 0.2, 9.1],
+    [8.8, 0.2, 0.2, 9.1],
+  ])
+    box(
+      roof,
+      x,
+      d,
+      w,
+      depth,
+      heights.upper_ceiling_level,
+      style.roof.main_top - heights.upper_ceiling_level,
+      palette.plaster,
+    );
+  box(
+    roof,
+    0,
+    9.5,
+    9,
+    1,
+    heights.ground_clear,
+    heights.floor_to_floor - heights.ground_clear,
+    palette.ceiling,
+  );
+  addClayRoof(roof, mainRoofFaces, 0.12, "Main hip roof");
+  addClayRoof(
+    roof,
+    [terraceRoofFace],
+    style.rear_canopy.low_top - style.rear_canopy.soffit,
+    "Terrace clay roof",
+  );
+  box(
+    roof,
+    ...lotRect(style.front_canopy.footprint_lot),
+    style.front_canopy.soffit,
+    style.front_canopy.top - style.front_canopy.soffit,
+    palette.wood,
+  );
   for (const floor of ["ground", "upper"] as const) {
     const group = floor === "ground" ? ground : upper,
       base = levels[floor];
@@ -310,6 +492,7 @@ export function createHouse(scene: THREE.Scene) {
         s.top - s.bottom,
         color,
       );
+      if (s.name) wall.name = s.name;
       depthEdges.push(addEdges(wall));
       if (s.bottom === base) {
         // Skirting stops at each actual door opening and outlines the floor junction.
@@ -341,7 +524,7 @@ export function createHouse(scene: THREE.Scene) {
                 0.045,
                 depth + 0.036,
                 base,
-                2.2,
+                o.height,
                 frame,
               );
             box(
@@ -350,23 +533,73 @@ export function createHouse(scene: THREE.Scene) {
               d - 0.018,
               o.width + 0.09,
               depth + 0.036,
-              base + 2.2,
+              base + o.height,
               0.055,
               frame,
             );
           } else {
             for (const edge of [o.start - 0.045, o.start + o.width])
-              box(group, x - 0.018, edge, w + 0.036, 0.045, base, 2.2, frame);
+              box(
+                group,
+                x - 0.018,
+                edge,
+                w + 0.036,
+                0.045,
+                base,
+                o.height,
+                frame,
+              );
             box(
               group,
               x - 0.018,
               o.start - 0.045,
               w + 0.036,
               o.width + 0.09,
-              base + 2.2,
+              base + o.height,
               0.055,
               frame,
             );
+          }
+          if (horizontal && d > 10) {
+            const [px, pd, pw] = rearSliderPanelRect;
+            const panels = new THREE.Group();
+            panels.name = "Rear slider parked panels";
+            group.add(panels);
+            for (const offset of [0, 0.045]) {
+              box(
+                panels,
+                px,
+                pd + offset,
+                pw,
+                0.035,
+                base + 0.03,
+                o.height - 0.06,
+                palette.glass,
+                true,
+              );
+              for (const edge of [px, px + pw - 0.035])
+                box(
+                  panels,
+                  edge,
+                  pd + offset,
+                  0.035,
+                  0.035,
+                  base,
+                  o.height,
+                  palette.metal,
+                );
+              for (const height of [base, base + o.height - 0.035])
+                box(
+                  panels,
+                  px,
+                  pd + offset,
+                  pw,
+                  0.035,
+                  height,
+                  0.035,
+                  palette.metal,
+                );
+            }
           }
           continue;
         }
@@ -380,11 +613,39 @@ export function createHouse(scene: THREE.Scene) {
           horizontal ? 0.03 : o.width,
           base + o.sill,
           o.height,
-          palette.glass,
-          true,
+          o.privacy ? "#d9dfd6" : palette.glass,
+          !o.privacy,
         );
         if (horizontal) {
-          for (const dx of [0, o.width / 2, o.width - 0.025])
+          if (o.reveal) {
+            for (const px of [o.start - 0.1, o.start + o.width])
+              box(
+                group,
+                px,
+                -o.reveal,
+                0.1,
+                o.reveal + 0.04,
+                base + o.sill - 0.1,
+                o.height + 0.2,
+                palette.plaster,
+              );
+            for (const py of [base + o.sill - 0.1, base + o.sill + o.height])
+              box(
+                group,
+                o.start,
+                -o.reveal,
+                o.width,
+                o.reveal + 0.04,
+                py,
+                0.1,
+                palette.plaster,
+              );
+          }
+          for (const dx of Array.from(
+            { length: (o.modules ?? 2) + 1 },
+            (_, i) =>
+              Math.min(o.width - 0.025, (i * o.width) / (o.modules ?? 2)),
+          ))
             box(
               group,
               o.start + dx,
@@ -502,18 +763,82 @@ export function createHouse(scene: THREE.Scene) {
   bed(g, 1.4, 4.42, 1.52, 2.03, 0);
   box(g, 0.2, 2.95, 0.6, 1.25, 0, 2.25, palette.wood);
   box(g, 5.7, 2.6, 0.45, 1.2, 0, 0.85, palette.wood);
-  box(g, 5.2, 4.95, 0.8, 0.72, 0, 1.9, "#afbab4");
-  box(g, 6, 4.95, 2.8, 0.65, 0, 0.9, palette.wood);
-  box(g, 8.15, 5.6, 0.65, 1.05, 0, 0.9, palette.wood);
-  box(g, 6, 4.95, 2.8, 0.65, 0.9, 0.045, palette.cream);
-  box(g, 8.15, 5.6, 0.65, 1.05, 0.9, 0.045, palette.cream);
-  box(g, 6.35, 5.06, 0.75, 0.43, 0.95, 0.01, palette.metal);
-  for (const x of [6.53, 6.89])
-    for (const d of [5.17, 5.38])
+  const k = kitchen.rectangles_m;
+  const kitchenBox = (
+    r: number[],
+    bottom: number,
+    height: number,
+    color: string,
+  ) => box(g, r[0], r[1], r[2], r[3], bottom, height, color);
+  kitchenBox(k.counter, 0, 0.9, palette.wood).name = "3.60 m kitchen counter";
+  kitchenBox(k.counter, 0.9, 0.045, palette.cream);
+  kitchenBox(k.return, 0, 0.9, palette.wood).name = "Kitchen right-wall return";
+  kitchenBox(k.return, 0.9, 0.045, palette.cream);
+  kitchenBox(k.cooktop, 0.95, 0.01, palette.metal).name = "Cooktop";
+  for (const x of [k.cooktop[0] + 0.18, k.cooktop[0] + 0.56])
+    for (const d of [k.cooktop[1] + 0.11, k.cooktop[1] + 0.32])
       cylinder(g, x, d, 0.96, 0.07, 0.006, "#8b9390");
-  box(g, 8.25, 5.9, 0.43, 0.65, 0.95, 0.015, palette.glass);
-  table(g, 5.5, 7.55, 0);
-  // Concept 06: TV on the exterior wall; the three-seat sofa faces it.
+  kitchenBox(k.sink, 0.95, 0.015, palette.glass).name = "Sink";
+  box(
+    g,
+    k.sink[0] + 0.3,
+    k.sink[1] - 0.055,
+    0.04,
+    0.045,
+    0.95,
+    0.25,
+    palette.metal,
+  );
+  kitchenBox(k.fridge_body, 0, 1.9, "#afbab4").name = "Right-wall refrigerator";
+  // Door face is on the kitchen/left side. Handle opposite the dining-end hinge.
+  box(
+    g,
+    k.fridge_body[0] - 0.018,
+    k.fridge_body[1],
+    0.018,
+    k.fridge_body[3],
+    0.05,
+    1.82,
+    "#d0d4cf",
+  );
+  box(
+    g,
+    k.fridge_body[0] - 0.045,
+    k.fridge_body[1] + 0.06,
+    0.027,
+    0.025,
+    0.95,
+    0.5,
+    palette.metal,
+  );
+  // Six chairs and their orientation come from the shared PDF movement study.
+  const [dx, dd, dw, dl] = kitchen.dining_table_m;
+  box(g, dx, dd, dw, dl, 0.73, 0.08, palette.wood).name =
+    "Six-seat indoor table";
+  for (const x of [dx + 0.12, dx + dw - 0.2])
+    for (const d of [dd + 0.12, dd + dl - 0.2])
+      box(g, x, d, 0.08, 0.08, 0, 0.73, palette.wood);
+  kitchen.dining_chairs_drawn_m.forEach(([x, d, w, depth], i) => {
+    const chair = new THREE.Group();
+    chair.name = `Indoor dining chair ${i + 1}`;
+    g.add(chair);
+    box(chair, x, d, w, depth, 0.41, 0.09, palette.sage);
+    const [vx, vd] = kitchen.chair_outward_vectors[i];
+    box(
+      chair,
+      x + (vx > 0 ? w - 0.06 : 0),
+      d + (vd > 0 ? depth - 0.06 : 0),
+      vx ? 0.06 : w,
+      vd ? 0.06 : depth,
+      0.5,
+      0.32,
+      palette.wood,
+    );
+    for (const xx of [x + 0.035, x + w - 0.075])
+      for (const dd of [d + 0.035, d + depth - 0.075])
+        box(chair, xx, dd, 0.04, 0.04, 0, 0.41, palette.wood);
+  });
+  // Retained acoustic layout: TV on the exterior wall; the three-seat sofa faces it.
   const lf = livingFurniture;
   const place = (r: number[], bottom: number, height: number, color: string) =>
     box(g, r[0], r[1], r[2], r[3], bottom, height, color);
@@ -542,8 +867,17 @@ export function createHouse(scene: THREE.Scene) {
     box(g, r[0], r[1], 0.13, r[3], 0.47, 0.37, palette.rust);
   }
   // Solid-core doors are held open at the approved swings for the walkthrough.
-  for (const r of openDoorLeaves) {
-    const leaf = box(ground, r[0], r[1], r[2], r[3], 0.02, 2.15, palette.wood);
+  for (const [index, r] of openDoorLeaves.entries()) {
+    const leaf = box(
+      ground,
+      r[0],
+      r[1],
+      r[2],
+      r[3],
+      0.02,
+      (index === 0 ? style.front_openings.entry[3] : 2.2) - 0.05,
+      palette.wood,
+    );
     depthEdges.push(addEdges(leaf));
     box(
       ground,
@@ -580,7 +914,7 @@ export function createHouse(scene: THREE.Scene) {
   box(u, 0.35, 7.15, 0.6, 1.2, b, 0.8, palette.wood);
   for (const d of [5.57, 8.25])
     box(u, 8.1, d, 0.55, 0.48, b, 0.55, palette.wood);
-  vanity(u, 1.65, 0.2, 1.9, b, true);
+  vanity(u, 1.65, 0.2, 1.9, b, true, 0.6);
   toilet(u, 2, 1.72, b, true);
   box(u, 0.2, 0.2, 1.1, 2.3, b + 0.01, 0.03, palette.glass);
   for (const [d, depth] of [
@@ -590,8 +924,14 @@ export function createHouse(scene: THREE.Scene) {
     box(u, 1.3, d, 0.02, depth, b, 2.1, palette.glass, true);
 
   return {
+    setGateOpen(open: boolean) {
+      gateLeaf.position.x = open ? gate.travel : 0;
+    },
+    setDrainageVisible(visible: boolean) {
+      drainage.visible = visible;
+    },
     setDepthCues(enabled: boolean) {
-      depthEdges.forEach((edge) => (edge.visible = enabled));
+      depthCuesEnabled = enabled;
     },
     setView(
       view: View,
@@ -599,6 +939,10 @@ export function createHouse(scene: THREE.Scene) {
       showRoof: boolean,
       showFurniture: boolean,
     ) {
+      // Wall decomposition edges aid interior navigation, not facade construction joints.
+      depthEdges.forEach((edge) => {
+        edge.visible = depthCuesEnabled && (walking || view !== "exterior");
+      });
       ground.visible = walking || view !== "upper";
       upper.visible = walking || view !== "ground";
       roof.visible = walking || (view === "exterior" && showRoof);

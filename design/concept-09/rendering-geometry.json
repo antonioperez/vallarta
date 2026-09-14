@@ -1,0 +1,187 @@
+{
+  "coordinate_basis": "Front x uses lot coordinates from street-left; rear x uses distance from building-left as seen from garden. z is relative to ground finished floor.",
+  "adopted": {
+    "lot": [
+      10,
+      20
+    ],
+    "ground_envelope": [
+      9,
+      10.5
+    ],
+    "upper_envelope": [
+      9,
+      9.5
+    ],
+    "ground_clear": 3,
+    "upper_clear": 2.8,
+    "floor_to_floor": 3.4,
+    "upper_ceiling_level": 6.2,
+    "front_court_depth": 5.5,
+    "rear_zone_depth": 4,
+    "rear_upper_setback": 1,
+    "terrace": [
+      6,
+      3
+    ]
+  },
+  "front_openings_x_z_w_h": {
+    "ground_bath": [
+      1.4,
+      1.6,
+      0.85,
+      0.7
+    ],
+    "ground_laundry": [
+      4.25,
+      1.4,
+      0.45,
+      0.9
+    ],
+    "entry": [
+      5.1,
+      0,
+      1.0,
+      2.45
+    ],
+    "ground_stair": [
+      7.8,
+      1.1,
+      1.65,
+      1.5
+    ],
+    "upper_bath_1": [
+      1.4,
+      5.0,
+      0.7,
+      0.7
+    ],
+    "upper_bath_2": [
+      3.6,
+      5.0,
+      0.9,
+      0.7
+    ],
+    "upper_stair": [
+      7.8,
+      4.5,
+      1.65,
+      1.5
+    ]
+  },
+  "rear_openings_x_z_w_h": {
+    "ground_sliding_door": [
+      0.9,
+      0,
+      3.2,
+      2.5
+    ],
+    "ground_living_window": [
+      5.45,
+      0.6,
+      2.9,
+      1.9
+    ],
+    "upper_primary_window": [
+      0.75,
+      4.25,
+      3.05,
+      1.7
+    ]
+  },
+  "visual_assumptions_only": {
+    "roof_cap_level": 6.7,
+    "screen_front_x_z_w_h": [
+      7.5,
+      0.55,
+      2.15,
+      5.65
+    ],
+    "canopy_soffit": 2.65,
+    "canopy_top": 2.85,
+    "opening_sill_head_heights": "all provisional, as shown in coordinate records",
+    "ground_above_grade": "not established"
+  },
+  "screen_direction": "Open terracotta screen spanning both stories, with two separate inward-opening stair-window groups behind. Support, drainage, insect screens and cleaning clearances still to detail.",
+  "gate_lot_coordinates_m": {
+    "opening_x": [
+      0.8,
+      4.4
+    ],
+    "closed_leaf": [
+      0.7,
+      0.22,
+      3.8,
+      0.08
+    ],
+    "open_leaf": [
+      4.5,
+      0.22,
+      3.8,
+      0.08
+    ],
+    "travel": 3.8,
+    "runback_reserve": [
+      4.4,
+      0,
+      4.05,
+      0.45
+    ],
+    "fixed_fence": [
+      4.6,
+      0,
+      3.75,
+      0.1
+    ],
+    "posts": [
+      [
+        0.6,
+        0,
+        0.2,
+        0.2
+      ],
+      [
+        4.4,
+        0,
+        0.2,
+        0.2
+      ],
+      [
+        8.35,
+        0,
+        0.2,
+        0.2
+      ],
+      [
+        9.65,
+        0,
+        0.2,
+        0.2
+      ]
+    ],
+    "pedestrian_opening_x": [
+      8.55,
+      9.65
+    ],
+    "pedestrian_path_x": 9.1,
+    "exit_corridor": [
+      1.35,
+      -0.6,
+      2.75,
+      5.9
+    ],
+    "status": "schematic track-guided single leaf; final hardware and structural design pending"
+  },
+  "parking_m": {
+    "court_depth": 5.5,
+    "car": [
+      1.8,
+      0.55,
+      1.85,
+      4.5
+    ],
+    "gate_gap": 0.55,
+    "house_gap": 0.45,
+    "vehicle_gate_width": 3.6
+  }
+}

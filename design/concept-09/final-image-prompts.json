@@ -1,0 +1,21 @@
+{
+  "mode": "built-in image generation",
+  "file": "front-updated.png",
+  "stages": [
+    {
+      "prompt": "Use case: sketch-to-render.\nCreate a photorealistic square front architectural image from the attached measured elevation. Preserve its HORIZONTAL PROPORTIONS, especially the gate opening, retracted gate length, pedestrian gate and car width. Treat this drawing as the controlling geometry; do not redesign the frontage.\n\nThe 10 m frontage has, from left to right: a narrow boundary return, a 3.60 m clear vehicle opening, approximately 4.05 m reserved sliding space behind a matching fixed fence, and a separate 1.10 m pedestrian gate at the far right. The fixed center fence and the moving gate parked behind it must each be approximately as WIDE as the open car entrance. DO NOT render a huge opening with a tiny gate panel. The WHOLE moving panel is 3.80 m long, slightly longer than the 3.60 m opening, so it can actually cover it when slid left.\nShow the vehicle gate FULLY OPEN, slid completely to the RIGHT, behind the fixed center fence. A small visible offset between the retracted moving leaf and the fixed fence shows the parallel sliding arrangement. The car entrance on the left has NO POST OR GATE in the car's path. The posts defining the opening are thin, outside the opening.\nCar is a real sedan 1.85 m wide and 4.50 m long, nose toward the house. Its width is about HALF the 3.60 m clear opening at the same plane. It has ample SIDE clearance to reverse straight onto the street. Do not inflate the car width. Keep the depth compact: the court is 5.50 m from boundary to house, nominally 0.55 m behind the car and 0.45 m in front of its nose. No plants or steps in the vehicle lane. Use a flush low-profile sliding track and a gently dropped curb aligned with the car exit, not a vertical sidewalk step across the wheel tracks.\n\nThe building is the same warm Mexican contemporary home in Las Juntas, Puerto Vallarta: a 9 m-wide two-story cream-stucco facade, near-level roof cap, two small high upper bathroom windows on the left, one small downstairs bathroom window, narrow laundry window, near-center timber entry and full two-story open terracotta flower-pattern screen on the right. Replace the guide's orange grid with real open floral clay blocks and separate glazed stair windows behind. Preserve these openings. Adopted floor-to-floor is 3.40 m, ground clear ceiling 3.00 m, upper clear 2.80 m; roof cap illustrative.\nRealistic materials, bronze slatted gates and frames, warm late-afternoon light, modest tropical landscaping in the pedestrian area, simple urban boundary walls. Keep the frontage broad enough to show the three gate zones accurately.\nUse a near-frontal architectural camera, straight verticals and restrained perspective. The drawing's car shape and vertical position are schematic: replace it with a realistic car on the actual forecourt, but KEEP its width relationship to the opening. Do not copy diagram labels, lettering, dimension lines, borders or block-car geometry. No people, additional cars, balconies, new windows, watermarks or text.",
+      "references": [
+        "gate-elevation-guide.png"
+      ],
+      "output": "front-gate-draft.png"
+    },
+    {
+      "prompt": "Use case: precise-object-edit. Make ONE small material correction to this architectural view: the tall two-story terracotta screen on the RIGHT must have a CONTINUOUS UNIFORM FLOWER-PATTERN of open clay blocks over its entire surface. Replace the plain square lattice patches directly in front of the two stair windows with the same flower-pattern blocks already present around them. The two distinct stair windows remain BEHIND the open floral screen, visible through its holes; no large uncovered rectangular window openings in the clay screen.\nPreserve EVERYTHING else exactly: building geometry, wall and window positions, roof, door, warm light, car scale and position, the wide clear car opening, the correctly sized sliding gate parked to the right behind the fixed fence, pedestrian gate, courtyard depth, curb and camera. Do not change any gate proportions or move its posts. No added text or watermarks.",
+      "references": [
+        "front-gate-draft.png"
+      ],
+      "output": "front-updated.png"
+    }
+  ],
+  "rear": "rear-updated.png retained unchanged from Concept 08"
+}

@@ -99,7 +99,7 @@ test("interior depth cues toggle and the latest spaces render", async ({
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("./");
-  await expect(page.locator(".edition")).toContainText("CONCEPT 06");
+  await expect(page.locator(".edition")).toContainText("CONCEPT 14");
   for (const room of ["G5", "G2", "G6", "U5"]) {
     await page.locator("#room").selectOption(room);
     await expect(page.locator("#scene")).toHaveAttribute("data-depth", "true");
@@ -119,4 +119,44 @@ test("interior depth cues toggle and the latest spaces render", async ({
   await page.locator("#room").selectOption("G6");
   await page.screenshot({ path: "test-results/doors-without-furniture.png" });
   expect(errors).toEqual([]);
+});
+
+test("selected roofs, sliding gate and proposed drainage controls coordinate", async ({
+  page,
+}) => {
+  // Match the interior tour's budget for multiple software-WebGL screenshots.
+  test.setTimeout(process.env.CI ? 120_000 : 30_000);
+  await page.goto("./");
+  await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
+  await page.getByLabel("Vehicle gate open").uncheck();
+  await expect(page.locator("#scene")).toHaveAttribute("data-gate", "closed");
+  await page.screenshot({ path: "test-results/gate-closed.png" });
+  await page.getByLabel("Vehicle gate open").check();
+  await expect(page.locator("#scene")).toHaveAttribute("data-gate", "open");
+  await page.getByLabel("Proposed drainage", { exact: true }).check();
+  await expect(page.locator("#drainage-legend")).toBeVisible();
+  await page.screenshot({ path: "test-results/drainage-front.png" });
+  await page.getByRole("button", { name: "Show rear exterior" }).click();
+  await page.screenshot({ path: "test-results/drainage-rear.png" });
+  await page.getByLabel("Proposed drainage", { exact: true }).uncheck();
+  await page.screenshot({ path: "test-results/rear.png" });
+  await page.getByLabel("Proposed drainage", { exact: true }).check();
+  await page.getByLabel("Exterior roof", { exact: true }).uncheck();
+  await expect(page.locator("#scene")).toHaveAttribute(
+    "data-drainage",
+    "false",
+  );
+  await expect(page.locator("#drainage-legend")).toBeHidden();
+  await page.getByRole("button", { name: "02 Ground floor" }).click();
+  await page.locator("#room").selectOption("G4");
+  await expect(page.locator("#view-label")).toContainText("G4 reference zone");
+  await page.screenshot({ path: "test-results/kitchen.png" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({
+    path: "test-results/mobile-kitchen.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.locator("#room").selectOption("U2");
+  await page.screenshot({ path: "test-results/upper-bathroom.png" });
 });

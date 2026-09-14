@@ -1,0 +1,494 @@
+{
+  "common": {
+    "coordinate_basis": "Front x uses lot coordinates from street-left; rear x uses distance from building-left as seen from garden. z is relative to ground finished floor.",
+    "adopted": {
+      "lot": [
+        10,
+        20
+      ],
+      "ground_envelope": [
+        9,
+        10.5
+      ],
+      "upper_envelope": [
+        9,
+        9.5
+      ],
+      "ground_clear": 3,
+      "upper_clear": 2.8,
+      "floor_to_floor": 3.4,
+      "upper_ceiling_level": 6.2,
+      "front_court_depth": 5.5,
+      "rear_zone_depth": 4,
+      "rear_upper_setback": 1,
+      "terrace": [
+        6,
+        3
+      ]
+    },
+    "areas_m2": {
+      "lot": 200,
+      "ground": 94.5,
+      "upper_envelope": 85.5,
+      "upper_stair_void": 8.0775,
+      "upper_floor": 77.4225,
+      "combined_floor": 171.9225,
+      "covered_terrace": 18,
+      "front_zone": 55,
+      "side_passage": 10.5,
+      "rear_zone": 40
+    },
+    "parking": {
+      "court_depth": 5.5,
+      "car": [
+        1.8,
+        0.55,
+        1.85,
+        4.5
+      ],
+      "gate_gap": 0.55,
+      "house_gap": 0.45,
+      "vehicle_gate_width": 3.6
+    },
+    "gate": {
+      "opening_x": [
+        0.8,
+        4.4
+      ],
+      "closed_leaf": [
+        0.7,
+        0.22,
+        3.8,
+        0.08
+      ],
+      "open_leaf": [
+        4.5,
+        0.22,
+        3.8,
+        0.08
+      ],
+      "travel": 3.8,
+      "runback_reserve": [
+        4.4,
+        0,
+        4.05,
+        0.45
+      ],
+      "fixed_fence": [
+        4.6,
+        0,
+        3.75,
+        0.1
+      ],
+      "posts": [
+        [
+          0.6,
+          0,
+          0.2,
+          0.2
+        ],
+        [
+          4.4,
+          0,
+          0.2,
+          0.2
+        ],
+        [
+          8.35,
+          0,
+          0.2,
+          0.2
+        ],
+        [
+          9.65,
+          0,
+          0.2,
+          0.2
+        ]
+      ],
+      "pedestrian_opening_x": [
+        8.55,
+        9.65
+      ],
+      "pedestrian_path_x": 9.1,
+      "exit_corridor": [
+        1.35,
+        -0.6,
+        2.75,
+        5.9
+      ],
+      "status": "schematic track-guided single leaf; final hardware and structural design pending"
+    },
+    "ground_plan_lot_xywh": [
+      1,
+      5.5,
+      9,
+      10.5
+    ],
+    "upper_plan_lot_xywh": [
+      1,
+      5.5,
+      9,
+      9.5
+    ],
+    "terrace_lot_xywh": [
+      3,
+      16,
+      6,
+      3
+    ],
+    "rear_openings": {
+      "ground_sliding_door": [
+        0.9,
+        0,
+        3.2,
+        2.5
+      ],
+      "ground_living_window": [
+        5.45,
+        0.6,
+        2.9,
+        1.9
+      ],
+      "upper_primary_window": [
+        0.75,
+        4.25,
+        3.05,
+        1.7
+      ]
+    },
+    "rear_canopy_columns_lot_xywh": [
+      [
+        3.09,
+        18.81,
+        0.12,
+        0.12
+      ],
+      [
+        8.79,
+        18.81,
+        0.12,
+        0.12
+      ]
+    ],
+    "status": "Appearance alternatives only. Proposed openings, roof levels, slopes, reveals and canopies are schematic; structure, glazing, drainage, guards and cost are not selected.",
+    "baseline_sha256": {
+      "las-juntas-concept-10.pdf": "45f230e622047a609b2ba3b72235d7007f3831feb8b0367bd95c3178a3a782d5",
+      "rendering-geometry.json": "f8bffdcc2b3dd2e2bbad0b2abb9976ff98211e7ca3f17c26c239a18c43e2faa5",
+      "area-schedule.json": "c00c101d4430f9a29587297f03fb99fa8be93fc84ed93f40ce8fbc3a4800c8cd",
+      "rear-updated.png": "ebdc391842d68a0b091de9bd129fbb691efc3cb4710d9870bff8f1d453a615a8",
+      "brief.md": "e95e25437ff03441eb9e74fe4023333aec9a5f705fdde2108577b85c5914f02e",
+      "draw_house.py": "9f6105df9bef3eaf7411aa6cb9952033e1813351735e63e836f4b3df045c7bc0",
+      "final-image-prompts.json": "0a89e494bfdd07842a39c22e77cf87164c9e98aa1e5636992b249d2f0fc475d5",
+      "front-updated.png": "48ea645588b12d2ffcf0f67a4fecaabb34b08ca29620e927230224c9d07acd16"
+    }
+  },
+  "variants": {
+    "A": {
+      "title": "Warm tropical contemporary",
+      "subtitle": "Ivory plaster / bronze / timber / horizontal shade",
+      "color": "#E9DEC9",
+      "trim": "#665847",
+      "accent": "#A76840",
+      "recommended": true,
+      "front_openings": {
+        "ground_bath": [
+          1.4,
+          1.6,
+          0.85,
+          0.7
+        ],
+        "ground_laundry": [
+          4.25,
+          1.4,
+          0.45,
+          0.9
+        ],
+        "entry": [
+          5.1,
+          0,
+          1.0,
+          2.45
+        ],
+        "ground_stair": [
+          7.8,
+          1.1,
+          1.65,
+          1.5
+        ],
+        "upper_stair": [
+          7.8,
+          4.5,
+          1.65,
+          1.5
+        ],
+        "upper_bath_ribbon": [
+          1.4,
+          5.15,
+          3.1,
+          0.55
+        ]
+      },
+      "roof": {
+        "type": "flat roof with parapet",
+        "main_top": 6.7,
+        "highest_top": 6.7,
+        "footprint_lot": [
+          1,
+          5.5,
+          9,
+          9.5
+        ]
+      },
+      "front_canopy": {
+        "footprint_lot": [
+          4.85,
+          4.7,
+          1.8,
+          0.8
+        ],
+        "soffit": 2.65,
+        "top": 2.8
+      },
+      "stair_reveal_projection": 0.2,
+      "rear_canopy": {
+        "type": "flat",
+        "footprint_lot": [
+          3,
+          16,
+          6,
+          3
+        ],
+        "soffit": 2.65,
+        "low_top": 2.85,
+        "high_top": 2.85
+      },
+      "notes": [
+        "One high bathroom ribbon replaces two upper openings; split into three glazed modules.",
+        "Two independent stair windows retain the floor band between them. Bronze frames sit behind projecting plaster reveals.",
+        "Use timber at the protected entry and canopy soffit; keep exposed frame and gate finishes coordinated."
+      ],
+      "tradeoff": "The closest fit to the established flat-roof structure. The wider bathroom opening needs a coordinated lintel and high-level operating hardware.",
+      "source": {
+        "title": "Casa Los Mangos / Bernal Architecture Studio / Bucerias",
+        "url": "https://www.brnlarchitecture.com/es/casa-los-mangos-nuevo-vallarta"
+      }
+    },
+    "B": {
+      "title": "Traditional Vallarta",
+      "subtitle": "Warm white / clay roofs / muted ochre trim / dark metal",
+      "color": "#F3EADB",
+      "trim": "#A88152",
+      "accent": "#A65535",
+      "recommended": false,
+      "front_openings": {
+        "ground_bath": [
+          1.4,
+          1.6,
+          0.85,
+          0.7
+        ],
+        "ground_laundry": [
+          4.25,
+          1.4,
+          0.45,
+          0.9
+        ],
+        "entry": [
+          5.1,
+          0,
+          1.0,
+          2.45
+        ],
+        "ground_stair": [
+          8.075,
+          1.0,
+          1.1,
+          1.6
+        ],
+        "upper_bath_1": [
+          1.4,
+          5.0,
+          0.7,
+          0.7
+        ],
+        "upper_bath_2": [
+          3.6,
+          5.0,
+          0.9,
+          0.7
+        ],
+        "upper_stair": [
+          8.075,
+          4.4,
+          1.1,
+          1.6
+        ]
+      },
+      "roof": {
+        "type": "hipped clay-tile roof",
+        "main_top": 6.6,
+        "highest_top": 7.95,
+        "slope_rise_per_run": 0.3,
+        "footprint_lot": [
+          1,
+          5.15,
+          9,
+          10.2
+        ],
+        "ridge_lot_xy_start_end": [
+          [
+            5.5,
+            9.65
+          ],
+          [
+            5.5,
+            10.85
+          ]
+        ],
+        "side_eave_projection": 0,
+        "front_rear_eave_projection": 0.35
+      },
+      "front_canopy": null,
+      "stair_reveal_projection": 0.12,
+      "rear_canopy": {
+        "type": "clay-tile shed roof descending to garden",
+        "footprint_lot": [
+          3,
+          16,
+          6,
+          3
+        ],
+        "soffit": 2.5,
+        "low_top": 2.7,
+        "high_top": 3.6,
+        "slope_rise_per_run": 0.3
+      },
+      "notes": [
+        "Narrower vertical stair windows sit in restrained ochre plaster trim; bathroom windows stay separate and obscure-glazed.",
+        "The roof hips on all four sides. Eaves project at front/rear only; side edges stay within the lot.",
+        "The rear canopy uses a matching sloping clay roof and timber-toned soffit. Its outer soffit is lower than A and C."
+      ],
+      "tradeoff": "The strongest traditional character, with an added pitched roof and more roof junctions to price and maintain. Tile fixing, pitch suitability and roof support require selection.",
+      "source": {
+        "title": "Puerto Vallarta Tourism Board / Cultural Patrimony of Jalisco",
+        "url": "https://visitpuertovallarta.com/blog/puerto-vallarta-cultural-patrimony-of-jalisco"
+      }
+    },
+    "C": {
+      "title": "Sculptural contemporary",
+      "subtitle": "Sand-gray plaster / deep reveals / curved entry / stepped roofline",
+      "color": "#C5B8A4",
+      "trim": "#5B4E41",
+      "accent": "#8F674B",
+      "recommended": false,
+      "front_openings": {
+        "ground_bath": [
+          1.4,
+          1.6,
+          0.85,
+          0.7
+        ],
+        "ground_laundry": [
+          4.25,
+          1.4,
+          0.45,
+          0.9
+        ],
+        "entry": [
+          5.1,
+          0,
+          1.0,
+          2.45
+        ],
+        "ground_stair": [
+          8.025,
+          0.9,
+          1.2,
+          1.8
+        ],
+        "upper_bath_1": [
+          1.4,
+          5.0,
+          0.7,
+          0.7
+        ],
+        "upper_bath_2": [
+          3.6,
+          5.0,
+          0.9,
+          0.7
+        ],
+        "upper_stair": [
+          8.025,
+          4.3,
+          1.2,
+          1.8
+        ]
+      },
+      "roof": {
+        "type": "flat roof with raised front stair parapet",
+        "main_top": 6.65,
+        "highest_top": 7.1,
+        "footprint_lot": [
+          1,
+          5.5,
+          9,
+          9.5
+        ],
+        "raised_parapet_footprint_lot": [
+          7.25,
+          5.5,
+          2.75,
+          4.8
+        ]
+      },
+      "front_canopy": {
+        "footprint_lot": [
+          4.85,
+          4.95,
+          1.8,
+          0.55
+        ],
+        "soffit": 2.6,
+        "top": 2.85,
+        "form": "rounded plaster entry surround"
+      },
+      "stair_reveal_projection": 0.25,
+      "rear_canopy": {
+        "type": "flat",
+        "footprint_lot": [
+          3,
+          16,
+          6,
+          3
+        ],
+        "soffit": 2.65,
+        "low_top": 2.85,
+        "high_top": 2.85
+      },
+      "notes": [
+        "Taller independent stair windows, with the floor band left solid, create a clear vertical rhythm.",
+        "The raised parapet occupies the front stair zone only. From the low garden viewpoint it sits behind the rear roofline, not on the rear wall.",
+        "A rounded external plaster surround softens the unchanged entrance. Use textured plaster for the finish; exposed structural concrete is not specified."
+      ],
+      "tradeoff": "More custom plaster geometry and coping junctions than A. The deeper reveals and taller windows need coordinated flashing, cleaning reach and stair guarding.",
+      "source": {
+        "title": "Casa Tao / HW Studio / Puerto Vallarta",
+        "url": "https://www.hw-studio.com/tao-house"
+      }
+    }
+  },
+  "checks": [
+    "Opening extents match their existing rooms",
+    "Opening heads below adopted ceilings",
+    "Separate stair windows resolve the 3.40 m floor separation",
+    "Bathroom openings high and specified obscure-glazed",
+    "Roof/canopy footprints inside lot",
+    "Front entrance details outside car footprint",
+    "Roof pitches reconcile with proposed ridge/canopy levels",
+    "Rear canopy clears upper primary window",
+    "Complete gate fits runback; car footprint retained",
+    "Baseline room, floor, stair, kitchen and gate data retained"
+  ]
+}

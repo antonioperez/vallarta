@@ -31,7 +31,7 @@ const icon = {
 };
 const app = document.querySelector<HTMLDivElement>("#app")!;
 app.innerHTML = `
-  <header class="masthead"><a class="brand" href="./" aria-label="Las Juntas home"><span class="brand-symbol">lj<span>·</span></span><span>LAS JUNTAS<small>A house in the making</small></span></a><div class="edition"><span class="status-dot"></span> CONCEPT 06 <span class="edition-date">/ SEPTEMBER 2026</span></div></header>
+  <header class="masthead"><a class="brand" href="./" aria-label="Las Juntas home"><span class="brand-symbol">lj<span>·</span></span><span>LAS JUNTAS<small>A house in the making</small></span></a><div class="edition"><span class="status-dot"></span> CONCEPT 14 <span class="edition-date">/ SEPTEMBER 2026</span></div></header>
   <main>
     <aside class="sidebar" aria-label="House controls">
       <div class="intro"><p class="eyebrow">THE HOUSE STUDY</p><h1>A little closer<br>to being here.</h1><p class="intro-copy">Step inside the plan. Explore the spaces, the proportions, and how it all connects.</p></div>
@@ -51,15 +51,15 @@ app.innerHTML = `
               .join("")}</optgroup>`,
         )
         .join("")}</select></div>
-      <div class="options"><label><input type="checkbox" id="furniture" checked><span>Furniture</span></label><label><input type="checkbox" id="roof" checked><span>Exterior roof</span></label><label><input type="checkbox" id="depth" checked><span>Depth cues</span></label></div>
-      <details class="notes"><summary>About this model <span>+</span></summary><p>Based on Concept 06. Ground ceiling 3.00 m; upper ceiling 2.80 m; floor-to-floor 3.40 m. Window and door heights, roof thickness, materials and landscape details are illustrative. Acoustic lining reservations and open stair/service doors follow Concept 06. Furniture is simplified; movement collides with walls and door leaves, not furniture. Tile joints and accent colors are illustrative depth cues.</p><p>Schematic study. Stair headroom, structure and construction details remain unverified.</p></details>
+      <div class="options"><label><input type="checkbox" id="furniture" checked><span>Furniture</span></label><label><input type="checkbox" id="roof" checked><span>Exterior roof</span></label><label><input type="checkbox" id="depth" checked><span>Depth cues</span></label><label><input type="checkbox" id="gate" checked><span>Vehicle gate open</span></label><label><input type="checkbox" id="drainage"><span>Proposed drainage</span></label></div>
+      <details class="notes"><summary>About this model <span>+</span></summary><p>Concept 14: A’s windows with B’s clay roofs. Ground clear height 3.00 m (9.84 ft); upper 2.80 m (9.19 ft); floor-to-floor 3.40 m (11.15 ft). Main eave 6.60 m (21.65 ft), ridge 7.95 m (26.08 ft). The 4.80 m car fits the 5.80 m court with the complete sliding gate retracted beside it.</p><p>Drainage lines show proposed collection paths. The inset boundary gutter, pipe sizes, rear transfer and site outfall need design; resolving the gutter may change the roof edge. Blue marks primary paths, orange the boundary/overflow relationships.</p><p>The L-shaped kitchen has a full-height backing wall and the fridge moved toward a six-seat table. G4/G5 are reference subzones; the fridge extends into the dining allocation. The rear slider opens on the left, with panels parked right. The terrace table still seats eight. Obscure bathroom glass is represented as opaque; final glazing and operation remain unresolved. Furniture, gate height and roof build-up are illustrative. Movement collides with walls, interior door leaves and parked rear glazing, not furniture or site gates. Structure, stair headroom and cost remain unverified.</p></details>
       <div class="sidebar-footer">10 × 20 m lot <span>·</span> Las Juntas, México</div>
     </aside>
     <section class="viewport" aria-label="Interactive 3D house">
       <div id="scene" tabindex="0" aria-label="3D model. In walk mode use W A S D or arrow keys to move, drag to look, Escape to return to orbit."></div>
-      <div class="scene-top"><div class="scene-title"><span class="eyebrow" id="view-label">01 / EXTERIOR</span><h2 id="scene-heading">The whole picture.</h2></div><div class="utilities"><button id="reset" class="icon-button" aria-label="Reset camera" title="Reset camera">${icon.reset}</button><button id="fullscreen" class="icon-button" aria-label="Toggle fullscreen" title="Fullscreen">${icon.expand}</button></div></div>
+      <div class="scene-top"><div class="scene-title"><span class="eyebrow" id="view-label">01 / EXTERIOR</span><h2 id="scene-heading">The whole picture.</h2></div><div class="utilities"><button id="rear" class="angle-button" aria-label="Show rear exterior">Rear view</button><button id="reset" class="icon-button" aria-label="Reset camera" title="Reset camera">${icon.reset}</button><button id="fullscreen" class="icon-button" aria-label="Toggle fullscreen" title="Fullscreen">${icon.expand}</button></div></div>
       <div class="mode-switch" aria-label="Navigation mode"><button id="orbit" aria-pressed="true">${icon.orbit} Orbit</button><button id="walk" aria-pressed="false">${icon.walk} Walk inside</button></div>
-      <div id="crosshair" hidden>+</div>
+      <div id="crosshair" hidden>+</div><div id="drainage-legend" hidden>PROPOSED DRAINAGE<br><span>Blue: collection paths · Orange: boundary / overflow<br>Diagram lines only; sizes and outfall unresolved.</span></div>
       <div class="view-badge"><span class="status-dot"></span><span id="view-status" role="status" aria-live="polite">Exterior · orbit view</span></div>
       <div class="touch-controls" id="touch-controls" hidden aria-label="Walk controls"><button data-move="forward" aria-label="Move forward">↑</button><div><button data-move="left" aria-label="Move left">←</button><button data-move="back" aria-label="Move backward">↓</button><button data-move="right" aria-label="Move right">→</button></div></div>
       <div class="scene-bottom"><div class="navigation-help" id="navigation-help"><span class="mouse-mark">↔</span><span>Drag to orbit <b>·</b> Scroll to zoom <b>·</b> Right-drag to pan</span></div><span class="scale-note">MODEL IN METERS</span></div>
@@ -138,6 +138,18 @@ const activeFloor = (): Floor =>
 
 function updateModel() {
   model.setDepthCues($<HTMLInputElement>("depth").checked);
+  model.setGateOpen($<HTMLInputElement>("gate").checked);
+  const drainageVisible =
+    $<HTMLInputElement>("drainage").checked &&
+    view === "exterior" &&
+    !walking &&
+    $<HTMLInputElement>("roof").checked;
+  model.setDrainageVisible(drainageVisible);
+  $("drainage-legend").hidden = !drainageVisible;
+  sceneElement.dataset.gate = $<HTMLInputElement>("gate").checked
+    ? "open"
+    : "closed";
+  sceneElement.dataset.drainage = String(drainageVisible);
   model.setView(
     view,
     walking,
@@ -145,6 +157,9 @@ function updateModel() {
     $<HTMLInputElement>("furniture").checked,
   );
   $<HTMLInputElement>("roof").disabled = walking || view !== "exterior";
+  $<HTMLInputElement>("drainage").disabled =
+    walking || view !== "exterior" || !$<HTMLInputElement>("roof").checked;
+  $("rear").hidden = walking || view !== "exterior";
 }
 function paintMap() {
   const floor = activeFloor();
@@ -204,7 +219,7 @@ function setView(next: View) {
   const targetY = next === "upper" ? levels.upper : 0;
   if (next === "exterior") {
     camera.position.set(-17, 14, 22);
-    controls.target.set(4, 1.5, -4);
+    controls.target.set(4, 2.2, -4);
   } else {
     camera.position.set(-7, targetY + 16, 12);
     controls.target.set(4.5, targetY, -5);
@@ -287,7 +302,8 @@ function enterRoom(id: string) {
   yaw = position[2];
   pitch = ["G2", "U2", "G3", "G8"].includes(id) ? -0.38 : -0.16;
   $("scene-heading").textContent = room.name;
-  $("view-label").textContent = `${room.id} / ${room.area.toFixed(1)} m² · ${squareFeet(room.area)} ft²`;
+  $("view-label").textContent =
+    `${room.id}${["G4", "G5"].includes(room.id) ? " reference zone" : ""} / ${room.area.toFixed(1)} m² · ${squareFeet(room.area)} ft²`;
   $<HTMLSelectElement>("room").value = id;
 }
 
@@ -302,6 +318,12 @@ $("walk").addEventListener("click", () => {
 $("orbit").addEventListener("click", () =>
   setView(walking ? activeFloor() : view),
 );
+$("rear").addEventListener("click", () => {
+  setView("exterior");
+  camera.position.set(20, 12, -29);
+  controls.target.set(4.5, 2.8, -6);
+  controls.update();
+});
 $("reset").addEventListener("click", () => setView(view));
 $("fullscreen").addEventListener("click", async () => {
   try {
@@ -311,7 +333,7 @@ $("fullscreen").addEventListener("click", async () => {
     $("view-status").textContent = "Fullscreen is unavailable in this browser.";
   }
 });
-for (const id of ["roof", "furniture", "depth"])
+for (const id of ["roof", "furniture", "depth", "gate", "drainage"])
   $(id).addEventListener("change", updateModel);
 $("room").addEventListener("change", (e) =>
   enterRoom((e.target as HTMLSelectElement).value),

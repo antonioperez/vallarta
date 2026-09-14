@@ -1,0 +1,21 @@
+{
+  "mode": "built-in image generation",
+  "scope": "Concept 11: 5.80 m court, 4.80 m car, house and 6 x 3 m terrace shifted 0.30 m toward rear boundary; 3.70 m rear zone and 0.70 m beyond canopy.",
+  "stages": [
+    {
+      "prompt": "Use case: precise-object-edit. Edit target: the provided Concept 10 FRONT house rendering. Produce the revised Concept 11 front architectural illustration, same square composition, warm afternoon light, cream plaster, bronze frames, timber entrance, all openings and two separate stair windows unchanged. Site dimensions change ONLY as follows: front boundary and complete gate stay fixed; the entire same house moves 0.30 m farther from the street so boundary-to-house court is now 5.80 m. The sedan becomes a slightly longer 4.80 m sedan, 1.85 m body width, parked nose toward the house, rear toward street. Rear bumper remains 0.55 m inward from street boundary; nose remains 0.45 m from house; closed gate plane would leave only 0.25 m behind bumper. Show realistic tight parking with the slightly longer car filling the added court depth. Do not make the driveway look spacious or shrink the car. Gate stays FULLY OPEN: left 3.60 m opening clear, complete 3.80 m leaf retracted RIGHT behind center fixed fence, separate pedestrian gate far right. Preserve facade design, heights, materials, left side passage, street and curb; extend side approach to shifted entrance. No terracotta stair screen, no extra windows, no added floors. No labels or dimensions. The only architectural geometry change is the 0.30 m house setback increase and corresponding car length increase.",
+      "references": [
+        "../concept-10/front-updated.png"
+      ],
+      "output": "front-updated.png"
+    },
+    {
+      "prompt": "Use case: precise-object-edit. Edit target: provided Concept 10 REAR rendering. Produce Concept 11 rear architectural illustration. Change only the site's rear depth: the SAME entire house and attached 6.00 m wide x 3.00 m deep covered terrace move 0.30 m toward the fixed rear lot boundary. Rear wall of house to boundary is now just 3.70 m, leaving ONLY a 0.70 m narrow garden strip beyond the canopy front edge (previously 1.00 m). Make the foreground visibly shallower, a narrow 70 cm grass strip immediately beyond the terrace, with the rear lot boundary explicitly legible at the bottom foreground as a low cream wall top along the bottom edge; camera is looking from just above that boundary toward the house. Fit perspective to these tight dimensions, avoid implying a large lawn continuing outside the frame. Terrace stays 3.00 m deep, same two slim dark posts, flat dark fascia and timber soffit. Keep the full SAME house silhouette and heights, cream stucco, large upper-left window, lower-left sliding kitchen doors, lower-right living window, same kitchen visible inside with refrigerator on viewer-left wall and sink on long back counter, dining furniture, terracotta patterned terrace tiles, warm sunset lighting, materials and planting character. Side planting must fit narrow side strips rather than consume the 70 cm strip. Preserve square crop and architectural perspective as closely as feasible. No new upper windows, no extra floors, no enlarged terrace, no labels, no dimension text. This is a subtle site-depth revision, not a facade redesign.",
+      "references": [
+        "../concept-10/rear-updated.png"
+      ],
+      "output": "rear-updated.png"
+    }
+  ],
+  "inspection": "Front retains exposed stair windows and complete retracted gate, with larger sedan; rear retains openings, kitchen and terrace character with visibly shallow foreground and illustrative boundary-wall top. Perspectives are illustrative; dimensioned plans govern exact fit."
+}

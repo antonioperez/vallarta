@@ -1,0 +1,63 @@
+{
+  "concept": 14,
+  "status": "implemented locally; publication not performed",
+  "pdf_pages": 13,
+  "pdf_sha256": "ea68a587d91c468cacdf962fc08e4e88d569c69f43ffc494067a6ecb5d02261d",
+  "pdf_checks": [
+    "13 A3 landscape pages",
+    "all pages rendered and visually inspected",
+    "no page-boundary text clipping",
+    "no AI/OpenAI/ChatGPT/Codex attribution in extracted PDF text",
+    "separate meter/feet columns retained",
+    "roof/drainage page text matches Concept 13 except edition label"
+  ],
+  "geometry_checks": {
+    "builder": "passed",
+    "viewer_unit_tests": 13,
+    "mesh_checks": [
+      "full-height backing wall",
+      "L return footprint",
+      "fridge body and 0-90 degree sweep",
+      "six chair footprints and complete 0.30 m outward motion",
+      "table and rear seating gap",
+      "left terrace route and right parked slider panels",
+      "retained roof/car/gate geometry"
+    ],
+    "stairs": "complete ascent and descent retained"
+  },
+  "browser_checks": {
+    "full_suite_passed": 5,
+    "final_targeted_camera_mobile_check": "passed",
+    "desktop_mobile_controls": "passed",
+    "production_build": "passed; existing Three.js chunk-size advisory only"
+  },
+  "preservation": {
+    "concept_13_and_style_study_files": 36,
+    "hashes": "preserved-files-sha256.json",
+    "all_hashes_match": true,
+    "front_image_byte_identical": true,
+    "roof_coordination_json_byte_identical": true
+  },
+  "appearance": {
+    "front": "retained",
+    "rear": "updated L-shaped kitchen, closer fridge, six-seat indoor table and panels parked in image-left half",
+    "generation_mode": "built-in image tool",
+    "prompts": [
+      "final-image-prompts.json",
+      "final-slider-edit-prompt.txt"
+    ],
+    "limit": "illustrative perspective; measured shared geometry governs"
+  },
+  "remaining_design_items": [
+    "actual refrigerator depth/ventilation/handles/drawer removal angle",
+    "oven and hood requirements",
+    "wall assembly, support and services",
+    "actual dining chair and occupied-body clearances; tested rear gap 0.05 m",
+    "roof structure, drainage and pricing carried forward unresolved"
+  ],
+  "screenshots": [
+    "viewer-kitchen.png",
+    "viewer-mobile-kitchen.png"
+  ],
+  "preview_url": "http://127.0.0.1:4174/"
+}

@@ -772,3 +772,42 @@ h1 {
     top: 112px;
   }
 }
+
+.angle-button {
+  height: 34px;
+  border: 1px solid var(--line, #c9c8bb);
+  border-radius: 22px;
+  padding: 0 13px;
+  background: #f8f6ed;
+  color: #35463d;
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+#drainage-legend {
+  position: absolute;
+  left: 24px;
+  top: 165px;
+  padding: 12px 16px;
+  background: #fcfaf1ed;
+  color: #366674;
+  border-left: 3px solid #168eaf;
+  font-size: 11px;
+  line-height: 1.6;
+  pointer-events: none;
+}
+#drainage-legend span {
+  color: #52665e;
+  font-size: 10px;
+}
+@media (max-width: 600px) {
+  #drainage-legend {
+    left: 14px;
+    top: 145px;
+    max-width: calc(100% - 28px);
+  }
+  .angle-button {
+    padding: 0 8px;
+    font-size: 10px;
+  }
+}

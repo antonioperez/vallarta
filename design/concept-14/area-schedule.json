@@ -1,0 +1,1084 @@
+{
+  "units": "meters; areas in square meters",
+  "areas": {
+    "lot": 200,
+    "ground": 94.5,
+    "upper_envelope": 85.5,
+    "upper_stair_void": 8.0775,
+    "upper_floor": 77.4225,
+    "combined_floor": 171.9225,
+    "covered_terrace": 18,
+    "front_zone": 58,
+    "side_passage": 10.5,
+    "rear_zone": 37
+  },
+  "heights_m": {
+    "ground_clear": 3.0,
+    "upper_clear": 2.8,
+    "floor_to_floor": 3.4,
+    "floor_assembly_allowance": 0.3999999999999999,
+    "upper_ceiling_level": 6.199999999999999
+  },
+  "heights_feet_reference": {
+    "ground_clear": 9.84251968503937,
+    "upper_clear": 9.186351706036744,
+    "floor_to_floor": 11.154855643044618,
+    "floor_assembly_allowance": 1.312335958005249,
+    "upper_ceiling_level": 20.341207349081362
+  },
+  "stair_design": {
+    "risers": 20,
+    "risers_per_flight": 10,
+    "tread": 0.28,
+    "flight_width": 1.05,
+    "front_landing": 1.0,
+    "turn_landing": 1.05,
+    "zone_width": 2.5,
+    "zone_depth": 4.6,
+    "start_y": 1.2,
+    "opening_width": 2.25,
+    "opening_depth": 3.59,
+    "riser": 0.16999999999999998,
+    "run": 2.5200000000000005,
+    "flight_back_y": 3.7200000000000006,
+    "turn_back_y": 4.7700000000000005,
+    "midlanding_level": 1.6999999999999997
+  },
+  "vertical_design_notes": [
+    "Ground finished floor is a relative datum, not a surveyed site elevation",
+    "0.40 m floor assembly allowance is not a slab thickness specification",
+    "Selected clay hip roof eave +6.60 m and ridge +7.95 m; roof build-up and supports unresolved",
+    "Final headroom, structure, guards and local compliance require professional review"
+  ],
+  "reference_conversion": {
+    "meters_per_foot": 0.3048,
+    "feet_format": "decimal",
+    "rounding": "display only; metric dimensions govern"
+  },
+  "areas_square_feet_reference": {
+    "lot": 2152.782083341944,
+    "ground": 1017.1895343790687,
+    "upper_envelope": 920.3143406286812,
+    "upper_stair_void": 86.94548639097279,
+    "upper_floor": 833.3688542377084,
+    "combined_floor": 1850.5583886167772,
+    "covered_terrace": 193.750387500775,
+    "front_zone": 624.3068041691638,
+    "side_passage": 113.02105937545208,
+    "rear_zone": 398.2646854182597
+  },
+  "rooms": [
+    {
+      "id": "G1",
+      "name": "Queen guest bedroom",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        2.75,
+        3.5,
+        3.9
+      ],
+      "area": 13.65,
+      "dimensions_feet_reference": [
+        11.48293963254593,
+        12.79527559055118
+      ],
+      "area_square_feet_reference": 146.92737718808772
+    },
+    {
+      "id": "G2",
+      "name": "Front shared full bathroom",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        0.2,
+        2,
+        2.3
+      ],
+      "area": 4.6,
+      "dimensions_feet_reference": [
+        6.561679790026246,
+        7.545931758530183
+      ],
+      "area_square_feet_reference": 49.513987916864714
+    },
+    {
+      "id": "G3",
+      "name": "Recessed stacked laundry bay",
+      "floor": "Ground",
+      "rect": [
+        2.35,
+        0.2,
+        1.45,
+        1.3
+      ],
+      "area": 1.885,
+      "dimensions_feet_reference": [
+        4.757217847769028,
+        4.2650918635170605
+      ],
+      "area_square_feet_reference": 20.289971135497826
+    },
+    {
+      "id": "G4",
+      "name": "Kitchen / transition zone",
+      "floor": "Ground",
+      "rect": [
+        3.95,
+        4.95,
+        4.85,
+        1.8
+      ],
+      "area": 8.73,
+      "dimensions_feet_reference": [
+        15.912073490813647,
+        5.905511811023622
+      ],
+      "area_square_feet_reference": 93.96893793787588
+    },
+    {
+      "id": "G5",
+      "name": "Living / dining zone",
+      "floor": "Ground",
+      "rect": [
+        0.2,
+        6.9,
+        8.6,
+        3.4
+      ],
+      "area": 29.24,
+      "dimensions_feet_reference": [
+        28.215223097112858,
+        11.154855643044618
+      ],
+      "area_square_feet_reference": 314.73674058459227
+    },
+    {
+      "id": "G6",
+      "name": "Entrance circulation",
+      "floor": "Ground",
+      "rect": [
+        3.95,
+        0.2,
+        2.2,
+        4.6
+      ],
+      "area": 10.12,
+      "dimensions_feet_reference": [
+        7.217847769028872,
+        15.091863517060366
+      ],
+      "area_square_feet_reference": 108.93077341710237
+    },
+    {
+      "id": "G7",
+      "name": "Stair zone, including landings",
+      "floor": "Ground",
+      "rect": [
+        6.3,
+        0.2,
+        2.5,
+        4.6
+      ],
+      "area": 11.5,
+      "dimensions_feet_reference": [
+        8.202099737532809,
+        15.091863517060366
+      ],
+      "area_square_feet_reference": 123.7849697921618
+    },
+    {
+      "id": "G8",
+      "name": "Enclosed service passage",
+      "floor": "Ground",
+      "rect": [
+        2.35,
+        1.5,
+        1.45,
+        1
+      ],
+      "area": 1.45,
+      "dimensions_feet_reference": [
+        4.757217847769028,
+        3.280839895013123
+      ],
+      "area_square_feet_reference": 15.607670104229095
+    },
+    {
+      "id": "U1",
+      "name": "Two-double guest bedroom",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        2.75,
+        4.5,
+        4.0
+      ],
+      "area": 18.0,
+      "dimensions_feet_reference": [
+        14.763779527559054,
+        13.123359580052492
+      ],
+      "area_square_feet_reference": 193.750387500775
+    },
+    {
+      "id": "U2",
+      "name": "Open shared bathroom with far-end shower",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        0.2,
+        3.6,
+        2.3
+      ],
+      "area": 8.28,
+      "dimensions_feet_reference": [
+        11.811023622047244,
+        7.545931758530183
+      ],
+      "area_square_feet_reference": 89.12517825035648
+    },
+    {
+      "id": "U3",
+      "name": "Hall linen cupboard",
+      "floor": "Upper",
+      "rect": [
+        3.95,
+        1.95,
+        0.6,
+        0.55
+      ],
+      "area": 0.33,
+      "dimensions_feet_reference": [
+        1.9685039370078738,
+        1.804461942257218
+      ],
+      "area_square_feet_reference": 3.552090437514208
+    },
+    {
+      "id": "U4",
+      "name": "Primary dressing / storage",
+      "floor": "Upper",
+      "rect": [
+        0.2,
+        6.9,
+        4.6,
+        2.4
+      ],
+      "area": 11.04,
+      "dimensions_feet_reference": [
+        15.091863517060366,
+        7.874015748031495
+      ],
+      "area_square_feet_reference": 118.83357100047532
+    },
+    {
+      "id": "U5",
+      "name": "Primary bedroom",
+      "floor": "Upper",
+      "rect": [
+        4.95,
+        5.05,
+        3.85,
+        4.25
+      ],
+      "area": 16.3625,
+      "dimensions_feet_reference": [
+        12.631233595800525,
+        13.943569553805773
+      ],
+      "area_square_feet_reference": 176.12448419341283
+    },
+    {
+      "id": "U6",
+      "name": "Hall",
+      "floor": "Upper",
+      "rect": [
+        4.95,
+        0.2,
+        1.2,
+        4.6
+      ],
+      "area": 5.52,
+      "dimensions_feet_reference": [
+        3.9370078740157477,
+        15.091863517060366
+      ],
+      "area_square_feet_reference": 59.41678550023766
+    },
+    {
+      "id": "U7",
+      "name": "Upper arrival landing",
+      "floor": "Upper",
+      "rect": [
+        6.3,
+        0.2,
+        2.5,
+        1
+      ],
+      "area": 2.5,
+      "dimensions_feet_reference": [
+        8.202099737532809,
+        3.280839895013123
+      ],
+      "area_square_feet_reference": 26.909776041774304
+    }
+  ],
+  "bathroom_count": 2,
+  "bedroom_count": 3,
+  "downstairs_bath_wall_to_kitchen_zone_gap_m": 2.3000000000000003,
+  "service_access": {
+    "route": [
+      "G6 entry hall",
+      "D2 service door",
+      "G8 enclosed service passage",
+      "G2 bathroom"
+    ],
+    "laundry_access": "G3 alcove opens to G8 inside the D2 acoustic enclosure",
+    "passage_width_m": 1,
+    "passage_width_ft": 3.280839895013123,
+    "hall_door_nominal_m": 0.9,
+    "bathroom_door_opening_m": 0.85,
+    "laundry_type": "stacked washer/dryer in G3 + G8 enclosed service vestibule",
+    "ventilation": "appliance-specific ventilation and heat/exhaust routes to design",
+    "exterior_laundry_door": false
+  },
+  "acoustic_design": {
+    "status": "space reservations and design requirements; no tested performance selected",
+    "main_external_source": "potential street traffic; general noise control",
+    "lining_reserve_m": 0.1,
+    "linings_m": {
+      "Ground": [
+        [
+          0.2,
+          2.65,
+          3.6,
+          0.1
+        ],
+        [
+          3.7,
+          2.75,
+          0.1,
+          3.9
+        ],
+        [
+          0.2,
+          6.65,
+          3.6,
+          0.1
+        ]
+      ],
+      "Upper": [
+        [
+          0.2,
+          2.65,
+          4.6,
+          0.1
+        ],
+        [
+          4.7,
+          2.75,
+          0.1,
+          4.0
+        ],
+        [
+          4.95,
+          4.95,
+          3.85,
+          0.1
+        ]
+      ]
+    },
+    "doors": {
+      "D1_stair": {
+        "x": 6.225,
+        "y": 0.25,
+        "width": 0.9,
+        "into": "left"
+      },
+      "D2_service": {
+        "x": 3.875,
+        "y": 1.55,
+        "width": 0.9,
+        "into": "right"
+      },
+      "D0_front": {
+        "x": 4.1,
+        "y": 0.1,
+        "width": 1.0,
+        "wall": "h"
+      }
+    },
+    "door_sweep_rectangles_m": {
+      "D0_front": [
+        4.1,
+        0.1,
+        1.0,
+        1.0
+      ],
+      "D1_stair": [
+        5.324999999999999,
+        0.25,
+        0.9,
+        0.9
+      ],
+      "D2_service": [
+        3.875,
+        1.55,
+        0.9,
+        0.9
+      ]
+    },
+    "living_furniture_m": {
+      "media_console": [
+        0.25,
+        7.7,
+        0.35,
+        1.65
+      ],
+      "tv": [
+        0.2,
+        7.9,
+        0.08,
+        1.25
+      ],
+      "sofa": [
+        2.95,
+        7.25,
+        0.85,
+        2.6
+      ],
+      "coffee_table": [
+        1.95,
+        8.1,
+        0.55,
+        1.2
+      ],
+      "chair": [
+        0.9,
+        7.15,
+        0.75,
+        0.75
+      ],
+      "rear_chair": [
+        0.9,
+        9.4,
+        0.75,
+        0.75
+      ]
+    },
+    "living_route_m": [
+      3.95,
+      6.9,
+      1.0,
+      3.4
+    ],
+    "rear_route_m": [
+      4.95,
+      9.3,
+      1.0,
+      1.0
+    ],
+    "floor_layers": [
+      "tile and bedding / wet-area waterproofing",
+      "compatible impact-isolation system and isolated perimeter",
+      "engineered concrete structure",
+      "services and isolated ceiling where required"
+    ],
+    "floor_layer_thicknesses": "not determined; total allowance 0.40 m",
+    "sources": {
+      "noise": "https://www.yourhome.gov.au/live-adapt/noise-control",
+      "usg": "https://www.usg.com/en-US/learning-reference/performance/acoustic/principles",
+      "insulation": "https://www.yourhome.gov.au/passive-design/insulation",
+      "glazing": "https://www.pilkington.com/en-gb/united-kingdom/architectural-and-technical-glass/product-categories/noise-control/pilkington-optiphon"
+    }
+  },
+  "upper_bathroom": {
+    "private_toilet_compartment": false,
+    "toilet_count": 1,
+    "bathing_fixture": "walk-in shower",
+    "shower_position": "far end opposite the hall door; left in plan",
+    "fixtures_m": {
+      "shower": [
+        0.2,
+        0.2,
+        1.1,
+        2.3
+      ],
+      "double_vanity": [
+        1.65,
+        0.2,
+        1.9,
+        0.55
+      ],
+      "toilet": [
+        2.0,
+        1.72,
+        0.6,
+        0.75
+      ]
+    },
+    "fixture_dimensions_ft": {
+      "shower": [
+        3.608923884514436,
+        7.545931758530183
+      ],
+      "double_vanity": [
+        6.233595800524934,
+        1.804461942257218
+      ],
+      "toilet": [
+        1.9685039370078738,
+        2.4606299212598426
+      ]
+    },
+    "door": {
+      "x": 3.875,
+      "y": 0.85,
+      "width": 0.9
+    },
+    "shower_entry_m": 0.9,
+    "nominal_toilet_front_to_vanity_gap_m": 0.97
+  },
+  "checks": [
+    "three bedrooms and two full bathrooms, one bathroom per floor",
+    "downstairs bathroom has no shared kitchen wall; 2.3 m plan-depth separation",
+    "lot allocation reconciles",
+    "room rectangles inside floor envelopes",
+    "room rectangles do not overlap",
+    "service-area rectangles and partition reconcile",
+    "passage connects hall, bath opening and laundry bay",
+    "stacked appliance footprint stays outside passage",
+    "upper bathroom fixture rectangles fit and do not overlap",
+    "upper bathroom door swing is clear of fixture rectangles",
+    "20 stair risers resolve the 3.40 m height",
+    "stair flights and landings fit the enlarged bay and opening",
+    "king bed remains inside the revised primary room",
+    "kitchen fixtures fit the combined open-plan envelope; G4/G5 remain reference subzones",
+    "floor and ceiling levels reconcile",
+    "budget allocation reconciles",
+    "new entrance door sweep envelopes do not overlap",
+    "D1 sweep stays outside stair landing",
+    "D2 sweep stays outside G8",
+    "living furniture fits and leaves nominal 1 m route beside dining furniture",
+    "bedroom furniture fits after lining reserves",
+    "bedroom door sweeps clear shown furniture",
+    "approved kitchen coordinates retained",
+    "fridge and counter do not overlap",
+    "appliances contained in counter and reserved bay",
+    "0.65 m cooktop-to-sink preparation surface",
+    "fridge 90 degree sweep clears fixed cabinets and chairs with 0.30 m pull-out",
+    "six chairs and their 0.30 m pull-out retain a 1 m living-side route into left slider opening",
+    "front court reconciles 0.55 + 4.80 + 0.45 = 5.80 m",
+    "5.80 + 10.50 + 3.70 = 20.00 m lot depth",
+    "0.70 m strip beyond retained 3.00 m canopy",
+    "0.25 m rear-bumper clearance to closed gate before hardware",
+    "longer car contained in unobstructed open exit corridor",
+    "closed gate covers full vehicle opening",
+    "open gate fits reserved runback and clears vehicle route",
+    "gate travel clears fixed posts and fence",
+    "pedestrian entrance stays outside sliding reserve",
+    "All unaffected Concept 13 areas, rooms, heights, stair, bathroom, acoustic, exterior, site and gate records match",
+    "A front openings remain within assigned rooms and below ceilings",
+    "Bathroom ribbon sill is 1.75 m above upper floor; mirrors and glazing to detail",
+    "B roof and A entry canopy translated to current Concept 11 site",
+    "Roof footprints remain within lot with zero side eave overhang",
+    "30 percent pitches reconcile main ridge and rear canopy levels",
+    "Rear roof clears upper primary window sill",
+    "Entry canopy stays outside car footprint; columns remain at existing terrace edges"
+  ],
+  "not_verified": [
+    "parcel buildability",
+    "structural adequacy",
+    "code compliance",
+    "stair headroom",
+    "actual local construction cost",
+    "finished floor level",
+    "flood exposure",
+    "utility capacity",
+    "measured street noise",
+    "installed acoustic performance",
+    "selected wall/floor/window assemblies",
+    "appliance ventilation and exhaust routes",
+    "finished door clear openings and hardware",
+    "clay roof support and fixing design",
+    "tile compatibility with 30 percent roof slope",
+    "roof drainage within lot",
+    "wide bathroom lintel and mirror coordination",
+    "window sash/guard/cleaning coordination"
+  ],
+  "kitchen_revision": {
+    "rectangles_m": {
+      "counter": [
+        5.2,
+        4.95,
+        3.6,
+        0.65
+      ],
+      "return": [
+        8.15,
+        5.6,
+        0.65,
+        1.05
+      ],
+      "cooktop": [
+        5.7,
+        5.06,
+        0.75,
+        0.43
+      ],
+      "sink": [
+        7.1,
+        5.06,
+        0.65,
+        0.43
+      ],
+      "fridge_bay": [
+        7.95,
+        6.8,
+        0.85,
+        0.9
+      ],
+      "fridge_body": [
+        8.03,
+        6.85,
+        0.72,
+        0.8
+      ],
+      "sink_standing": [
+        7.125,
+        5.6,
+        0.6,
+        0.75
+      ],
+      "through_route": [
+        3.95,
+        4.8,
+        1.0,
+        5.5
+      ]
+    },
+    "fridge_door": {
+      "hinge": [
+        8.03,
+        7.65
+      ],
+      "width": 0.8,
+      "angle": 90,
+      "sweep_bounds": [
+        7.23,
+        6.85,
+        0.8,
+        0.8
+      ]
+    },
+    "dining_table_m": [
+      6.0,
+      7.6,
+      0.9,
+      1.8
+    ],
+    "backing_wall_extension_m": [
+      5.2,
+      4.8,
+      1.1,
+      0.15
+    ],
+    "backing_wall_height_m": 3.0,
+    "open_plan_envelope_m": [
+      3.95,
+      4.95,
+      4.85,
+      5.35
+    ],
+    "reference_subzones": "G4 and G5 are retained reference allocations, not enclosed rooms; fridge extends into former G5",
+    "dining_seats": 6,
+    "terrace_dining_seats": 8,
+    "dining_chairs_drawn_m": [
+      [
+        5.45,
+        7.875,
+        0.43,
+        0.45
+      ],
+      [
+        5.45,
+        8.675,
+        0.43,
+        0.45
+      ],
+      [
+        7.02,
+        7.875,
+        0.43,
+        0.45
+      ],
+      [
+        7.02,
+        8.675,
+        0.43,
+        0.45
+      ],
+      [
+        6.225,
+        7.05,
+        0.45,
+        0.43
+      ],
+      [
+        6.225,
+        9.52,
+        0.45,
+        0.43
+      ]
+    ],
+    "dining_chairs_pulled_m": [
+      [
+        5.15,
+        7.875,
+        0.43,
+        0.45
+      ],
+      [
+        5.15,
+        8.675,
+        0.43,
+        0.45
+      ],
+      [
+        7.319999999999999,
+        7.875,
+        0.43,
+        0.45
+      ],
+      [
+        7.319999999999999,
+        8.675,
+        0.43,
+        0.45
+      ],
+      [
+        6.225,
+        6.75,
+        0.45,
+        0.43
+      ],
+      [
+        6.225,
+        9.82,
+        0.45,
+        0.43
+      ]
+    ],
+    "chair_outward_vectors": [
+      [
+        -1,
+        0
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "chair_pull_out_test_m": 0.3,
+    "rear_slider": {
+      "opening_x_m": [
+        4.9,
+        8.1
+      ],
+      "wall_depth_m": 10.4,
+      "height_m": 2.5,
+      "clear_x_m": [
+        4.9,
+        6.5
+      ],
+      "parked_x_m": [
+        6.5,
+        8.1
+      ],
+      "opens": "left half; panels parked right, viewed from inside toward garden"
+    },
+    "rear_turn_route_m": [
+      4.95,
+      9.3,
+      1.0,
+      1.0
+    ],
+    "clearances_m": {
+      "counter_to_pulled_front_chair": 1.15,
+      "table_to_closed_fridge_body": 1.13,
+      "retained_through_route": 1.0,
+      "rear_table_seating_zone": 0.9,
+      "sweep_to_nearest_side_chair": 0.225,
+      "rear_pulled_chair_to_wall": 0.05
+    },
+    "sink_work_area_overlaps_door_sweep": false,
+    "appliance_width_selected_m": 0.8,
+    "appliance_model_selected": false,
+    "services": "retain sink/cooktop positions; coordinate oven/hood, backing wall and refrigerator requirements before cabinetry",
+    "not_verified": [
+      "actual appliance installation clearances",
+      "full opening angle for drawer removal",
+      "actual chair pull-out and occupied body clearances",
+      "oven/hood requirements",
+      "wall construction"
+    ]
+  },
+  "site_revision": {
+    "lot_width": 10.0,
+    "lot_depth": 20.0,
+    "building_x": 1.0,
+    "front_depth": 5.8,
+    "ground_depth": 10.5,
+    "upper_depth": 9.5,
+    "terrace_width": 6.0,
+    "terrace_depth": 3.0,
+    "ground_rear_y": 16.3,
+    "upper_rear_y": 15.3,
+    "rear_depth": 3.6999999999999993,
+    "terrace_rear_y": 19.3,
+    "beyond_canopy": 0.6999999999999993
+  },
+  "parking_revision": {
+    "court_depth": 5.8,
+    "car": [
+      1.8,
+      0.55,
+      1.85,
+      4.8
+    ],
+    "gate_gap": 0.55,
+    "house_gap": 0.45,
+    "vehicle_gate_width": 3.6,
+    "closed_gate_gap": 0.25000000000000006
+  },
+  "sliding_gate": {
+    "opening_x": [
+      0.8,
+      4.4
+    ],
+    "closed_leaf": [
+      0.7,
+      0.22,
+      3.8,
+      0.08
+    ],
+    "open_leaf": [
+      4.5,
+      0.22,
+      3.8,
+      0.08
+    ],
+    "travel": 3.8,
+    "runback_reserve": [
+      4.4,
+      0,
+      4.05,
+      0.45
+    ],
+    "fixed_fence": [
+      4.6,
+      0,
+      3.75,
+      0.1
+    ],
+    "posts": [
+      [
+        0.6,
+        0,
+        0.2,
+        0.2
+      ],
+      [
+        4.4,
+        0,
+        0.2,
+        0.2
+      ],
+      [
+        8.35,
+        0,
+        0.2,
+        0.2
+      ],
+      [
+        9.65,
+        0,
+        0.2,
+        0.2
+      ]
+    ],
+    "pedestrian_opening_x": [
+      8.55,
+      9.65
+    ],
+    "pedestrian_path_x": 9.1,
+    "exit_corridor": [
+      1.35,
+      -0.6,
+      2.75,
+      6.2
+    ],
+    "status": "schematic track-guided single leaf; final hardware and structural design pending"
+  },
+  "selected_exterior": {
+    "concept": 14,
+    "selection": "A window layout with B main hip roof and clay-tile rear canopy",
+    "basis": "Concept 13 selected exterior, site and roof drainage retained; Concept 14 interior kitchen and dining revision",
+    "coordinate_basis": "Front x uses lot coordinates from street-left; rear x uses distance from building-left as seen from garden. z is relative to ground finished floor.",
+    "front_openings": {
+      "ground_bath": [
+        1.4,
+        1.6,
+        0.85,
+        0.7
+      ],
+      "ground_laundry": [
+        4.25,
+        1.4,
+        0.45,
+        0.9
+      ],
+      "entry": [
+        5.1,
+        0,
+        1.0,
+        2.45
+      ],
+      "ground_stair": [
+        7.8,
+        1.1,
+        1.65,
+        1.5
+      ],
+      "upper_stair": [
+        7.8,
+        4.5,
+        1.65,
+        1.5
+      ],
+      "upper_bath_ribbon": [
+        1.4,
+        5.15,
+        3.1,
+        0.55
+      ]
+    },
+    "rear_openings": {
+      "ground_sliding_door": [
+        0.9,
+        0,
+        3.2,
+        2.5
+      ],
+      "ground_living_window": [
+        5.45,
+        0.6,
+        2.9,
+        1.9
+      ],
+      "upper_primary_window": [
+        0.75,
+        4.25,
+        3.05,
+        1.7
+      ]
+    },
+    "roof": {
+      "type": "hipped clay-tile roof",
+      "main_top": 6.6,
+      "highest_top": 7.95,
+      "slope_rise_per_run": 0.3,
+      "footprint_lot": [
+        1,
+        5.45,
+        9,
+        10.2
+      ],
+      "ridge_lot_xy_start_end": [
+        [
+          5.5,
+          9.95
+        ],
+        [
+          5.5,
+          11.15
+        ]
+      ],
+      "side_eave_projection": 0,
+      "front_rear_eave_projection": 0.35
+    },
+    "rear_canopy": {
+      "type": "clay-tile shed roof descending to garden",
+      "footprint_lot": [
+        3,
+        16.3,
+        6,
+        3
+      ],
+      "soffit": 2.5,
+      "low_top": 2.7,
+      "high_top": 3.6,
+      "slope_rise_per_run": 0.3
+    },
+    "front_canopy": {
+      "footprint_lot": [
+        4.85,
+        5.0,
+        1.8,
+        0.8
+      ],
+      "soffit": 2.65,
+      "top": 2.8
+    },
+    "stair_reveal_projection": 0.2,
+    "palette": {
+      "plaster": "warm ivory",
+      "frames_gate": "dark bronze",
+      "entry_soffit": "timber",
+      "roof": "reddish clay tile",
+      "window_reveals": "ivory plaster"
+    },
+    "sources": [
+      {
+        "title": "Casa Los Mangos / Bernal Architecture Studio / Bucerias",
+        "url": "https://www.brnlarchitecture.com/es/casa-los-mangos-nuevo-vallarta"
+      },
+      {
+        "title": "Puerto Vallarta Tourism Board / Cultural Patrimony of Jalisco",
+        "url": "https://visitpuertovallarta.com/blog/puerto-vallarta-cultural-patrimony-of-jalisco"
+      }
+    ],
+    "status": "Selected concept form and opening schedule; assemblies, structure, drainage, glazing, hardware and costs unverified",
+    "rear_canopy_columns_lot_xywh": [
+      [
+        3.09,
+        19.17,
+        0.12,
+        0.12
+      ],
+      [
+        8.79,
+        19.17,
+        0.12,
+        0.12
+      ]
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "concept": 12,
+  "selected_direction": "A window layout, ivory plaster and entry with B clay hip roof and tiled terrace canopy",
+  "pdf": "las-juntas-concept-12.pdf",
+  "pdf_pages": 10,
+  "retained_basis": "Concept 11: 5.80 m court, 4.80 m car, 3.70 m rear zone and 0.70 m beyond canopy",
+  "preservation": "Every recorded file hash in Concepts 10 and 11 and style-study-01 remains unchanged",
+  "geometry_checks": "draw_house.py verify_geometry and verify_style passed; retained area, room, kitchen, stair, height, service, acoustic, site and gate records compared directly to Concept 11",
+  "selected_openings": "Exact study A front opening schedule; upper bathroom replaced in both furnished plan and enlarged detail",
+  "roof_checks": [
+    "B main roof and rear canopy translated 0.30 m to current site",
+    "Main eave 6.60 m, ridge 7.95 m, added height above upper ceiling 1.75 m",
+    "30 percent roof pitches reconcile",
+    "Roof footprints within lot and zero side overhang scheduled",
+    "Entry canopy outside car footprint",
+    "Rear canopy below upper primary window sill"
+  ],
+  "visual_review": {
+    "pages_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "resolution": "1600 px page render using Poppler",
+    "layout": "All pages inspected; no clipping or table/text overlap observed",
+    "images": "Final views retain A bathroom ribbon and separate wider stair openings; main clay hip roof, tiled rear canopy, open vehicle route and shallow rear garden shown. Roof-edge and facade proportions remain illustrative; dimensioned sheet 10 governs exact geometry.",
+    "rejected_image_edits": "Two attempted side-edge refinements distorted wall/roof width relationships; not adopted. Final assets are the initial hybrid views."
+  },
+  "pdf_text_checks": [
+    "Ten pages with correct headers and page numbering",
+    "Selected metric and feet values present",
+    "All extracted characters within page bounds",
+    "No excluded attribution terms in text or metadata"
+  ],
+  "limits": [
+    "Roof structure and build-up not engineered",
+    "Roof images do not certify exact edge, support or installed dimensions",
+    "Tile-system suitability at 30 percent slope, roof fixing, weatherproofing and drainage unverified",
+    "Sash operation, mirrors, guards, safe glazing and cleaning reach to detail",
+    "Construction cost and MXN 4 million working allocation unverified",
+    "Viewer remains Concept 06"
+  ],
+  "files_sha256": {
+    "rendering-geometry.json": "2932339828e4de9d379e50bf08df11bb855dd2985515da1305f5a255ee1aa054",
+    "las-juntas-concept-12.pdf": "72c97f217a64976afd59ce7d52ccfd848b257dcf20573001395ca5f308e9d830",
+    "area-schedule.json": "d43970ffbe081e77261172fb384dcfcfe63175bb83c61386cd21550440079f56",
+    "selected-style-geometry.json": "35977c21bf7aaca484fd9fee76408481faddc62f5697437fb2ecb28aa5ca240b",
+    "rear-updated.png": "1888fb54094f4fcf059d85bd18e22a183b818c9d142cfab535b536c59c56151b",
+    "preserved-files-sha256.json": "1dc8747dad9cb0d8d620b9dd242fdb5ca7e208b35b2b474acd2ea2b2bc6ee53d",
+    "brief.md": "6448c7c0efd7731291597789efa33cd78f97043cbf2d2f85656e2d6702859ce0",
+    "draw_house.py": "df257eb45d580d1e179a21ed2c151932dc94b852643921b2a46c02c9c00cb163",
+    "final-image-prompts.json": "ca67bce6f164ffa7fecabdbf9ed43efdc08d1f81422252d22b385790834ace94",
+    "front-updated.png": "81b5803df3a9948061d57a930939b5a628ca3a070b822c35ebcf91148d104a32"
+  }
+}
