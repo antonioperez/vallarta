@@ -1,8 +1,9 @@
 import * as THREE from "three";
+import { registerFinish } from "./materials";
 
 // A subtle, repeating 60 cm ceramic tile texture provides a real scale cue.
 // Generated locally so the viewer has no external texture dependencies.
-export function tileMaterial(color: string, width: number, depth: number) {
+export function tileMaterial(color: string) {
   const canvas = document.createElement("canvas");
   canvas.width = canvas.height = 128;
   const ctx = canvas.getContext("2d")!;
@@ -20,9 +21,12 @@ export function tileMaterial(color: string, width: number, depth: number) {
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(width / 0.6, depth / 0.6);
+  texture.repeat.set(1 / 0.6, 1 / 0.6);
   texture.anisotropy = 4;
-  return new THREE.MeshStandardMaterial({ map: texture, roughness: 0.85 });
+  return registerFinish(
+    new THREE.MeshStandardMaterial({ map: texture, roughness: 0.85 }),
+    "floor",
+  );
 }
 
 export function addFloorFinish(
@@ -34,10 +38,11 @@ export function addFloorFinish(
   y: number,
   color: string,
 ) {
-  const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(width, depth),
-    tileMaterial(color, width, depth),
-  );
+  const geometry = new THREE.PlaneGeometry(width, depth);
+  const uv = geometry.getAttribute("uv");
+  for (let i = 0; i < uv.count; i++)
+    uv.setXY(i, uv.getX(i) * width + x, uv.getY(i) * depth + d);
+  const floor = new THREE.Mesh(geometry, tileMaterial(color));
   floor.rotation.x = -Math.PI / 2;
   floor.position.set(x + width / 2, y, -d - depth / 2);
   floor.receiveShadow = true;

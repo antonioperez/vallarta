@@ -28,6 +28,7 @@ import {
   type Point,
 } from "./design";
 import { addClayRoof, worldPoint } from "./roof";
+import { registerFinish, texturedBoxGeometry, type Finish } from "./materials";
 
 const palette = {
   plaster: "#eee5d6",
@@ -35,6 +36,7 @@ const palette = {
   tile: "#bca487",
   wood: "#9a6545",
   cream: "#f7f0e4",
+  linen: "#f2eddf",
   sage: "#819080",
   rust: "#a4573e",
   metal: "#49413a",
@@ -44,23 +46,45 @@ const palette = {
   lining: "#bacbc1",
   trim: "#797b6c",
 };
-const cube = new THREE.BoxGeometry(1, 1, 1);
 const materials = new Map<string, THREE.MeshStandardMaterial>();
-function material(color: string, glass = false) {
-  const key = color + glass;
+function material(color: string, glass = false, finish?: Finish) {
+  finish ??=
+    glass || color === palette.glass
+      ? "glass"
+      : color === palette.wood
+        ? "wood"
+        : [palette.sage, palette.rust, palette.linen].includes(color)
+          ? "fabric"
+          : [
+                palette.metal,
+                "#afbab4",
+                "#d0d4cf",
+                "#8b9390",
+                "#706156",
+              ].includes(color)
+            ? "metal"
+            : color === palette.cream
+              ? "ceramic"
+              : color === palette.tile
+                ? "floor"
+                : "plaster";
+  const key = color + glass + finish;
   if (!materials.has(key))
     materials.set(
       key,
-      new THREE.MeshStandardMaterial({
-        color,
-        roughness: glass ? 0.15 : 0.86,
-        metalness: 0,
-        emissive: color === palette.ceiling ? palette.ceiling : "#000000",
-        emissiveIntensity: color === palette.ceiling ? 0.18 : 0,
-        transparent: glass,
-        opacity: glass ? 0.27 : 1,
-        depthWrite: !glass,
-      }),
+      registerFinish(
+        new THREE.MeshStandardMaterial({
+          color,
+          roughness: glass ? 0.15 : 0.86,
+          metalness: 0,
+          emissive: color === palette.ceiling ? palette.ceiling : "#000000",
+          emissiveIntensity: color === palette.ceiling ? 0.18 : 0,
+          transparent: glass,
+          opacity: glass ? 0.27 : 1,
+          depthWrite: !glass,
+        }),
+        finish,
+      ),
     );
   return materials.get(key)!;
 }
@@ -76,7 +100,10 @@ function box(
   color = palette.plaster,
   glass = false,
 ): THREE.Mesh {
-  const mesh = new THREE.Mesh(cube, material(color, glass));
+  const mesh = new THREE.Mesh(
+    texturedBoxGeometry(w, height, depth),
+    material(color, glass),
+  );
   mesh.position.set(x + w / 2, bottom + height / 2, -d - depth / 2);
   mesh.scale.set(w, height, depth);
   mesh.castShadow = !glass;
@@ -95,7 +122,7 @@ function cylinder(
 ) {
   const mesh = new THREE.Mesh(
     new THREE.CylinderGeometry(r, r * 0.85, height, 12),
-    material(color),
+    material(color, false, color === palette.rust ? "ceramic" : undefined),
   );
   mesh.position.set(x, y + height / 2, -d);
   mesh.castShadow = true;
@@ -120,7 +147,7 @@ function bed(
     depth - 0.05,
     base + 0.34,
     0.25,
-    palette.cream,
+    palette.linen,
   );
   box(
     group,
@@ -135,7 +162,7 @@ function bed(
   if (right) {
     box(group, x + w - 0.1, d, 0.09, depth, base + 0.15, 0.9, palette.wood);
     for (const p of [d + 0.2, d + depth / 2 + 0.1])
-      box(group, x + w - 0.55, p, 0.4, 0.6, base + 0.59, 0.12, palette.cream);
+      box(group, x + w - 0.55, p, 0.4, 0.6, base + 0.59, 0.12, palette.linen);
   } else {
     box(group, x, d + depth - 0.1, w, 0.09, base + 0.15, 0.9, palette.wood);
     for (const p of [x + 0.12, x + w / 2 + 0.05])
@@ -147,7 +174,7 @@ function bed(
         0.38,
         base + 0.59,
         0.12,
-        palette.cream,
+        palette.linen,
       );
   }
 }
@@ -857,7 +884,7 @@ export function createHouse(scene: THREE.Scene) {
       0.76,
       0.46,
       0.1,
-      palette.cream,
+      palette.linen,
     );
   for (const z of [sz, sz + sd - 0.1])
     box(g, sx, z, sw, 0.1, 0.46, 0.24, palette.sage);

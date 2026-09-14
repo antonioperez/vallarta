@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import type { Point } from "./design";
+import { registerFinish } from "./materials";
 
 export const worldPoint = ([x, depth, height]: Point) =>
   new THREE.Vector3(x, height, -depth);
@@ -31,11 +32,14 @@ function clayMaterial() {
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(1 / 0.22, 1 / 0.34);
   texture.anisotropy = 8;
-  clay = new THREE.MeshStandardMaterial({
-    map: texture,
-    roughness: 0.92,
-    side: THREE.DoubleSide,
-  });
+  clay = registerFinish(
+    new THREE.MeshStandardMaterial({
+      map: texture,
+      roughness: 0.92,
+      side: THREE.DoubleSide,
+    }),
+    "clay",
+  );
   return clay;
 }
 

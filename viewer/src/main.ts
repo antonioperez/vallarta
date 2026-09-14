@@ -13,6 +13,12 @@ import {
 import { createHouse } from "./model";
 import "./style.css";
 import { createDepthRenderer } from "./depth";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import {
+  loadMaterialTextures,
+  setRealisticMaterials,
+  disposeMaterialTextures,
+} from "./materials";
 
 const squareFeet = (squareMeters: number) =>
   (squareMeters / 0.3048 ** 2).toLocaleString("en-US", {
@@ -51,8 +57,9 @@ app.innerHTML = `
               .join("")}</optgroup>`,
         )
         .join("")}</select></div>
-      <div class="options"><label><input type="checkbox" id="furniture" checked><span>Furniture</span></label><label><input type="checkbox" id="roof" checked><span>Exterior roof</span></label><label><input type="checkbox" id="depth" checked><span>Depth cues</span></label><label><input type="checkbox" id="gate" checked><span>Vehicle gate open</span></label><label><input type="checkbox" id="drainage"><span>Proposed drainage</span></label></div>
-      <details class="notes"><summary>About this model <span>+</span></summary><p>Concept 14: A’s windows with B’s clay roofs. Ground clear height 3.00 m (9.84 ft); upper 2.80 m (9.19 ft); floor-to-floor 3.40 m (11.15 ft). Main eave 6.60 m (21.65 ft), ridge 7.95 m (26.08 ft). The 4.80 m car fits the 5.80 m court with the complete sliding gate retracted beside it.</p><p>Drainage lines show proposed collection paths. The inset boundary gutter, pipe sizes, rear transfer and site outfall need design; resolving the gutter may change the roof edge. Blue marks primary paths, orange the boundary/overflow relationships.</p><p>The L-shaped kitchen has a full-height backing wall and the fridge moved toward a six-seat table. G4/G5 are reference subzones; the fridge extends into the dining allocation. The rear slider opens on the left, with panels parked right. The terrace table still seats eight. Obscure bathroom glass is represented as opaque; final glazing and operation remain unresolved. Furniture, gate height and roof build-up are illustrative. Movement collides with walls, interior door leaves and parked rear glazing, not furniture or site gates. Structure, stair headroom and cost remain unverified.</p></details>
+      <div class="options"><label><input type="checkbox" id="furniture" checked><span>Furniture</span></label><label><input type="checkbox" id="roof" checked><span>Exterior roof</span></label><label><input type="checkbox" id="depth" checked><span>Depth cues</span></label><label><input type="checkbox" id="gate" checked><span>Vehicle gate open</span></label><label><input type="checkbox" id="drainage"><span>Proposed drainage</span></label><label><input type="checkbox" id="materials" checked><span>Realistic materials</span></label></div>
+      <p id="material-status" class="map-hint" role="status">Loading finishes…</p>
+      <details class="notes"><summary>About this model <span>+</span></summary><p>Concept 14: A’s windows with B’s clay roofs. Ground clear height 3.00 m (9.84 ft); upper 2.80 m (9.19 ft); floor-to-floor 3.40 m (11.15 ft). Main eave 6.60 m (21.65 ft), ridge 7.95 m (26.08 ft). The 4.80 m car fits the 5.80 m court with the complete sliding gate retracted beside it.</p><p>Drainage lines show proposed collection paths. The inset boundary gutter, pipe sizes, rear transfer and site outfall need design; resolving the gutter may change the roof edge. Blue marks primary paths, orange the boundary/overflow relationships.</p><p>Realistic materials add wood grain, plaster detail, woven upholstery, stone flooring and clay tiles. Switch them off for simpler surfaces. Texture scans: <a href="https://polyhaven.com/" target="_blank" rel="noopener noreferrer">Poly Haven</a> (CC0). Finishes and reflections are illustrative.</p><p>The L-shaped kitchen has a full-height backing wall and the fridge moved toward a six-seat table. G4/G5 are reference subzones; the fridge extends into the dining allocation. The rear slider opens on the left, with panels parked right. The terrace table still seats eight. Obscure bathroom glass is represented as opaque; final glazing and operation remain unresolved. Furniture, gate height and roof build-up are illustrative. Movement collides with walls, interior door leaves and parked rear glazing, not furniture or site gates. Structure, stair headroom and cost remain unverified.</p></details>
       <div class="sidebar-footer">10 × 20 m lot <span>·</span> Las Juntas, México</div>
     </aside>
     <section class="viewport" aria-label="Interactive 3D house">
@@ -117,6 +124,24 @@ groundPlane.position.y = -0.27;
 groundPlane.receiveShadow = true;
 scene.add(groundPlane);
 const model = createHouse(scene);
+const environmentScene = new RoomEnvironment();
+const pmrem = new THREE.PMREMGenerator(renderer);
+const environment = pmrem.fromScene(environmentScene, 0.04);
+environmentScene.dispose();
+pmrem.dispose();
+scene.environment = environment.texture;
+sceneElement.dataset.textures = "loading";
+let active = true;
+void loadMaterialTextures(renderer.capabilities.getMaxAnisotropy()).then(
+  (complete) => {
+    if (!active) return;
+    sceneElement.dataset.textures = complete ? "ready" : "partial";
+    $("material-status").hidden = complete;
+    if (!complete)
+      $("material-status").textContent =
+        "Some finishes could not load; simple surfaces are shown.";
+  },
+);
 const depthRenderer = createDepthRenderer(renderer, scene, camera);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -137,6 +162,11 @@ const activeFloor = (): Floor =>
   walking ? floorOfCamera() : view === "upper" ? "upper" : "ground";
 
 function updateModel() {
+  const realistic = $<HTMLInputElement>("materials").checked;
+  setRealisticMaterials(realistic);
+  scene.environmentIntensity = realistic ? 0.55 : 0;
+  ambient.intensity = realistic ? 1.35 : 1.75;
+  sceneElement.dataset.materials = realistic ? "realistic" : "simple";
   model.setDepthCues($<HTMLInputElement>("depth").checked);
   model.setGateOpen($<HTMLInputElement>("gate").checked);
   const drainageVisible =
@@ -333,7 +363,14 @@ $("fullscreen").addEventListener("click", async () => {
     $("view-status").textContent = "Fullscreen is unavailable in this browser.";
   }
 });
-for (const id of ["roof", "furniture", "depth", "gate", "drainage"])
+for (const id of [
+  "roof",
+  "furniture",
+  "depth",
+  "gate",
+  "drainage",
+  "materials",
+])
   $(id).addEventListener("change", updateModel);
 $("room").addEventListener("change", (e) =>
   enterRoom((e.target as HTMLSelectElement).value),
@@ -492,9 +529,12 @@ renderer.setAnimationLoop(frame);
 // Do not leave stale input or animation listeners after a dev hot update.
 if (import.meta.hot)
   import.meta.hot.dispose(() => {
+    active = false;
     renderer.setAnimationLoop(null);
     observer.disconnect();
     controls.dispose();
     depthRenderer.dispose();
+    environment.dispose();
+    disposeMaterialTextures();
     renderer.dispose();
   });

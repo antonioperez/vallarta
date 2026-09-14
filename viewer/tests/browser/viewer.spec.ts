@@ -1,4 +1,13 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+
+async function openViewer(page: Page) {
+  await page.goto("./");
+  await expect(page.locator("#scene")).toHaveAttribute(
+    "data-textures",
+    "ready",
+    { timeout: 30_000 },
+  );
+}
 
 test("renders the model and excludes the static document from indexing", async ({
   page,
@@ -6,7 +15,7 @@ test("renders the model and excludes the static document from indexing", async (
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("./");
+  await openViewer(page);
   await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
   expect(
     Number(await page.locator("#scene").getAttribute("data-draw-calls")),
@@ -42,7 +51,7 @@ test("renders the model and excludes the static document from indexing", async (
 test("keyboard movement stops at the rear wall and room shortcuts work", async ({
   page,
 }) => {
-  await page.goto("./");
+  await openViewer(page);
   await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
   await page.locator("#room").selectOption("G1");
   const before = await page.locator("#scene").getAttribute("data-position");
@@ -69,7 +78,7 @@ test("keyboard movement stops at the rear wall and room shortcuts work", async (
 
 test("mobile layout fits and touch navigation moves", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("./");
+  await openViewer(page);
   await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
@@ -98,7 +107,7 @@ test("interior depth cues toggle and the latest spaces render", async ({
   test.setTimeout(process.env.CI ? 120_000 : 30_000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("./");
+  await openViewer(page);
   await expect(page.locator(".edition")).toContainText("CONCEPT 14");
   for (const room of ["G5", "G2", "G6", "U5"]) {
     await page.locator("#room").selectOption(room);
@@ -126,7 +135,7 @@ test("selected roofs, sliding gate and proposed drainage controls coordinate", a
 }) => {
   // Match the interior tour's budget for multiple software-WebGL screenshots.
   test.setTimeout(process.env.CI ? 120_000 : 30_000);
-  await page.goto("./");
+  await openViewer(page);
   await expect(page.locator("#scene")).toHaveAttribute("data-ready", "true");
   await page.getByLabel("Vehicle gate open").uncheck();
   await expect(page.locator("#scene")).toHaveAttribute("data-gate", "closed");
@@ -159,4 +168,51 @@ test("selected roofs, sliding gate and proposed drainage controls coordinate", a
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.locator("#room").selectOption("U2");
   await page.screenshot({ path: "test-results/upper-bathroom.png" });
+});
+
+test("realistic finishes load locally and switch back to simple materials", async ({
+  page,
+}) => {
+  // Switching mapped materials compiles additional programs on software WebGL.
+  test.setTimeout(process.env.CI ? 120_000 : 30_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await openViewer(page);
+  await expect(
+    page.getByLabel("Realistic materials", { exact: true }),
+  ).toBeChecked();
+  await page.locator("#room").selectOption("G5");
+  await page.screenshot({ path: "test-results/materials-realistic.png" });
+  await page.getByLabel("Realistic materials", { exact: true }).uncheck();
+  await expect(page.locator("#scene")).toHaveAttribute(
+    "data-materials",
+    "simple",
+  );
+  await page.screenshot({ path: "test-results/materials-simple.png" });
+  await page.getByLabel("Realistic materials", { exact: true }).check();
+  await expect(page.locator("#scene")).toHaveAttribute(
+    "data-materials",
+    "realistic",
+  );
+  expect(errors).toEqual([]);
+});
+
+test("a missing texture set keeps the house navigable with fallback materials", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.route("**/textures/wood-*.jpg", (route) => route.abort());
+  await page.goto("./");
+  await expect(page.locator("#scene")).toHaveAttribute(
+    "data-textures",
+    "partial",
+    { timeout: 30_000 },
+  );
+  await expect(page.locator("#material-status")).toContainText(
+    "Some finishes could not load",
+  );
+  await page.locator("#room").selectOption("G4");
+  await expect(page.locator("#scene")).toHaveAttribute("data-mode", "walk");
+  expect(errors).toEqual([]);
 });
