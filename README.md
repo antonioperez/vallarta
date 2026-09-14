@@ -35,7 +35,7 @@ Ground clear ceiling: 3.00 m; upper: 2.80 m; floor-to-floor: 3.40 m. Main roof e
 
 The main PDF contains 13 pages, including proposed drainage coordination. The model retains the baseline roof: sizing the inset boundary gutter may change its tiled edge and hip/ridge. Colored overlay lines are diagram centerlines only; overflow elevations, pipe sizes and the site outfall remain unresolved. Roof build-up, tile pattern, the 1.80 m gate height, car shape and furniture remain illustrative. Bathroom mirrors stop below the high window; their final specification remains open. The interior doors remain held open at the approved swings. Movement collides with walls, interior door leaves and parked rear glazing, not furniture or site gates. No surveyed north is asserted. Structure, stair headroom, local compliance and the budget are unverified.
 
-See [the current design index](design/CURRENT.md) and [viewer coordination notes](docs/viewer-concept-14.md). The local Concept 14 revision has not yet been published to the live walkthrough.
+See [the current design index](design/CURRENT.md) and [viewer coordination notes](docs/viewer-concept-14.md). Concept 14 was published to the live walkthrough on 13 September 2026.
 
 The original design sources and PDFs remain in `design/` and are not copied to the published website. They remain visible in the public source repository.
 
@@ -49,7 +49,7 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-Geometry tests check source heights, openings, service access, room viewpoints, full stair ascent/descent and collision boundaries, plus actual roof/car/kitchen mesh bounds and the complete gate leaf in both positions. Browser tests check render startup, crawler meta tags in server-delivered HTML, floor/room controls, wall collision, mobile layout, touch navigation the depth-cue toggle, selected exterior controls and proposed drainage visibility. Browser screenshots are written under `viewer/test-results/`.
+Geometry tests check source heights, openings, service access, room viewpoints, full stair ascent/descent and collision boundaries, plus actual roof/car/kitchen mesh bounds and the complete gate leaf in both positions. Browser tests check render startup, crawler meta tags in server-delivered HTML, floor/room controls, wall collision, mobile layout, touch navigation, the depth-cue toggle, selected exterior controls and proposed drainage visibility. Browser screenshots are written under `viewer/test-results/`.
 
 ## GitHub Pages
 

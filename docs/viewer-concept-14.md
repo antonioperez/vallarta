@@ -1,6 +1,6 @@
 # Concept 14 viewer coordination
 
-The viewer follows Concept 14's L-shaped kitchen and six-seat dining, with the selected A openings, B roofs and retained Concept 13 site. Concept 13, all previous concepts and the original style study remain unchanged. Publication remains a separate step.
+The viewer follows Concept 14's L-shaped kitchen and six-seat dining, with the selected A openings, B roofs and retained Concept 13 site. Concept 13, all previous concepts and the original style study remain unchanged. Published to [GitHub Pages](https://antonioperez.github.io/vallarta/) on 13 September 2026.
 
 ## Geometry sources
 
@@ -35,4 +35,4 @@ Walk collision includes walls, acoustic linings, open interior leaves and the re
 
 ## Verification
 
-The geometry suite checks retained circulation and stair movement plus actual Three.js bounds for roof, terrace, car, gate, kitchen, new full-height wall, return, six-seat table/chairs and parked rear panels. Tests sample each chair through its complete 0.30 m outward movement and the nominal fridge leaf through 0-90 degrees. Browser checks cover desktop/mobile render, room shortcuts, movement, depth cues, gate states, rear view and drainage visibility. Screenshots remain in `viewer/test-results/` for local inspection. The current revision is local; GitHub Pages has not been updated.
+The geometry suite checks retained circulation and stair movement plus actual Three.js bounds for roof, terrace, car, gate, kitchen, new full-height wall, return, six-seat table/chairs and parked rear panels. Tests sample each chair through its complete 0.30 m outward movement and the nominal fridge leaf through 0-90 degrees. Browser checks cover desktop/mobile render, room shortcuts, movement, depth cues, gate states, rear view and drainage visibility. Screenshots remain in `viewer/test-results/` for local inspection. All 13 geometry checks and five browser checks passed locally and in the [publication workflow](https://github.com/antonioperez/vallarta/actions/runs/34804488830). The source brief and verification JSON retain their original preparation-time records; this document and the current design index record subsequent publication.

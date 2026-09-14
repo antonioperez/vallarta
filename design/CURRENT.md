@@ -14,6 +14,6 @@ The main PDF includes the roof collection plan, boundary gutter/rear junction sk
 
 Retains the 5.80 m court, 4.80 m car, 3.70 m rear zone, restored L counter, moved fridge, full-height backing wall, six-seat indoor table and retained room/floor geometry. The original style study remains unchanged on its historical 5.50 m court / 4.50 m car basis.
 
-The local Three.js viewer now follows Concept 14, with gate operation and an optional proposed drainage overlay. This revision has not been published to GitHub Pages.
+The [live Three.js viewer](https://antonioperez.github.io/vallarta/) follows Concept 14, with gate operation and an optional proposed drainage overlay. Published to GitHub Pages on 13 September 2026; square-meter/square-foot labels and no-index directives are retained, and trees remain removed.
 
 [Preliminary structural coordination review](structural-review-01/review.md), 13 September 2026: the structural system remains undefined; resolve boundary separation and upper-wall support before fixing the design. This review does not change Concept 14.
