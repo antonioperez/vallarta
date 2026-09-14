@@ -6,6 +6,8 @@ Wood cabinets, doors and tables use scanned grain with normal and roughness maps
 
 UV coordinates are measured in meters on each box face, floor and roof, so enlarging an object does not enlarge its grain. The visual geometry remains schematic; surface maps do not create detailed appliances, rounded furniture or construction assemblies.
 
+The kitchen now includes individual wood base-cabinet fronts, cooktop/prep drawers, paired sink and return doors, recessed toe kicks, and dark metal pulls. Four wall-cabinet doors sit above the prep/sink side, leaving the cooktop area open. All base fronts and pulls fit under the existing L-shaped countertop overhang; wall units are 35 cm deep with their underside at 1.55 m and top at 2.40 m. These are illustrative cabinet modules for the walkthrough, not fabrication drawings; appliance, hood and plumbing coordination remains as recorded in Concept 14.
+
 ## Assets and loading
 
 Thirteen self-hosted 1K JPEG maps total 5.57 MiB. Texture objects are shared per finish, with mipmaps and anisotropy capped at four. Software renderers such as SwiftShader use a 240,000-pixel cap for the canvas and depth passes, 512-pixel shadows, and anisotropy capped at one; HTML controls remain sharp. Hardware GPUs retain the existing full-resolution path. There is no live texture-service dependency or subscription. A material set is applied only after all of its files load; failed sets retain their original surfaces and the viewer reports partial loading. Disabling realistic materials restores original maps/colors/roughness and removes environment illumination. The depth-cue toggle separately controls ambient occlusion.

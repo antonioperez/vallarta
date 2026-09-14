@@ -129,6 +129,83 @@ function cylinder(
   mesh.receiveShadow = true;
   parent.add(mesh);
 }
+
+// Local cabinet fronts face increasing plan depth. Pulls stay under the worktop
+// overhang, preserving the approved circulation and refrigerator sweep.
+function cabinetFront(
+  group: THREE.Group,
+  x: number,
+  width: number,
+  depth: number,
+  bottom: number,
+  height: number,
+  drawer = false,
+  hingeRight = false,
+) {
+  box(group, x + 0.004, depth - 0.05, width - 0.008, 0.02,
+    bottom + 0.004, height - 0.008, palette.wood);
+  const pullX = drawer ? x + (width - 0.16) / 2
+    : x + (hingeRight ? 0.035 : width - 0.047);
+  box(group, pullX, depth - 0.026, drawer ? 0.16 : 0.012, 0.024,
+    drawer ? bottom + height - 0.05 : bottom + height - 0.22,
+    drawer ? 0.012 : 0.16, palette.metal);
+}
+
+function baseCabinets(parent: THREE.Group, r: number[], name: string, returnRun = false) {
+  const [x, d, w, depth] = r;
+  const run = new THREE.Group();
+  run.name = name;
+  run.position.set(returnRun ? x + w : x, 0, -d);
+  run.rotation.y = returnRun ? Math.PI / 2 : 0;
+  parent.add(run);
+  const length = returnRun ? depth : w;
+  const cabinetDepth = returnRun ? w : depth;
+  box(run, 0, 0, length, cabinetDepth - 0.12, 0, 0.12, palette.metal);
+  box(run, 0, 0, length, cabinetDepth - 0.05, 0.12, 0.78, palette.wood);
+  // Dark backing makes the narrow panel reveals readable in either material mode.
+  box(run, 0.008, cabinetDepth - 0.052, length - 0.016, 0.002,
+    0.12, 0.775, palette.metal);
+  box(run, 0, 0, length, cabinetDepth, 0.9, 0.045, palette.cream);
+  if (returnRun) {
+    for (let i = 0; i < 2; i++)
+      cabinetFront(run, i * length / 2, length / 2, cabinetDepth,
+        0.12, 0.775, false, i === 1);
+  } else {
+    cabinetFront(run, 0, 0.5, cabinetDepth, 0.12, 0.775);
+    // Cooktop and prep drawers; paired doors below the sink leave room for plumbing.
+    for (const [start, width] of [[0.5, 0.8], [1.3, 0.6]])
+      for (const [bottom, height] of [[0.12, 0.30], [0.42, 0.29], [0.71, 0.185]])
+        cabinetFront(run, start, width, cabinetDepth, bottom, height, true);
+    for (let i = 0; i < 2; i++)
+      cabinetFront(run, 1.9 + i * 0.45, 0.45, cabinetDepth,
+        0.12, 0.775, false, i === 1);
+    // Fixed corner filler, followed by the perpendicular return cabinet.
+    box(run, 2.804, cabinetDepth - 0.05, length - 2.804, 0.02,
+      0.124, 0.767, palette.wood);
+  }
+}
+
+function kitchenWallCabinets(parent: THREE.Group) {
+  const k = kitchen.rectangles_m;
+  const start = k.cooktop[0] + k.cooktop[2] + 0.1;
+  const length = k.counter[0] + k.counter[2] - start;
+  const upper = new THREE.Group();
+  upper.name = "Kitchen wall cabinets";
+  upper.position.set(start, 0, -k.counter[1]);
+  parent.add(upper);
+  const depth = 0.35, bottom = 1.55, height = 0.85;
+  box(upper, 0, 0, length, depth - 0.05, bottom, height, palette.wood);
+  box(upper, 0.004, depth - 0.052, length - 0.008, 0.002,
+    bottom + 0.004, height - 0.008, palette.metal);
+  for (let i = 0; i < 4; i++) {
+    const width = length / 4;
+    box(upper, i * width + 0.004, depth - 0.05, width - 0.008, 0.02,
+      bottom + 0.004, height - 0.008, palette.wood);
+    // Wall-unit pulls are at the lower edge for reach from the counter.
+    box(upper, i * width + (i % 2 ? 0.035 : width - 0.047),
+      depth - 0.026, 0.012, 0.024, bottom + 0.05, 0.16, palette.metal);
+  }
+}
 function bed(
   group: THREE.Group,
   x: number,
@@ -797,10 +874,9 @@ export function createHouse(scene: THREE.Scene) {
     height: number,
     color: string,
   ) => box(g, r[0], r[1], r[2], r[3], bottom, height, color);
-  kitchenBox(k.counter, 0, 0.9, palette.wood).name = "3.60 m kitchen counter";
-  kitchenBox(k.counter, 0.9, 0.045, palette.cream);
-  kitchenBox(k.return, 0, 0.9, palette.wood).name = "Kitchen right-wall return";
-  kitchenBox(k.return, 0.9, 0.045, palette.cream);
+  baseCabinets(g, k.counter, "3.60 m kitchen counter");
+  baseCabinets(g, k.return, "Kitchen right-wall return", true);
+  kitchenWallCabinets(g);
   kitchenBox(k.cooktop, 0.95, 0.01, palette.metal).name = "Cooktop";
   for (const x of [k.cooktop[0] + 0.18, k.cooktop[0] + 0.56])
     for (const d of [k.cooktop[1] + 0.11, k.cooktop[1] + 0.32])

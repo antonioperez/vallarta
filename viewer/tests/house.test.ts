@@ -211,6 +211,18 @@ describe("selected exterior and kitchen coordination", () => {
         wall = bounds("Kitchen backing wall extension"),
         dining = bounds("Six-seat indoor table"),
         panels = bounds("Rear slider parked panels");
+      const upperCabinets = bounds("Kitchen wall cabinets");
+      // Wall units remain over the worktop, clear of the cooktop and below the ceiling.
+      expect(upperCabinets.min.x).toBeGreaterThan(cooktop.max.x);
+      expect(upperCabinets.max.x).toBeLessThanOrEqual(counter.max.x);
+      expect(upperCabinets.max.z).toBeCloseTo(counter.max.z);
+      expect(upperCabinets.min.z).toBeGreaterThan(counter.min.z);
+      expect(upperCabinets.min.y - counter.max.y).toBeGreaterThan(0.6);
+      expect(upperCabinets.max.y).toBeLessThan(3);
+      for (const cabinet of [counter, ret, upperCabinets]) {
+        expect(overlaps(rect(cabinet), kitchen.rectangles_m.through_route)).toBe(false);
+        expect(overlaps(rect(cabinet), kitchen.fridge_door.sweep_bounds)).toBe(false);
+      }
       rect(ret).forEach((n, i) =>
         expect(n).toBeCloseTo([8.15, 5.6, 0.65, 1.05][i]),
       );
