@@ -4,6 +4,8 @@
 
 An interactive, browser-based walkthrough of Concept 14: a two-story, three-bedroom house on a 10 × 20 m lot. Built with TypeScript, Vite and Three.js. No viewer installation, account, paid modeling software or backend is needed.
 
+[Build your own study](docs/build-your-own-study.md): a practical guide to supplying context, writing revision prompts, coordinating drawings and images, and developing a measured browser walkthrough. Includes reusable prompt templates and examples from this project's revisions.
+
 ## Run locally
 
 Requires Node.js 24 and npm.
