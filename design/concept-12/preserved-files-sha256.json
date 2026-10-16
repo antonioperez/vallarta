@@ -1,0 +1,49 @@
+{
+  "concept-10": {
+    "coastal-house-concept-10.pdf": "2f7a5a8eeab41acd18e8f080e657d9aecfd54e4415be28171321aafe4341c787",
+    "rendering-geometry.json": "f8bffdcc2b3dd2e2bbad0b2abb9976ff98211e7ca3f17c26c239a18c43e2faa5",
+    "area-schedule.json": "171b5e9cf7462168858f9eafc376f6fb51e77db43f74542d7cc785d28a124b90",
+    "rear-updated.png": "ebdc391842d68a0b091de9bd129fbb691efc3cb4710d9870bff8f1d453a615a8",
+    "brief.md": "0dd1a817456836dcd158c5ef7cb0b9f7270edca53033b3ae6b1645f555745521",
+    "draw_house.py": "c860693ec347e9785d23f485661444169beeb8cf5347da28c4ac0c149ec7f593",
+    "final-image-prompts.json": "5b7915beb815e9a3e92fc498b2aabbd9dc77570ba00a8610b1d95cac5046bfbf",
+    "front-updated.png": "48ea645588b12d2ffcf0f67a4fecaabb34b08ca29620e927230224c9d07acd16"
+  },
+  "concept-11": {
+    "coastal-house-concept-11.pdf": "95482cf2f16e9f2997ab1d8595f09aa9ef63f86d40c9c377b62613eec5bbdb96",
+    "rendering-geometry.json": "cb7c95f754f31006c66c3bdae8c98b8d0f7b48433ba7afcfa4976a952b7bfb3e",
+    "area-schedule.json": "dd3982bf8cb79bd5602b114976ffc9b7d683243fd05459c29e75f91435966e03",
+    "rear-updated.png": "b73bd6737a11cc8c8782ceb81a5b7e0a947feffff8ffc3176a0da2bd0adf86af",
+    "verification.json": "207bbb7a510110e8ce4db17e719f7ae74eda48b34f5fd229e338d4f4bdd69038",
+    "brief.md": "23ce7fefc2de9ceddb6aadf930c853204c33804293ff4fe21803a3e7ec1c9b11",
+    "draw_house.py": "6727213385fc2b90ff18967282e39d2857f14db823f0dc925a887cc86b4c9b20",
+    "final-image-prompts.json": "30058bfbfd66a08238da4cb71ae9d3662991f0daf35c8acf2db3f17b7ade2242",
+    "front-updated.png": "52b74404a3ea40130331fa983b46386f25db3d3a180b8704ff5948afc39b9527"
+  },
+  "style-study-01": {
+    "b-front-initial.png": "ced1f8f5dcd4fbd3f325a8a586ff825b0848bbf24210571c1f34e7d846ec6ff9",
+    "b-front.png": "6bc73ea1461774ffff763be73b43f9befda12e247a1b6ccddec1fc4429d1dfa0",
+    "b-rear-initial.png": "79a2588c411f8ff803b9e092f87a0a62c5295940f009ef1359e96e955bf12f7a",
+    "b-rear-elevation.png": "8138f5d4c5b7647886109250685c5a7b4c549602ae02fa2e1ed17542bb87e60a",
+    "b-rear.png": "d841cea34acf9d9743c0be5ad60f3d97b561cc93b774bcb9c297e2cadd57fba7",
+    "c-rear.png": "6b1af2e84d6bbdc2124851d4651c9c119946364f63a7b041f5906ccb69fb950b",
+    "c-front.png": "213088df2b9817510b9cdce38980260aa6a5b760450596be00c638fba34dc729",
+    "build_comparison.py": "b3ac173a731155754293063c0cd4c46656a297df2f063ba37df24090b2b28f13",
+    "b-front-roof-edge-draft.png": "564bfe3f383b9053fb215185d46b7fb01b51746b7fb8b48799bde0ba2301c129",
+    "coastal-house-style-study-01.pdf": "fb63e5863b226cf1620725c3faaba05ff346018d9bf31b8093c8a7a2e50f88af",
+    "a-rear-elevation.png": "fd3df09f1379ff8cd9b87c382d23b8cfbf5633b37baceeb88fe9fe1bf8fa46da",
+    "a-front-elevation.png": "af40a3112006e4f0db334140fa5be11702451ceded3f9e4156a08e3cace7f894",
+    "c-front-elevation.png": "af25e309e6033be54dcdbb1d8af36e80cba9cb530de3d703d2f0d04ab378edf6",
+    "b-front-elevation.png": "41cba20a5afcb64462fedd15b12a25f914a6f2f7e6200fa9254bd4563e627844",
+    "c-rear-elevation.png": "cd0751c56cc87bf075e9723f8f2819e4e2cef020d339416373d9b780ab1108be",
+    "prepare_study.py": "1b9fa5dfb62e3c4a9bf7acefad38a987978889b4be0621b36a2e4d1edc11f138",
+    "b-front-width-draft.png": "2395b95df14bf006c0d409dc2a0fb27b3f63a4d0a0b769b1fb2fbb9f0559e96d",
+    "six-style-views.zip": "7f2b00bf85d93256720f32d867c693bfe55fc0566fdcd7a21555edf0dfde07df",
+    "verification.json": "19387fee700f49b70de72d5e399b572fcbd6e83b11b2b432a993abdc60ddf483",
+    "brief.md": "7354ec86e61bbf37162043c07466ebf58f5fc328387e2448da29cf7307ac781a",
+    "a-front.png": "ecc7739f76cf5de44f1b92012a52eb91d5b18f99c42bec02edc1e8da50302baf",
+    "a-rear.png": "b0ce54a053b8886013d9009f34bfe7d7adf089abeaaf3fa70cbb57807bb5dc88",
+    "final-image-prompts.json": "82e4c2e3d1e4653895450489e2d051eddb4a248dbe6f33c7708592c49b1936fe",
+    "study-geometry.json": "ab86405a21f536fbac5025a958b4cd416feb7a633983e0f0efde98cb29981b4c"
+  }
+}

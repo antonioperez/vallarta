@@ -1,0 +1,57 @@
+{
+  "basis": "Concept 12, unchanged",
+  "status": "Proposed coordination only; roof dimension changes not adopted",
+  "sources": [
+    {
+      "name": "[1] Tejas Borja / TB-12",
+      "url": "https://tejasborja.com/teja/tb-12/",
+      "note": "The listed 30% minimum is conditional on roof length and exposure. Product example only; no tile or local supply selected."
+    },
+    {
+      "name": "[2] Copper Development Association / built-in gutters",
+      "url": "https://archive.copper.org/applications/architecture/arch_dhb/arch-details/gutters_downspouts/gutter_linings.php",
+      "note": "Principles for lining, support, movement and positive drainage. This supplement does not specify copper or copy its material dimensions."
+    },
+    {
+      "name": "[3] Copper Development Association / overflow scuppers",
+      "url": "https://archive.copper.org/applications/architecture/arch_dhb/arch-details/gutters_downspouts/scuppers.php",
+      "note": "A secondary outlet sits above normal drainage and limits water accumulation if the primary route blocks."
+    },
+    {
+      "name": "[4] Marley / roof maintenance",
+      "url": "https://www.marley.co.uk/support/problems-and-maintenance",
+      "note": "Marley advises against walking directly on tiles. Provide a professional access strategy appropriate to the chosen roof."
+    }
+  ],
+  "baseline_concept12_sha256": {
+    "rendering-geometry.json": "2932339828e4de9d379e50bf08df11bb855dd2985515da1305f5a255ee1aa054",
+    "coastal-house-concept-12.pdf": "dc54837df890547323752ab45a4293cbb08b5391cf364267dcfda428fd0801b4",
+    "area-schedule.json": "e87b445ec5b856ad2bcd5782e94a2efdb0d65c074b71b9342fe0c73f6ede5b75",
+    "selected-style-geometry.json": "35977c21bf7aaca484fd9fee76408481faddc62f5697437fb2ecb28aa5ca240b",
+    "rear-updated.png": "1888fb54094f4fcf059d85bd18e22a183b818c9d142cfab535b536c59c56151b",
+    "preserved-files-sha256.json": "c36ea5b385508495f302ef4a1aee9698a6c72005a6ee83888b6544bba303222b",
+    "verification.json": "c63c80081e592f776fb3c82bb4d2817144bce4374bbb0aa1a5fdcf3931afcfd1",
+    "brief.md": "ae12cac2f64153c7c2f9c43216032a7e294c98018f85f957176b332e14f4762c",
+    "draw_house.py": "6f1b902b6105c938cf3d3776997bf36c794c290d7a7ac2f5ccde99e4d134ed37",
+    "final-image-prompts.json": "ca67bce6f164ffa7fecabdbf9ed43efdc08d1f81422252d22b385790834ace94",
+    "front-updated.png": "81b5803df3a9948061d57a930939b5a628ca3a070b822c35ebcf91148d104a32"
+  },
+  "catchment_baseline_m2": {
+    "main_front": 20.25,
+    "main_rear": 20.25,
+    "each_main_side": 25.65,
+    "main_total": 91.8,
+    "terrace": 18
+  },
+  "sloped_tile_surface_m2": {
+    "main": 95.84201375179886,
+    "terrace": 18.792551716038993
+  },
+  "not_sized": [
+    "inset gutter width/depth",
+    "gutter slopes",
+    "outlet and overflow dimensions",
+    "downpipe sizes and exact paths",
+    "underground system and final discharge connection"
+  ]
+}

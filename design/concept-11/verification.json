@@ -1,0 +1,37 @@
+{
+  "concept": 11,
+  "pdf_pages": 9,
+  "geometry_checks": "passed; draw_house.py verify_geometry",
+  "baseline_concept_10": "all original file hashes unchanged",
+  "interior_drawing_functions": "AST identical to Concept 10",
+  "site_depth_m": [
+    5.8,
+    10.5,
+    3.7
+  ],
+  "lot_area_m2": 200,
+  "front_court_m2": 58,
+  "rear_zone_m2": 37,
+  "covered_terrace_m2": 18,
+  "closed_gate_bumper_gap_m": 0.25,
+  "beyond_canopy_m": 0.7,
+  "pdf_text_checks": "all page headers and numbers; revised dimensions and area totals passed",
+  "visual_review": "all nine pages rendered with Poppler at 1500 px and inspected; page 8 re-rendered after separate-depth label correction; no clipping or overlaps observed",
+  "images": "both revised via built-in image generation and visually inspected; illustrative perspectives, dimensioned plans govern",
+  "limitations": [
+    "selected vehicle, mirrors and trunk/tailgate access not verified",
+    "gate hardware not selected",
+    "schematic only; not construction or permit drawings"
+  ],
+  "files_sha256": {
+    "coastal-house-concept-11.pdf": "95482cf2f16e9f2997ab1d8595f09aa9ef63f86d40c9c377b62613eec5bbdb96",
+    "rendering-geometry.json": "cb7c95f754f31006c66c3bdae8c98b8d0f7b48433ba7afcfa4976a952b7bfb3e",
+    "area-schedule.json": "dd3982bf8cb79bd5602b114976ffc9b7d683243fd05459c29e75f91435966e03",
+    "rear-updated.png": "b73bd6737a11cc8c8782ceb81a5b7e0a947feffff8ffc3176a0da2bd0adf86af",
+    "brief.md": "23ce7fefc2de9ceddb6aadf930c853204c33804293ff4fe21803a3e7ec1c9b11",
+    "draw_house.py": "6727213385fc2b90ff18967282e39d2857f14db823f0dc925a887cc86b4c9b20",
+    "final-image-prompts.json": "30058bfbfd66a08238da4cb71ae9d3662991f0daf35c8acf2db3f17b7ade2242",
+    "front-updated.png": "52b74404a3ea40130331fa983b46386f25db3d3a180b8704ff5948afc39b9527"
+  },
+  "privacy_revision": "Public copy sanitized on 2026-10-15. Historical design checks describe the original review; filenames, location labels and cost disclosures were revised, affected exports regenerated and file hashes refreshed. Geometry was retained."
+}

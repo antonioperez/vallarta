@@ -1,0 +1,31 @@
+{
+  "pdf_pages": 13,
+  "format": "A3 landscape",
+  "headers_and_numbering": "pass",
+  "separate_meter_feet_columns": "retained",
+  "attribution_check": "pass",
+  "retained_geometry_against_concept12": "all fields identical except concept selection metadata",
+  "preserved_files_checked": 40,
+  "preserved_folders": [
+    "concept-12",
+    "style-study-01",
+    "roof-coordination-01"
+  ],
+  "visual_pdf_review": "13 rendered pages inspected; final corrected pages 11 and 13 reinspected",
+  "pdf_sha256": "69fb3484b94692ad21dfa13b4513117028c02b33dff9b051cc9ada26b33dccac",
+  "viewer_geometry_tests": 12,
+  "roof_status": "Baseline form retained. Drainage proposals not sized; inset gutter may change roof edge.",
+  "deployment": "Local revision; not published",
+  "viewer_browser_tests": 5,
+  "viewer_build": "pass; existing Three.js bundle-size advisory",
+  "viewer_visual_review": [
+    "front / rear",
+    "ground / upper",
+    "kitchen / upper bathroom",
+    "gate open / closed",
+    "proposed drainage",
+    "mobile"
+  ],
+  "local_preview": "http://127.0.0.1:4174/",
+  "privacy_revision": "Public copy sanitized on 2026-10-15. Historical design checks describe the original review; filenames, location labels and cost disclosures were revised, affected exports regenerated and file hashes refreshed. Geometry was retained."
+}

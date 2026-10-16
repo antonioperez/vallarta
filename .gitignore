@@ -1,0 +1,6 @@
+node_modules/
+viewer/dist/
+viewer/test-results/
+viewer/playwright-report/
+.DS_Store
+*.log

@@ -1,0 +1,22 @@
+{
+  "pdf_pages": 3,
+  "visual_review": "All final pages rendered at 1600 px and inspected; no clipped text or overlapping labels/tables observed",
+  "text_checks": [
+    "page numbering",
+    "characters inside page bounds",
+    "four source links",
+    "no excluded attribution terms"
+  ],
+  "geometry": "Baseline main catchment faces reconcile to 91.80 m2; tile area calculated from 30 percent slope; window/canopy height difference checked",
+  "scope": "Proposed supplement; current Concept 12 geometry and complete style study preserved",
+  "not_verified": [
+    "hydraulic capacity",
+    "inset gutter section",
+    "exact pipe routes and dimensions",
+    "safe access equipment",
+    "local rainfall criteria and final discharge connection",
+    "roof structure, tile suitability and cost"
+  ],
+  "pdf_sha256": "374d194b2057ab56a38bf8c577b0853936c321ce76d435043764c72c77415032",
+  "privacy_revision": "Public copy sanitized on 2026-10-15. Historical design checks describe the original review; filenames, location labels and cost disclosures were revised, affected exports regenerated and file hashes refreshed. Geometry was retained."
+}
